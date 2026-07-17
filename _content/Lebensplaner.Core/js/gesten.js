@@ -1,7 +1,9 @@
 // Wischgesten auf Dashboard-Karten (US-25).
 //
-// Liegt in App, nicht in Core: Das Dashboard liegt in App, und kein Modul
-// braucht diese Geste — der Kern bleibt dünn (CLAUDE.md).
+// Liegt in Core, nicht in App: US-36 (F-A) braucht die Geste auch in der
+// Raum-Detailansicht des Moduls Haushalt, und Haushalt darf nicht nach App
+// (Abhängigkeitstabelle in CLAUDE.md). Ursprünglich in App, weil bis dahin
+// kein Modul sie brauchte — diese Prämisse ist mit US-36 falsch geworden.
 //
 // Das Ziehen selbst läuft komplett hier, nie Frame für Frame durch C#
 // (CLAUDE.md). Erst wenn eine Geste abgeschlossen ist, meldet dieses Modul

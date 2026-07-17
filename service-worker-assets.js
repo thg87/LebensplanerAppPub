@@ -1,13 +1,17 @@
 self.assetsManifest = {
-  "version": "XUeAAls5",
+  "version": "akt1wJk/",
   "assets": [
     {
-      "hash": "sha256-AcwAxgSe7E6fIeLicAjlZHF0Kyq47cdRH/+XMGSju2Y=",
+      "hash": "sha256-uLQcEHUZ0wI2PZ9Or8EIbxLrkRzOtk2zVY8hFBEMq8w=",
       "url": "_content/Lebensplaner.Core/css/grundlage.css"
     },
     {
       "hash": "sha256-nbiug5P54y4XDdQ8GiGAzKt4PayXpMkMuDtRHQ4B/Gs=",
       "url": "_content/Lebensplaner.Core/js/datei.js"
+    },
+    {
+      "hash": "sha256-g3+0X6AHmxtFsB7pwYJDuX6cZVhmFiRjn0s/uL+0Ic4=",
+      "url": "_content/Lebensplaner.Core/js/gesten.js"
     },
     {
       "hash": "sha256-kTlmQpA5NP1750ONW/Rx/OaaSHpqRkmpeKuyu3SCJY4=",
@@ -18,16 +22,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-Pm9la838+XmJCbfRcG86AnHZhs9SkZXd2U6ce6JQ/+U=",
-      "url": "_framework/Lebensplaner.App.ul3mxhfl3e.wasm"
+      "hash": "sha256-3KgQy/WNoKYmeoHwbQcb+Bpy1VT6dhX8VaY7GHFT1/k=",
+      "url": "_framework/Lebensplaner.App.g75imyaqds.wasm"
     },
     {
-      "hash": "sha256-1tbGqsohtT0jFRFfJpRw1OZwzs66BZ7ZT1V5SoeGUAI=",
-      "url": "_framework/Lebensplaner.Core.6ornv3oszs.wasm"
+      "hash": "sha256-+oAvSVjM5n0zucaPwY5ePE3QMdH9CjklISaEQa0Bmks=",
+      "url": "_framework/Lebensplaner.Core.q4x5ye7yl7.wasm"
     },
     {
-      "hash": "sha256-pyAVqCHG4Vf7+aFR+rn3FWXvFUQnYI17IkYUJCYefVc=",
-      "url": "_framework/Lebensplaner.Haushalt.p0or9p0u7x.wasm"
+      "hash": "sha256-XxBM7hEa0ls3rEOQZ5TTdCsFZMAKtQVbAaGweT9Vaw8=",
+      "url": "_framework/Lebensplaner.Haushalt.ne9nxc9e33.wasm"
     },
     {
       "hash": "sha256-CFPYiqycDQnH+YaCiZLKWsdJKx0Gm9PaXcZhSugBMi8=",
@@ -130,8 +134,8 @@ self.assetsManifest = {
       "url": "_framework/System.IO.Pipelines.0luqpzcwkx.wasm"
     },
     {
-      "hash": "sha256-5anl3JtPLfFQ+QSrRlI8D4bxLkETCRO3xNF4hoFe2zU=",
-      "url": "_framework/System.Linq.pjaaq3lz9f.wasm"
+      "hash": "sha256-Mbbanl/nd15QS4c8RJw7JgvC6IETIC68Hbx+WU1LBJU=",
+      "url": "_framework/System.Linq.57rysrpic0.wasm"
     },
     {
       "hash": "sha256-AlnW0l4iyjGNgX9Et2nPvFPNfqhCRkoB6U+DthEvkkk=",
@@ -142,20 +146,20 @@ self.assetsManifest = {
       "url": "_framework/System.ObjectModel.71xt2g2ecm.wasm"
     },
     {
-      "hash": "sha256-7VeqfSuS/1VEax9OhP3GqE/bhB0si0OqhWc8fckVUlM=",
-      "url": "_framework/System.Private.CoreLib.phng1naqfe.wasm"
+      "hash": "sha256-DczDLOLC8JZ+/LKyIKpHnIkcZ8y30uwm9d/Z+j1ghXc=",
+      "url": "_framework/System.Private.CoreLib.l27dj5kc2x.wasm"
     },
     {
       "hash": "sha256-PgaqBvfoc283TMuSh9WCgId7t10QIc23HsMVk5lQj+I=",
       "url": "_framework/System.Private.Uri.eodce6l570.wasm"
     },
     {
-      "hash": "sha256-Q2Fgd91xC+DZhcEcVcK247Y6Vv3lbCEGVn+x6B1Y+fw=",
-      "url": "_framework/System.Runtime.9hhpezkcml.wasm"
-    },
-    {
       "hash": "sha256-R9aUORxsL1Uy5IL5uONuC7aiSLohp3NX7irrSitGLh0=",
       "url": "_framework/System.Runtime.InteropServices.JavaScript.78mfkxc91d.wasm"
+    },
+    {
+      "hash": "sha256-DZSpRx7bp8CJu8BAFvggqd0ajqgRe0ON5jy2pNSlzfk=",
+      "url": "_framework/System.Runtime.vxzgqadzne.wasm"
     },
     {
       "hash": "sha256-EtCAv8n8nbXWUJNH16d5QxTfbrvBzSNzfiMZBRA5N64=",
@@ -186,8 +190,8 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-cy6f5CmnvcjJTHVYIcc4j2Swp/XRtj4ShbN+yw1Xx5Y=",
-      "url": "_framework/dotnet.5e9o0fv0d4.js"
+      "hash": "sha256-SVVMcScJK2xv0tjzYz/rrTffZfUmvy0MpP1v0+6qCcA=",
+      "url": "_framework/dotnet.90cmfs9ya3.js"
     },
     {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
@@ -230,16 +234,12 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-1dtRffWHrcKEcJdpn09Ii3Dgb0SE8msqT/vlZSBvIqk=",
+      "hash": "sha256-1h+DPyEAKwpbq1aeHcHWvyJa8SSUBKfS4qvCqReqs5U=",
       "url": "index.html"
     },
     {
       "hash": "sha256-cERKgvoR+CVYaye3Dl7KVZesoBrO0GHFoTM1uieN5cc=",
       "url": "js/aktualisierung.js"
-    },
-    {
-      "hash": "sha256-8cuwZ7eIZFfT+CoatEO0kIEhVoxnYQ/lB8sTLGz3f7k=",
-      "url": "js/gesten.js"
     },
     {
       "hash": "sha256-nc8XXc8cVs5DJWrGNxHKoKV5TWIJ3opFXXz6M6vNke8=",

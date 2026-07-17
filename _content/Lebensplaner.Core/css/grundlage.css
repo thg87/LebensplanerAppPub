@@ -279,6 +279,22 @@ a {
     color: var(--lp-text-leise);
 }
 
+/* Sauberkeits-Score (US-33/34/36): trägt immer Text — eine Zahl oder "—" —,
+   nie nur eine Farbe (Barrierefreiheit, wie .lp-erfolg). Gemeinsam mit
+   Dashboard und Raum-Detail, deshalb hier statt in einer der beiden Schalen. */
+.lp-score {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin: 0 0 var(--lp-abstand) 0;
+}
+
+.lp-score__wert {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--lp-akzent);
+}
+
 /* Das Rückgängig-Angebot. Ruhig: Es ist eine Quittung, keine Warnung — nichts
    ist schiefgegangen, der Nutzer hat nur gerade etwas getan. */
 .rueckgaengig {
@@ -319,6 +335,16 @@ a {
 .aufgabe__ueberfaellig {
     color: var(--lp-fehler-text);
     font-weight: 600;
+}
+
+/* Der Raumname als Tippziel zur Detailansicht (US-36/F-C) — ein Block, kein
+   Inline-Link, damit die volle Zeile den Mindest-Tippbereich erreicht und sich
+   nicht mit den separaten Zeilen-Aktionen (Umbenennen/Löschen) überlagert. */
+.raum__name {
+    display: block;
+    min-height: var(--lp-tippziel);
+    color: inherit;
+    text-decoration: none;
 }
 
 .aufgabe__aktionen {
