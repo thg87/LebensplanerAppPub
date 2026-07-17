@@ -5,20 +5,80 @@
  * Lägen sie in App, erzwänge das Haushalt → App und bräche die
  * Abhängigkeitstabelle (CLAUDE.md, Korrektur zu ADR 0009).
  *
- * M4 ist bewusst schmucklos. Die Flächen stehen trotzdem schon als eigene
- * Variablen da, damit M5 für die Liquid-Glass-Annäherung nur Werte tauscht und
- * `backdrop-filter` ergänzt — kein Umbau. Ehrlich bleibt: Das wird eine
- * Annäherung. Echtes Liquid Glass rechnet das OS in Echtzeit, CSS kann das nicht.
+ * Dunkles Neon-Theme (aus claude.ai/design importiert, Projekt "Dunkles
+ * App-Design mit Neon"). Der Entwurf hat kein Light-Pendant — deshalb ein
+ * festes dunkles Erscheinungsbild statt der bisherigen
+ * `prefers-color-scheme`-Umschaltung. Bleibt trotzdem eine *Annäherung*:
+ * Echtes Liquid Glass rechnet das OS in Echtzeit, CSS kann das nicht.
  */
 
-:root {
-    /* Beide Erscheinungsbilder. Ein Planer, den man abends aufs Handy nimmt,
-       sollte nicht blenden. */
-    color-scheme: light dark;
+/* Space Grotesk und Inter selbst gehostet statt über fonts.googleapis.com
+   geladen — ein Netzaufruf beim Start wäre ein Bug, kein Feature (CLAUDE.md:
+   „Offline ist der Normalfall"). Nur der Latin-Schnitt je Schnittstärke, kein
+   variables Font-File: kleinstmögliche Dateizahl für das, was die App
+   tatsächlich zeigt. */
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/inter-400.woff2") format("woff2");
+}
 
-    /* system-ui liefert auf iOS echtes SF Pro (CLAUDE.md). Die Kette dahinter ist
-       nur für Android und Desktop; auf iOS greift sie nie. */
-    --lp-schrift: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../fonts/inter-500.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/inter-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/inter-700.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../fonts/space-grotesk-500.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/space-grotesk-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/space-grotesk-700.woff2") format("woff2");
+}
+
+:root {
+    color-scheme: dark;
+
+    --lp-schrift: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* Überschriften und die Score-Zahl — die auffälligeren, kürzeren Texte. */
+    --lp-schrift-anzeige: "Space Grotesk", var(--lp-schrift);
 
     /* 44px ist Apples Mindestmaß für ein Tippziel. Kein Richtwert zum
        Unterschreiten: Darunter trifft der Daumen daneben, und die App wird auf
@@ -32,67 +92,36 @@
     --lp-radius: 14px;
     --lp-radius-gross: 20px;
 
-    --lp-hintergrund: #f2f2f7;
-    --lp-flaeche: #ffffff;
-    /* Schwebende Flächen (Navigation, später Dialoge) sind eigene Tokens: Hier
+    --lp-hintergrund: #05070a;
+    --lp-flaeche: rgba(255, 255, 255, 0.045);
+    /* Schwebende Flächen (Navigation, Dialoge) sind eigene Tokens: Hier
        setzt die Transluzenz an.
        `--lp-flaeche-schwebend` ist der *deckende* Wert und bleibt die
        Voraussetzung — er gilt, wo `backdrop-filter` fehlt oder wo der Nutzer
        weniger Transparenz verlangt hat. `--lp-flaeche-glas` ist die Zugabe. */
-    --lp-flaeche-schwebend: #fbfbfd;
-    --lp-flaeche-glas: rgba(255, 255, 255, 0.72);
+    --lp-flaeche-schwebend: #121614;
+    --lp-flaeche-glas: rgba(18, 22, 20, 0.7);
     /* saturate() ist der Teil, der das Milchglas nach iOS aussehen lässt statt
        nach Weichzeichner: Was durchscheint, bleibt farbig. */
-    --lp-glas-filter: blur(20px) saturate(180%);
-    --lp-trennlinie: rgba(60, 60, 67, 0.18);
+    --lp-glas-filter: blur(26px) saturate(180%);
+    --lp-trennlinie: rgba(255, 255, 255, 0.08);
 
-    --lp-text: #1c1c1e;
-    --lp-text-leise: #6c6c70;
-    --lp-akzent: #0071e3;
+    --lp-text: #f2fff6;
+    --lp-text-leise: #8b9992;
+    --lp-akzent: #39ff8a;
+    /* Text/Icons auf einer Akzentfläche: Weiß auf Neongrün liegt unter 3:1,
+       dunkler Text schafft komfortabel über 8:1. */
+    --lp-akzent-text: #04150a;
 
-    /* Eigene Tokens statt eines nackten `red`: Der Fehlerton muss in beiden
-       Erscheinungsbildern lesbar bleiben — rot auf Schwarz ist es nicht. */
-    --lp-fehler-text: #8a1c1c;
-    --lp-fehler-flaeche: #fdecec;
-    --lp-fehler-rand: #f0b4b4;
+    /* Eigene Tokens statt eines nackten `red`: Der Fehlerton muss auf der
+       dunklen Fläche lesbar bleiben — sattes Rot auf Schwarz ist es nicht. */
+    --lp-fehler-text: #ff9478;
+    --lp-fehler-flaeche: #2c1616;
+    --lp-fehler-rand: #ff6b4a;
 
-    --lp-erfolg-text: #1a6b32;
+    --lp-erfolg-text: #3cff8a;
 
-    --lp-schatten: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --lp-hintergrund: #000000;
-        --lp-flaeche: #1c1c1e;
-        /* Gleicher Wert wie die Fläche — und das ist gemessen, nicht vergessen.
-           Im Dunkeln trägt kein Schatten (--lp-schatten ist `none`), also läge
-           es nahe, die schwebende Fläche aufzuhellen. Das kostet aber genau den
-           Kontrast, den der aktive Navigationslink braucht: --lp-akzent
-           (#0a84ff) erreicht auf #1c1c1e noch 4.66:1, auf #2c2c2e nur noch
-           3.82 — unter den 4.5, die für Text dieser Größe gelten. Den Akzent
-           dafür aufzuhellen ginge nicht: Er ist auch die Knopffläche unter
-           weißer Schrift, dort würde es dieselbe Grenze von der anderen Seite
-           reißen.
-           Die Höhe entsteht deshalb aus Unschärfe und Trennlinie statt aus
-           Helligkeit — so macht es iOS auch. Wer hier aufhellt, misst vorher
-           nach. */
-        --lp-flaeche-schwebend: #1c1c1e;
-        --lp-flaeche-glas: rgba(28, 28, 30, 0.72);
-        --lp-trennlinie: rgba(84, 84, 88, 0.65);
-
-        --lp-text: #f2f2f7;
-        --lp-text-leise: #98989d;
-        --lp-akzent: #0a84ff;
-
-        --lp-fehler-text: #ff9b9b;
-        --lp-fehler-flaeche: #2c1616;
-        --lp-fehler-rand: #5c2626;
-
-        --lp-erfolg-text: #6ee7a0;
-
-        --lp-schatten: none;
-    }
+    --lp-schatten: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 *,
@@ -152,9 +181,28 @@ a {
 
 .lp-karte {
     background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
     border-radius: var(--lp-radius-gross);
     box-shadow: var(--lp-schatten);
     padding: var(--lp-abstand);
+}
+
+/* Transluzenz ist die Zugabe, deckend die Voraussetzung — dieselbe Regel wie
+   Navigationsleiste und Dialog (US-23): @supports prüft beide Präfixe,
+   prefers-reduced-transparency schaltet zurück. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .lp-karte {
+        -webkit-backdrop-filter: var(--lp-glas-filter);
+        backdrop-filter: var(--lp-glas-filter);
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .lp-karte {
+        background: var(--lp-flaeche-schwebend);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
 }
 
 .lp-feld {
@@ -190,16 +238,22 @@ a {
 
 .lp-knopf {
     font: inherit;
-    font-weight: 600;
+    font-weight: 700;
 
     min-height: var(--lp-tippziel);
     padding: 0 var(--lp-abstand-gross);
 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+
     border: none;
     border-radius: var(--lp-radius);
     background: var(--lp-akzent);
-    color: #fff;
+    color: var(--lp-akzent-text);
     cursor: pointer;
+    box-shadow: 0 0 18px rgba(57, 255, 138, 0.4);
 
     -webkit-tap-highlight-color: transparent;
 }
@@ -207,11 +261,17 @@ a {
 .lp-knopf:disabled {
     opacity: 0.5;
     cursor: default;
+    box-shadow: none;
 }
 
+/* Der "Morgen"-Knopf im Entwurf: ein Rahmen statt einer gefüllten Fläche —
+   sekundär, aber weiterhin klar als Knopf erkennbar. */
 .lp-knopf--leise {
-    background: transparent;
-    color: var(--lp-akzent);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: var(--lp-text-leise);
+    box-shadow: none;
+    font-weight: 600;
 }
 
 /* Fehler tragen nicht nur Farbe: Rot allein sieht nicht jeder (CLAUDE.md denkt
@@ -304,6 +364,7 @@ a {
 }
 
 .lp-score__wert {
+    font-family: var(--lp-schrift-anzeige);
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--lp-akzent);
@@ -323,6 +384,18 @@ a {
     border-radius: var(--lp-radius-gross);
     padding: var(--lp-abstand-klein) var(--lp-abstand);
     margin-bottom: var(--lp-abstand);
+}
+
+/* Der Rückgängig-Knopf ist im Entwurf ein reiner Text-Link, kein Rahmen wie
+   der sonstige `.lp-knopf--leise` — er sitzt schon in einer eigenen Karte. */
+.rueckgaengig .lp-knopf--leise {
+    /* Trotzdem ein 44px-Tippziel (CLAUDE.md) — nur ohne Rahmen/Fläche, weil die
+       Karte drumherum schon die Fläche stellt. */
+    padding: 0 0.6rem;
+    border: none;
+    background: none;
+    color: var(--lp-akzent);
+    font-weight: 600;
 }
 
 /* Pausiert: erkennbar, aber ruhig — es ist kein Fehler, sondern eine Ansage. */
@@ -416,11 +489,17 @@ a {
 }
 
 .wisch__hintergrund--morgen {
-    background: var(--lp-text-leise);
+    /* Eigener dunkler Grauton statt --lp-text-leise: Das Token ist für Text auf
+       der Fläche gedacht (Kontrast dorthin), nicht für weiße Schrift auf sich
+       selbst — als Fläche wäre es zu hell für #fff. */
+    background: #2a3430;
 }
 
 .wisch__hintergrund--erledigt {
     background: var(--lp-erfolg-text);
+    /* Weiß auf Neongrün unterschreitet 3:1 — hier greift dieselbe Regel wie bei
+       .lp-knopf: dunkler Text auf der hellen Akzentfläche. */
+    color: var(--lp-akzent-text);
 }
 
 .wisch--morgen .wisch__hintergrund--morgen,

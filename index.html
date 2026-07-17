@@ -11,7 +11,7 @@
          die Navigation läge auf dem iPhone unter dem Home-Indikator. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Lebensplaner</title>
-    <link href="_framework/dotnet.phw4j59s22.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-fTQwCmyenHQmodf27GmyXUpgvx4F6uXE9njn5HExOVk=" />
+    <link href="_framework/dotnet.zb4deyg2nl.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-0ZK9lk5RgL+NKYeyLXmtVOBulEaS6I1cF+x+U/Yu15o=" />
     <!-- Erst die Grundlage aus Core (Tokens, Basis), dann die Schale, dann der
          Rest der Vorlage: Später Geladenes darf Früheres überschreiben. -->
     <link rel="stylesheet" href="_content/Lebensplaner.Core/css/grundlage.css" />
@@ -22,11 +22,11 @@
     <link href="manifest.webmanifest" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
-    <!-- Färbt die Statusleiste. Zwei Angaben, weil das Manifest nur *eine*
-         theme_color kennt und nicht auf das Erscheinungsbild reagieren kann —
-         ein heller Balken über schwarzem Inhalt wäre der Kasten, der auffällt. -->
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f2f7" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+    <!-- Ein fester Wert statt zweier Varianten: Das Theme ist seit dem
+         Neon-Redesign nicht mehr an prefers-color-scheme gekoppelt (die
+         helle Fassung entfällt), also gibt es auch nur noch eine Statusleisten-
+         Farbe. -->
+    <meta name="theme-color" content="#05070a" />
     <!-- Deprecated zugunsten von manifest.display, aber iOS liest das Manifest
          erst ab 16.4. Darunter startet die App ohne diese Zeile im Tab-Modus —
          und dann meldet navigator.standalone nie einen Homescreen-Start und
@@ -37,19 +37,19 @@
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.puryxhmhq9.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.phw4j59s22.js",
-    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.web2r9gqbh.js"
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.web2r9gqbh.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.zb4deyg2nl.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
     "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
-    "./_framework/dotnet.js": "sha256-fTQwCmyenHQmodf27GmyXUpgvx4F6uXE9njn5HExOVk=",
+    "./_framework/dotnet.js": "sha256-0ZK9lk5RgL+NKYeyLXmtVOBulEaS6I1cF+x+U/Yu15o=",
     "./_framework/dotnet.native.js": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
     "./_framework/dotnet.native.puryxhmhq9.js": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
-    "./_framework/dotnet.phw4j59s22.js": "sha256-fTQwCmyenHQmodf27GmyXUpgvx4F6uXE9njn5HExOVk=",
     "./_framework/dotnet.runtime.js": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
-    "./_framework/dotnet.runtime.web2r9gqbh.js": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU="
+    "./_framework/dotnet.runtime.web2r9gqbh.js": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
+    "./_framework/dotnet.zb4deyg2nl.js": "sha256-0ZK9lk5RgL+NKYeyLXmtVOBulEaS6I1cF+x+U/Yu15o="
   }
 }</script>
 </head>

@@ -1,9 +1,37 @@
 self.assetsManifest = {
-  "version": "6C1vsTrP",
+  "version": "KDQQIJL5",
   "assets": [
     {
-      "hash": "sha256-aNBvPca6SPa3ySSz/WTkt69uDvlcTcnwXrR14SJYRCE=",
+      "hash": "sha256-oyTq5vd2Vvak38BEFi8I5JrOuFS34OB8MDkMgnny+8Y=",
       "url": "_content/Lebensplaner.Core/css/grundlage.css"
+    },
+    {
+      "hash": "sha256-iQmQSrbIcuuZQJNIKoiijsos2VkS17b+zXIQOw3Aftw=",
+      "url": "_content/Lebensplaner.Core/fonts/inter-400.woff2"
+    },
+    {
+      "hash": "sha256-83efHvzMS9zfnAoCq5W/a9CS7QnEjAjO3HJYie3R0Z8=",
+      "url": "_content/Lebensplaner.Core/fonts/inter-500.woff2"
+    },
+    {
+      "hash": "sha256-+aBuec06KiCVHA8OKPZt0ObT/ac5EdZAohJcj8t48ho=",
+      "url": "_content/Lebensplaner.Core/fonts/inter-600.woff2"
+    },
+    {
+      "hash": "sha256-b1ZAn9PWS7hffQcLziB0nbLWa21jzsWGzCLRx2G+JJE=",
+      "url": "_content/Lebensplaner.Core/fonts/inter-700.woff2"
+    },
+    {
+      "hash": "sha256-GxqBMdnt+XXZ3s7oHi8r9QSBL3pPSY5VAPKKYT4i5kw=",
+      "url": "_content/Lebensplaner.Core/fonts/space-grotesk-500.woff2"
+    },
+    {
+      "hash": "sha256-aFu79p+mFt8e+BhHyF/Ha+CX3fs0aP8iV75UURqzEw8=",
+      "url": "_content/Lebensplaner.Core/fonts/space-grotesk-600.woff2"
+    },
+    {
+      "hash": "sha256-NfiuxWz9XL/bA8xoczpUoLBbs2F//NX9MyutwLBFylU=",
+      "url": "_content/Lebensplaner.Core/fonts/space-grotesk-700.woff2"
     },
     {
       "hash": "sha256-nbiug5P54y4XDdQ8GiGAzKt4PayXpMkMuDtRHQ4B/Gs=",
@@ -26,16 +54,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-Dw2Ypf8rkp/QeCGEhrb19abtkkkVPCMtiRmSM0f1gEk=",
-      "url": "_framework/Lebensplaner.App.xgdfhcmths.wasm"
+      "hash": "sha256-VmskVN+BCd66TkVR8OLs8ZlbHjtr+4HgBGAlkVIWJsE=",
+      "url": "_framework/Lebensplaner.App.qs2evw55w8.wasm"
     },
     {
-      "hash": "sha256-Rif1uURwmi/jemcF84fzLngJCuG2Qe80Y6+TQxNDv/U=",
-      "url": "_framework/Lebensplaner.Core.i2uqekqex3.wasm"
+      "hash": "sha256-8D7XfdCBpMkUfzI5088zUMVuIxOpl4hJvRhgHdHuZ3Q=",
+      "url": "_framework/Lebensplaner.Core.knqoa6sjlv.wasm"
     },
     {
-      "hash": "sha256-vcOR5TqDNOafZDShEQ+zJpwNY5W46xmhirEAh+W5I8c=",
-      "url": "_framework/Lebensplaner.Haushalt.z84jctktes.wasm"
+      "hash": "sha256-8+pgI5oEMaxwTDyA/nyJS1FQI8UbNNxeARqYfxC43ew=",
+      "url": "_framework/Lebensplaner.Haushalt.js72f614fa.wasm"
     },
     {
       "hash": "sha256-CFPYiqycDQnH+YaCiZLKWsdJKx0Gm9PaXcZhSugBMi8=",
@@ -150,8 +178,8 @@ self.assetsManifest = {
       "url": "_framework/System.ObjectModel.71xt2g2ecm.wasm"
     },
     {
-      "hash": "sha256-DczDLOLC8JZ+/LKyIKpHnIkcZ8y30uwm9d/Z+j1ghXc=",
-      "url": "_framework/System.Private.CoreLib.l27dj5kc2x.wasm"
+      "hash": "sha256-okdRe54GsFbUrC7hBNkpDv1vYqw+fJNtKOWSc8qPRLI=",
+      "url": "_framework/System.Private.CoreLib.u0sqsr0vpn.wasm"
     },
     {
       "hash": "sha256-PgaqBvfoc283TMuSh9WCgId7t10QIc23HsMVk5lQj+I=",
@@ -162,8 +190,8 @@ self.assetsManifest = {
       "url": "_framework/System.Runtime.InteropServices.JavaScript.78mfkxc91d.wasm"
     },
     {
-      "hash": "sha256-DZSpRx7bp8CJu8BAFvggqd0ajqgRe0ON5jy2pNSlzfk=",
-      "url": "_framework/System.Runtime.vxzgqadzne.wasm"
+      "hash": "sha256-+nzlGha+A1k4SyD73yaII3r/3eZVX3Q6gz5Anbab4QY=",
+      "url": "_framework/System.Runtime.qwm4cl3g66.wasm"
     },
     {
       "hash": "sha256-EtCAv8n8nbXWUJNH16d5QxTfbrvBzSNzfiMZBRA5N64=",
@@ -202,12 +230,12 @@ self.assetsManifest = {
       "url": "_framework/dotnet.native.u31nt9bth6.wasm"
     },
     {
-      "hash": "sha256-fTQwCmyenHQmodf27GmyXUpgvx4F6uXE9njn5HExOVk=",
-      "url": "_framework/dotnet.phw4j59s22.js"
-    },
-    {
       "hash": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
       "url": "_framework/dotnet.runtime.web2r9gqbh.js"
+    },
+    {
+      "hash": "sha256-0ZK9lk5RgL+NKYeyLXmtVOBulEaS6I1cF+x+U/Yu15o=",
+      "url": "_framework/dotnet.zb4deyg2nl.js"
     },
     {
       "hash": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -226,7 +254,7 @@ self.assetsManifest = {
       "url": "css/app.css"
     },
     {
-      "hash": "sha256-E2nCO1cIvUQEsYxKXvoT2I0/9Qzl0JbXvOJqaNU8yZM=",
+      "hash": "sha256-k1FZjG5g4nVIJ6toIOG9ei7Hfqiv8OckL0quL+BkrR0=",
       "url": "css/schale.css"
     },
     {
@@ -238,7 +266,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-Y5m12++vKu/RnkqFCpxEKAqy+QNFcOVxe8YXw5MX26U=",
+      "hash": "sha256-bH11Hjc3eDQLqe5jC3BU5TRQbegNDL+cGNA8otPWnEc=",
       "url": "index.html"
     },
     {
