@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "sifCB1gD",
+  "version": "6C1vsTrP",
   "assets": [
     {
       "hash": "sha256-aNBvPca6SPa3ySSz/WTkt69uDvlcTcnwXrR14SJYRCE=",
@@ -26,16 +26,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-8Ai0YYPny4JhaRVS9+OXH6XiNZ+NmnIfURpUNLbhE50=",
-      "url": "_framework/Lebensplaner.App.o6s1onnexl.wasm"
+      "hash": "sha256-Dw2Ypf8rkp/QeCGEhrb19abtkkkVPCMtiRmSM0f1gEk=",
+      "url": "_framework/Lebensplaner.App.xgdfhcmths.wasm"
     },
     {
-      "hash": "sha256-bHmR748BM9WceLzVwZfokVQzk6vOKPRUmMlCmUES/b4=",
-      "url": "_framework/Lebensplaner.Core.0hnnwkk2b4.wasm"
+      "hash": "sha256-Rif1uURwmi/jemcF84fzLngJCuG2Qe80Y6+TQxNDv/U=",
+      "url": "_framework/Lebensplaner.Core.i2uqekqex3.wasm"
     },
     {
-      "hash": "sha256-RcDkrziU3nC5J4yf/j2P0bJAY2lNo/cLbf19iOeDGBM=",
-      "url": "_framework/Lebensplaner.Haushalt.rkt4tl6f96.wasm"
+      "hash": "sha256-vcOR5TqDNOafZDShEQ+zJpwNY5W46xmhirEAh+W5I8c=",
+      "url": "_framework/Lebensplaner.Haushalt.z84jctktes.wasm"
     },
     {
       "hash": "sha256-CFPYiqycDQnH+YaCiZLKWsdJKx0Gm9PaXcZhSugBMi8=",
@@ -194,16 +194,16 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-NC928Lt0vdoEmTZOB3EAApkNZHf8rTLjli9SweUWn7c=",
-      "url": "_framework/dotnet.40be82z6xl.js"
-    },
-    {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
       "url": "_framework/dotnet.native.puryxhmhq9.js"
     },
     {
       "hash": "sha256-pqkc+YDwRTSgmuWJlAiNJayjN0YQFu94A84NGzuA12Q=",
       "url": "_framework/dotnet.native.u31nt9bth6.wasm"
+    },
+    {
+      "hash": "sha256-fTQwCmyenHQmodf27GmyXUpgvx4F6uXE9njn5HExOVk=",
+      "url": "_framework/dotnet.phw4j59s22.js"
     },
     {
       "hash": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
@@ -238,7 +238,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-9O+8vy7LeVarHmLbOmFzE+jpOTFaPKkyZ27hydACZuA=",
+      "hash": "sha256-Y5m12++vKu/RnkqFCpxEKAqy+QNFcOVxe8YXw5MX26U=",
       "url": "index.html"
     },
     {
