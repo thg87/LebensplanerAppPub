@@ -410,6 +410,95 @@ a {
     }
 }
 
+/* US-28: Dialog/Sheet-Baustein für den „+"-Flow (US-29/US-30). Natives
+   <dialog> bringt Fokusfalle und Escape-Schließen vom Browser mit — hier
+   steht nur die Optik: Handy = von unten einfahrendes Sheet, Desktop =
+   zentriertes Fenster, ein Bauplan, zwei Größen (CLAUDE.md). */
+.lp-dialog {
+    border: none;
+    border-radius: var(--lp-radius-gross);
+    padding: 0;
+    margin: auto;
+    max-width: min(480px, calc(100vw - 2 * var(--lp-abstand-gross)));
+    width: 100%;
+    background: var(--lp-flaeche-schwebend);
+    color: var(--lp-text);
+    box-shadow: var(--lp-schatten);
+}
+
+.lp-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Transluzenz ist die Zugabe, deckend die Voraussetzung — dieselbe Regel wie
+   die Navigationsleiste (US-23): @supports prüft beide Präfixe,
+   prefers-reduced-transparency schaltet zurück. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .lp-dialog {
+        background: var(--lp-flaeche-glas);
+        -webkit-backdrop-filter: var(--lp-glas-filter);
+        backdrop-filter: var(--lp-glas-filter);
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .lp-dialog {
+        background: var(--lp-flaeche-schwebend);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
+.lp-dialog__kopf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lp-abstand);
+    padding: var(--lp-abstand);
+    border-bottom: 1px solid var(--lp-trennlinie);
+}
+
+.lp-dialog__kopf h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.lp-dialog__inhalt {
+    padding: var(--lp-abstand);
+}
+
+/* Bottom-Sheet unterhalb einer Handy-Breite. 640px trennt Handy von
+   Tablet/Desktop ausreichend deutlich, ohne an einen bestehenden Bruchpunkt
+   gebunden zu sein. */
+@media (max-width: 640px) {
+    .lp-dialog {
+        position: fixed;
+        inset: auto 0 0 0;
+        margin: 0;
+        max-width: none;
+        width: 100%;
+        border-radius: var(--lp-radius-gross) var(--lp-radius-gross) 0 0;
+        padding-bottom: env(safe-area-inset-bottom);
+        animation: lp-dialog-einfahren 0.25s ease-out;
+    }
+}
+
+@keyframes lp-dialog-einfahren {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lp-dialog {
+        animation: none;
+    }
+}
+
 /* Der Avatar. Rund, klein, und mit einem neutralen Platzhalter statt eines
    leeren Lochs, solange keiner gewählt ist. */
 .avatar {
