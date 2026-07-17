@@ -193,54 +193,6 @@
     color: var(--lp-text-leise);
 }
 
-/*
- * Der Score-Ring auf dem Dashboard (aus dem Entwurf). Nur hier, nicht in
- * grundlage.css: Aktuell braucht ihn ausschließlich das Dashboard (App), eine
- * Raum-Detailseite bekäme ihn erst, wenn ein zweiter Ort ihn wirklich
- * braucht (ADR-0009-Korrektur in CLAUDE.md — nur was mehrere Module
- * brauchen, gehört in Core). Der Ring selbst trägt keine Zahl über
- * `conic-gradient` allein: `.lp-score__wert` (aus grundlage.css) sitzt in der
- * Mitte und bleibt die einzige Textquelle.
- */
-.lp-score-karte {
-    display: flex;
-    align-items: center;
-    gap: var(--lp-abstand);
-}
-
-.lp-score-ring {
-    position: relative;
-    flex: none;
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: conic-gradient(var(--lp-akzent) calc(var(--score-pct, 0) * 1%), rgba(255, 255, 255, 0.07) 0);
-    box-shadow: 0 0 24px rgba(52, 255, 122, 0.35);
-}
-
-.lp-score-ring__mitte {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: #0a0f0c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lp-score-ring__mitte .lp-score__wert {
-    font-size: 1.35rem;
-}
-
-.lp-score-karte__titel {
-    font-family: var(--lp-schrift-anzeige);
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
 /* Kopfzeile des Dashboards: Datum, Begrüßung, Avatar (Entwurf). Eigener Name
    statt der bestehenden .lp-kopfzeile (Räume/Vorlagen) — die trägt dort einen
    anderen Rhythmus (Überschrift + "+"-Knopf) und soll sich nicht mitändern,

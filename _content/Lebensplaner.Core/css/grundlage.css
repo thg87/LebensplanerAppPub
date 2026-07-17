@@ -142,6 +142,11 @@ body {
     overscroll-behavior-y: none;
 }
 
+h1,
+h2 {
+    font-family: var(--lp-schrift-anzeige);
+}
+
 h1 {
     font-size: 1.75rem;
     font-weight: 700;
@@ -223,7 +228,10 @@ a {
     /* Erbt nicht von selbst: Formularelemente haben ihre eigene Schrift. */
     font: inherit;
     color: var(--lp-text);
-    background: var(--lp-hintergrund);
+    /* Eigener, leicht hellerer Ton statt der Seitenfläche: Auf einer
+       Glaskarte (.lp-dialog, .lp-karte) wäre ein Feld in --lp-hintergrund
+       fast unsichtbar — hier trägt es sein eigenes bisschen Kontur. */
+    background: rgba(255, 255, 255, 0.04);
 
     min-height: var(--lp-tippziel);
     padding: 0 0.75rem;
@@ -234,6 +242,14 @@ a {
        Das ist kein Schönheitsfehler: Danach steht die Seite verschoben, und der
        Nutzer muss von Hand zurückzoomen. */
     font-size: max(16px, 1rem);
+}
+
+/* color-scheme:dark allein reicht nicht überall — Chromium zieht die
+   Optionsliste eines <select> sonst in Hell nach, mitten aus einer dunklen
+   Karte heraus. */
+.lp-feld select option {
+    background: #0d1210;
+    color: var(--lp-text);
 }
 
 .lp-knopf {
@@ -625,4 +641,128 @@ a {
 .avatar--leer {
     background: var(--lp-hintergrund);
     border: 1px dashed var(--lp-trennlinie);
+}
+
+/*
+ * Der Score-Ring (aus dem Design-Entwurf). Zuerst nur vom Dashboard (App)
+ * gebraucht, jetzt auch von RaumDetailSeite und der Räume-Liste (Haushalt) —
+ * das ist der zweite und dritte Ort, ab dem ein Baustein laut CLAUDE.md nach
+ * Core gehört statt in eine der Schalen. `.lp-score__wert` (oben in dieser
+ * Datei) bleibt die einzige Textquelle in der Mitte.
+ */
+.lp-score-karte {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand);
+}
+
+.lp-score-ring {
+    position: relative;
+    flex: none;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(var(--lp-akzent) calc(var(--score-pct, 0) * 1%), rgba(255, 255, 255, 0.07) 0);
+    box-shadow: 0 0 24px rgba(52, 255, 122, 0.35);
+}
+
+.lp-score-ring__mitte {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #0a0f0c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lp-score-ring__mitte .lp-score__wert {
+    font-size: 1.35rem;
+}
+
+.lp-score-karte__titel {
+    font-family: var(--lp-schrift-anzeige);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* Kleine Variante für eine Zeile (Räume-Liste): ein Ring pro Raum, ohne
+   eigenes Leuchten — zwölf glühende Ringe untereinander wären Lärm. */
+.lp-score-ring--klein {
+    width: 40px;
+    height: 40px;
+    box-shadow: none;
+}
+
+.lp-score-ring--klein .lp-score-ring__mitte {
+    width: 31px;
+    height: 31px;
+}
+
+.lp-score-ring--klein .lp-score-ring__mitte .lp-score__wert {
+    font-size: 0.68rem;
+}
+
+/* Quadratischer Icon-Knopf: die "+"-Aktionen (Räume, Raum-Detail) und der
+   Zurück-Pfeil. Eigene Klasse statt .lp-knopf, weil beide fest quadratisch
+   bleiben statt sich am Text zu strecken. */
+.lp-icon-knopf {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    border: 1px solid var(--lp-trennlinie);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--lp-text-leise);
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lp-icon-knopf--akzent {
+    border-color: rgba(52, 255, 122, 0.35);
+    background: rgba(52, 255, 122, 0.12);
+    color: var(--lp-akzent);
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+/*
+ * Rückfragen (Raum löschen, Sicherung/Standard-Set ersetzen): dieselbe
+ * ARIA-Rolle wie ein Formularfehler (role=alertdialog statt alert), aber
+ * keine Fehlermeldung — deshalb als zentriertes Overlay statt inline im
+ * Textfluss, mit normaler statt roter Schrift. Nur der Rahmen von .lp-fehler
+ * bleibt im Warnton: ein leiser Hinweis „das hier ist endgültig", keine
+ * Alarmfarbe für einen normalen Sicherheitsschritt.
+ */
+.lp-ruecksfrage-hinterlage {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--lp-abstand-gross);
+    z-index: 30;
+}
+
+.lp-ruecksfrage-hinterlage .lp-fehler[role="alertdialog"] {
+    width: 100%;
+    max-width: 380px;
+    background: rgba(16, 20, 18, 0.94);
+    color: var(--lp-text);
+    margin-bottom: 0;
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .lp-ruecksfrage-hinterlage .lp-fehler[role="alertdialog"] {
+        -webkit-backdrop-filter: blur(30px) saturate(160%);
+        backdrop-filter: blur(30px) saturate(160%);
+    }
 }
