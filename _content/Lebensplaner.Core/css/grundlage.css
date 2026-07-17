@@ -1,0 +1,399 @@
+/*
+ * Design-Grundlage — Tokens und Basis für alle Module.
+ *
+ * Liegt in Core, nicht in App: Module brauchen die Bausteine für ihre Screens.
+ * Lägen sie in App, erzwänge das Haushalt → App und bräche die
+ * Abhängigkeitstabelle (CLAUDE.md, Korrektur zu ADR 0009).
+ *
+ * M4 ist bewusst schmucklos. Die Flächen stehen trotzdem schon als eigene
+ * Variablen da, damit M5 für die Liquid-Glass-Annäherung nur Werte tauscht und
+ * `backdrop-filter` ergänzt — kein Umbau. Ehrlich bleibt: Das wird eine
+ * Annäherung. Echtes Liquid Glass rechnet das OS in Echtzeit, CSS kann das nicht.
+ */
+
+:root {
+    /* Beide Erscheinungsbilder. Ein Planer, den man abends aufs Handy nimmt,
+       sollte nicht blenden. */
+    color-scheme: light dark;
+
+    /* system-ui liefert auf iOS echtes SF Pro (CLAUDE.md). Die Kette dahinter ist
+       nur für Android und Desktop; auf iOS greift sie nie. */
+    --lp-schrift: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    /* 44px ist Apples Mindestmaß für ein Tippziel. Kein Richtwert zum
+       Unterschreiten: Darunter trifft der Daumen daneben, und die App wird auf
+       genau dem Gerät unbenutzbar, für das sie gebaut ist. */
+    --lp-tippziel: 44px;
+
+    --lp-abstand-klein: 0.5rem;
+    --lp-abstand: 1rem;
+    --lp-abstand-gross: 1.5rem;
+
+    --lp-radius: 14px;
+    --lp-radius-gross: 20px;
+
+    --lp-hintergrund: #f2f2f7;
+    --lp-flaeche: #ffffff;
+    /* Schwebende Flächen (Navigation, später Dialoge) sind eigene Tokens: Hier
+       setzt die Transluzenz an.
+       `--lp-flaeche-schwebend` ist der *deckende* Wert und bleibt die
+       Voraussetzung — er gilt, wo `backdrop-filter` fehlt oder wo der Nutzer
+       weniger Transparenz verlangt hat. `--lp-flaeche-glas` ist die Zugabe. */
+    --lp-flaeche-schwebend: #fbfbfd;
+    --lp-flaeche-glas: rgba(255, 255, 255, 0.72);
+    /* saturate() ist der Teil, der das Milchglas nach iOS aussehen lässt statt
+       nach Weichzeichner: Was durchscheint, bleibt farbig. */
+    --lp-glas-filter: blur(20px) saturate(180%);
+    --lp-trennlinie: rgba(60, 60, 67, 0.18);
+
+    --lp-text: #1c1c1e;
+    --lp-text-leise: #6c6c70;
+    --lp-akzent: #0071e3;
+
+    /* Eigene Tokens statt eines nackten `red`: Der Fehlerton muss in beiden
+       Erscheinungsbildern lesbar bleiben — rot auf Schwarz ist es nicht. */
+    --lp-fehler-text: #8a1c1c;
+    --lp-fehler-flaeche: #fdecec;
+    --lp-fehler-rand: #f0b4b4;
+
+    --lp-erfolg-text: #1a6b32;
+
+    --lp-schatten: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --lp-hintergrund: #000000;
+        --lp-flaeche: #1c1c1e;
+        /* Gleicher Wert wie die Fläche — und das ist gemessen, nicht vergessen.
+           Im Dunkeln trägt kein Schatten (--lp-schatten ist `none`), also läge
+           es nahe, die schwebende Fläche aufzuhellen. Das kostet aber genau den
+           Kontrast, den der aktive Navigationslink braucht: --lp-akzent
+           (#0a84ff) erreicht auf #1c1c1e noch 4.66:1, auf #2c2c2e nur noch
+           3.82 — unter den 4.5, die für Text dieser Größe gelten. Den Akzent
+           dafür aufzuhellen ginge nicht: Er ist auch die Knopffläche unter
+           weißer Schrift, dort würde es dieselbe Grenze von der anderen Seite
+           reißen.
+           Die Höhe entsteht deshalb aus Unschärfe und Trennlinie statt aus
+           Helligkeit — so macht es iOS auch. Wer hier aufhellt, misst vorher
+           nach. */
+        --lp-flaeche-schwebend: #1c1c1e;
+        --lp-flaeche-glas: rgba(28, 28, 30, 0.72);
+        --lp-trennlinie: rgba(84, 84, 88, 0.65);
+
+        --lp-text: #f2f2f7;
+        --lp-text-leise: #98989d;
+        --lp-akzent: #0a84ff;
+
+        --lp-fehler-text: #ff9b9b;
+        --lp-fehler-flaeche: #2c1616;
+        --lp-fehler-rand: #5c2626;
+
+        --lp-erfolg-text: #6ee7a0;
+
+        --lp-schatten: none;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--lp-schrift);
+    background: var(--lp-hintergrund);
+    color: var(--lp-text);
+    -webkit-font-smoothing: antialiased;
+
+    /* Kein Gummiband-Überziehen der ganzen Seite — das fühlt sich sofort nach
+       Webseite an, nicht nach App. */
+    overscroll-behavior-y: none;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--lp-abstand) 0;
+}
+
+h1:focus,
+h1:focus-visible {
+    /* FocusOnNavigate setzt den Fokus nach jeder Navigation auf die
+       Überschrift — das ist für Screenreader richtig, soll aber keinen Rahmen
+       um die Überschrift malen. Tastaturnutzer verlieren nichts: Sie sehen den
+       Fokus an den Bedienelementen, nicht an der Schrift. */
+    outline: none;
+}
+
+p {
+    line-height: 1.5;
+    margin: 0 0 var(--lp-abstand) 0;
+}
+
+a {
+    color: var(--lp-akzent);
+}
+
+/* Nie den Fokus unsichtbar machen: Ohne ihn ist die App mit der Tastatur
+   unbedienbar, und das merkt beim Bauen niemand, weil alle die Maus nehmen. */
+:focus-visible {
+    outline: 2px solid var(--lp-akzent);
+    outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Bausteine. Hier steht nur, was ein Modul auch wirklich braucht — keine
+ * Komponentenbibliothek auf Vorrat.
+ * ------------------------------------------------------------------------- */
+
+.lp-karte {
+    background: var(--lp-flaeche);
+    border-radius: var(--lp-radius-gross);
+    box-shadow: var(--lp-schatten);
+    padding: var(--lp-abstand);
+}
+
+.lp-feld {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: var(--lp-abstand);
+}
+
+.lp-feld > label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lp-text-leise);
+}
+
+.lp-feld input,
+.lp-feld select {
+    /* Erbt nicht von selbst: Formularelemente haben ihre eigene Schrift. */
+    font: inherit;
+    color: var(--lp-text);
+    background: var(--lp-hintergrund);
+
+    min-height: var(--lp-tippziel);
+    padding: 0 0.75rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+
+    /* 16px ist die Grenze, unter der iOS beim Tippen in ein Feld hineinzoomt.
+       Das ist kein Schönheitsfehler: Danach steht die Seite verschoben, und der
+       Nutzer muss von Hand zurückzoomen. */
+    font-size: max(16px, 1rem);
+}
+
+.lp-knopf {
+    font: inherit;
+    font-weight: 600;
+
+    min-height: var(--lp-tippziel);
+    padding: 0 var(--lp-abstand-gross);
+
+    border: none;
+    border-radius: var(--lp-radius);
+    background: var(--lp-akzent);
+    color: #fff;
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lp-knopf:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.lp-knopf--leise {
+    background: transparent;
+    color: var(--lp-akzent);
+}
+
+/* Fehler tragen nicht nur Farbe: Rot allein sieht nicht jeder (CLAUDE.md denkt
+   Barrierefreiheit mit). Deshalb steht immer auch Text da. */
+.lp-fehler {
+    border: 1px solid var(--lp-fehler-rand);
+    background: var(--lp-fehler-flaeche);
+    color: var(--lp-fehler-text);
+    border-radius: var(--lp-radius);
+    padding: var(--lp-abstand-klein) var(--lp-abstand);
+    margin-bottom: var(--lp-abstand);
+}
+
+.lp-fehler ul {
+    margin: 0;
+    padding-inline-start: 1.2rem;
+}
+
+/* Zahl und Einheit gehören zusammen — „alle 3" und „Wochen" nebeneinander,
+   nicht untereinander. */
+.intervall {
+    display: flex;
+    gap: var(--lp-abstand-klein);
+}
+
+.intervall input {
+    width: 6rem;
+}
+
+.intervall select {
+    flex: 1;
+}
+
+/* Erfolg trägt ebenfalls Text, nicht nur Grün. */
+.lp-erfolg {
+    color: var(--lp-erfolg-text);
+    font-weight: 600;
+}
+
+/* Der Installationshinweis. Auffällig genug, dass man ihn liest — er ist die
+   einzige Warnung vor stillem Datenverlust. */
+.hinweis {
+    background: var(--lp-fehler-flaeche);
+    border: 1px solid var(--lp-fehler-rand);
+    border-radius: var(--lp-radius-gross);
+    padding: var(--lp-abstand);
+    margin-bottom: var(--lp-abstand-gross);
+}
+
+.hinweis p {
+    margin: var(--lp-abstand-klein) 0 0 0;
+    font-size: 0.95rem;
+}
+
+.lp-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.lp-leer {
+    color: var(--lp-text-leise);
+}
+
+/* Das Rückgängig-Angebot. Ruhig: Es ist eine Quittung, keine Warnung — nichts
+   ist schiefgegangen, der Nutzer hat nur gerade etwas getan. */
+.rueckgaengig {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lp-abstand-klein);
+
+    background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius-gross);
+    padding: var(--lp-abstand-klein) var(--lp-abstand);
+    margin-bottom: var(--lp-abstand);
+}
+
+/* Pausiert: erkennbar, aber ruhig — es ist kein Fehler, sondern eine Ansage. */
+.pausiert {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lp-akzent);
+}
+
+/* Eine überfällige Aufgabe trägt eine Kante — nicht nur Schriftfarbe. Ein
+   Farbunterschied allein unterscheidet für rot-grün-blinde Augen nichts, und
+   der Text sagt es ohnehin. Die Kante ist das Extra, nicht der Träger. */
+.aufgabe--ueberfaellig {
+    border-inline-start: 3px solid var(--lp-fehler-text);
+}
+
+.aufgabe__zeile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.aufgabe__ueberfaellig {
+    color: var(--lp-fehler-text);
+    font-weight: 600;
+}
+
+.aufgabe__aktionen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+    margin-top: var(--lp-abstand-klein);
+}
+
+/* US-25: die wischbare Karte. Der äußere Ring ist nur Bühne — transparent,
+   an den Ecken abgeschnitten (`overflow: hidden`) — die sichtbare Karte ist
+   `.wisch__vordergrund` und gleitet beim Ziehen darüber. Dahinter liegt der
+   Hinweis, was passieren wird: nicht nur Farbe, auch Text, und erst
+   sichtbar, sobald die jeweilige Schwelle erreicht ist — sonst wäre Ziehen
+   Glücksspiel. `touch-action: pan-y` überlässt senkrechtes Scrollen dem
+   Browser; waagerecht übernimmt gesten.js. */
+.wisch {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--lp-radius-gross);
+    touch-action: pan-y;
+}
+
+.wisch__hintergrund {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-inline-end: var(--lp-abstand-gross);
+    font-weight: 600;
+    color: #fff;
+    opacity: 0;
+}
+
+.wisch__hintergrund--morgen {
+    background: var(--lp-text-leise);
+}
+
+.wisch__hintergrund--erledigt {
+    background: var(--lp-erfolg-text);
+}
+
+.wisch--morgen .wisch__hintergrund--morgen,
+.wisch--erledigt .wisch__hintergrund--erledigt {
+    opacity: 1;
+}
+
+.wisch__vordergrund {
+    position: relative;
+    transform: translateX(var(--wisch-versatz, 0px));
+}
+
+/* Zurückfedern nur, wenn gerade nicht gezogen wird — während der Geste
+   bestimmt der Finger die Position, keine Transition soll hinterherhinken. */
+.wisch:not(.wisch--zieht) .wisch__vordergrund {
+    transition: transform 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wisch:not(.wisch--zieht) .wisch__vordergrund {
+        transition: none;
+    }
+}
+
+/* Der Avatar. Rund, klein, und mit einem neutralen Platzhalter statt eines
+   leeren Lochs, solange keiner gewählt ist. */
+.avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar--leer {
+    background: var(--lp-hintergrund);
+    border: 1px dashed var(--lp-trennlinie);
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <!-- viewport-fit=cover: Ohne das ist env(safe-area-inset-bottom) immer 0, und
+         die Navigation läge auf dem iPhone unter dem Home-Indikator. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Lebensplaner</title>
+    <base href="/" />
+    <link href="_framework/dotnet.tpdbij4odc.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-zyfBhGQDZrPcrmt9gwKKD4ClTDJ/+sBiT0MjeWVP/V8=" />
+    <!-- Erst die Grundlage aus Core (Tokens, Basis), dann die Schale, dann der
+         Rest der Vorlage: Später Geladenes darf Früheres überschreiben. -->
+    <link rel="stylesheet" href="_content/Lebensplaner.Core/css/grundlage.css" />
+    <link rel="stylesheet" href="css/schale.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <!-- If you add any scoped CSS files, uncomment the following to load them
+    <link href="Lebensplaner.App.styles.css" rel="stylesheet" /> -->
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <!-- Färbt die Statusleiste. Zwei Angaben, weil das Manifest nur *eine*
+         theme_color kennt und nicht auf das Erscheinungsbild reagieren kann —
+         ein heller Balken über schwarzem Inhalt wäre der Kasten, der auffällt. -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f2f7" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+    <!-- Deprecated zugunsten von manifest.display, aber iOS liest das Manifest
+         erst ab 16.4. Darunter startet die App ohne diese Zeile im Tab-Modus —
+         und dann meldet navigator.standalone nie einen Homescreen-Start und
+         US-19 (F-8) prüfte etwas anderes als gemeint. Welche iOS-Version das
+         Testgerät hat, weiß hier niemand. -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script type="importmap">{
+  "imports": {
+    "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
+    "./_framework/dotnet.native.js": "./_framework/dotnet.native.puryxhmhq9.js",
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.web2r9gqbh.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.tpdbij4odc.js"
+  },
+  "scopes": {},
+  "integrity": {
+    "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/dotnet.js": "sha256-zyfBhGQDZrPcrmt9gwKKD4ClTDJ/+sBiT0MjeWVP/V8=",
+    "./_framework/dotnet.native.js": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
+    "./_framework/dotnet.native.puryxhmhq9.js": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
+    "./_framework/dotnet.runtime.js": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
+    "./_framework/dotnet.runtime.web2r9gqbh.js": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
+    "./_framework/dotnet.tpdbij4odc.js": "sha256-zyfBhGQDZrPcrmt9gwKKD4ClTDJ/+sBiT0MjeWVP/V8="
+  }
+}</script>
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+    <script src="_framework/blazor.webassembly.w3qd1tpl0e.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
+</body>
+
+</html>
