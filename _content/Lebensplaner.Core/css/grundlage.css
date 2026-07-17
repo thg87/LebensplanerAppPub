@@ -328,62 +328,6 @@ a {
     margin-top: var(--lp-abstand-klein);
 }
 
-/* US-25: die wischbare Karte. Der äußere Ring ist nur Bühne — transparent,
-   an den Ecken abgeschnitten (`overflow: hidden`) — die sichtbare Karte ist
-   `.wisch__vordergrund` und gleitet beim Ziehen darüber. Dahinter liegt der
-   Hinweis, was passieren wird: nicht nur Farbe, auch Text, und erst
-   sichtbar, sobald die jeweilige Schwelle erreicht ist — sonst wäre Ziehen
-   Glücksspiel. `touch-action: pan-y` überlässt senkrechtes Scrollen dem
-   Browser; waagerecht übernimmt gesten.js. */
-.wisch {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--lp-radius-gross);
-    touch-action: pan-y;
-}
-
-.wisch__hintergrund {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-inline-end: var(--lp-abstand-gross);
-    font-weight: 600;
-    color: #fff;
-    opacity: 0;
-}
-
-.wisch__hintergrund--morgen {
-    background: var(--lp-text-leise);
-}
-
-.wisch__hintergrund--erledigt {
-    background: var(--lp-erfolg-text);
-}
-
-.wisch--morgen .wisch__hintergrund--morgen,
-.wisch--erledigt .wisch__hintergrund--erledigt {
-    opacity: 1;
-}
-
-.wisch__vordergrund {
-    position: relative;
-    transform: translateX(var(--wisch-versatz, 0px));
-}
-
-/* Zurückfedern nur, wenn gerade nicht gezogen wird — während der Geste
-   bestimmt der Finger die Position, keine Transition soll hinterherhinken. */
-.wisch:not(.wisch--zieht) .wisch__vordergrund {
-    transition: transform 0.2s ease-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .wisch:not(.wisch--zieht) .wisch__vordergrund {
-        transition: none;
-    }
-}
-
 /* Der Avatar. Rund, klein, und mit einem neutralen Platzhalter statt eines
    leeren Lochs, solange keiner gewählt ist. */
 .avatar {
