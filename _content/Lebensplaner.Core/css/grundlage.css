@@ -1785,6 +1785,74 @@ a {
 }
 
 /*
+ * US-81: Die Einkaufsliste aus dem Wochenplan. Oben die Quellen-Karte (woher die Liste
+ * stammt, KW und Kennzahlen), darunter die flache, ungruppierte Positionsliste (v1;
+ * Ladengruppierung ist US-87). Sie nutzt die geteilte .lp-karte als Kartengrundlage.
+ */
+.einkauf-quelle {
+    margin-bottom: var(--lp-abstand);
+}
+
+.einkauf-quelle__titel {
+    margin: 0;
+    font-weight: 600;
+}
+
+.einkauf-quelle__woche {
+    margin: 0.15rem 0 0;
+    color: var(--lp-text-leise);
+    font-variant-numeric: tabular-nums;
+}
+
+.einkauf-quelle__kennzahlen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+    margin: var(--lp-abstand-klein) 0 0;
+    color: var(--lp-text-leise);
+    font-variant-numeric: tabular-nums;
+}
+
+.einkauf-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+/* Eine Zeile je Position: Menge (fest links), Name (füllt), Herkunft (leise rechts).
+   Auf schmalen Geräten darf die Herkunft umbrechen, ohne die Zeile zu sprengen. */
+.einkauf-position {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.35rem var(--lp-abstand-klein);
+    min-height: var(--lp-tippziel);
+    padding: var(--lp-abstand-klein);
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+}
+
+.einkauf-position__menge {
+    flex: none;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.einkauf-position__name {
+    flex: 1;
+    min-width: 0;
+}
+
+.einkauf-position__herkunft {
+    flex: none;
+    color: var(--lp-text-leise);
+    font-size: 0.85rem;
+}
+
+/*
  * US-51: Anzeige von Raumfarbe und Raum-Icon. Die Farbe wirkt als Akzent — nie als
  * Vollflächen-Tönung (Mockup): ein 38px-Icon-Badge mit aus der Raumfarbe
  * abgeleitetem (reduziertem) Hintergrund und ein 3px linker Kartenrand.
