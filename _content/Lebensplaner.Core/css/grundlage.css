@@ -1439,6 +1439,174 @@ a {
 }
 
 /*
+ * Wochenplan (US-76). Die Wochen-Navigation (‹ Bezeichnung ›) und darunter die
+ * sieben Tageskarten mit je drei Mahlzeit-Slots. Bewusst als vertikale Kartenliste
+ * statt als 7×3-Gitter: Auf dem Handy passt ein Wochenraster nicht ohne
+ * Querscrollen (CLAUDE.md: „ohne Querscrollen"); die Karten stapeln sich auf
+ * schmalen Viewports und legen sich auf breiten nebeneinander.
+ */
+.wochenplan-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lp-abstand);
+    margin-bottom: var(--lp-abstand);
+}
+
+.wochenplan-nav__woche {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.wochenplan {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: var(--lp-abstand);
+    /* Platz über dem Sticky-Fußknopf, damit die letzte Karte nicht darunter
+       verschwindet. */
+    margin-bottom: 5rem;
+}
+
+.wochenplan-tag {
+    background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius-gross);
+    padding: var(--lp-abstand);
+}
+
+/* Der heutige Tag ist hervorgehoben (US-76): Akzentrahmen statt Füllung, damit die
+   Slot-Inhalte lesbar bleiben. */
+.wochenplan-tag--heute {
+    border-color: var(--lp-akzent);
+    box-shadow: 0 0 0 1px var(--lp-akzent);
+}
+
+.wochenplan-tag__kopf {
+    display: flex;
+    align-items: baseline;
+    gap: var(--lp-abstand-klein);
+    margin-bottom: var(--lp-abstand-klein);
+}
+
+.wochenplan-tag__wochentag {
+    font-weight: 600;
+}
+
+.wochenplan-tag__datum {
+    color: var(--lp-text-leise);
+    font-variant-numeric: tabular-nums;
+}
+
+.wochenplan-tag__heute {
+    margin-left: auto;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: var(--lp-akzent);
+    color: var(--lp-akzent-text);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.wochenplan-tag__slots {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.wochenplan-slot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.wochenplan-slot__mahlzeit {
+    color: var(--lp-text-leise);
+    font-size: 0.8rem;
+}
+
+.wochenplan-slot__belegt {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+    min-height: var(--lp-tippziel);
+    padding: 0 var(--lp-abstand-klein);
+    border-radius: var(--lp-radius);
+    background: var(--lp-flaeche);
+}
+
+.wochenplan-slot__bild {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: calc(var(--lp-radius) - 6px);
+    object-fit: cover;
+}
+
+.wochenplan-slot__rezept {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wochenplan-slot__entfernen {
+    flex: none;
+    width: var(--lp-tippziel);
+    min-height: var(--lp-tippziel);
+    border: none;
+    background: transparent;
+    color: var(--lp-text-leise);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: var(--lp-radius);
+}
+
+.wochenplan-slot__entfernen:hover {
+    color: var(--lp-text);
+}
+
+/* Der leere Slot lädt zum Belegen ein — ein gestrichelter, ruhiger Knopf, der sich
+   klar von einem belegten Slot unterscheidet. */
+.wochenplan-slot__waehlen {
+    min-height: var(--lp-tippziel);
+    width: 100%;
+    padding: 0 var(--lp-abstand-klein);
+    border: 1px dashed var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    background: transparent;
+    color: var(--lp-text-leise);
+    text-align: left;
+    cursor: pointer;
+}
+
+.wochenplan-slot__waehlen:hover {
+    border-color: var(--lp-akzent);
+    color: var(--lp-text);
+}
+
+/* Sticky-Fußknopf: „Einkaufsliste für diese Woche erstellen" (AC7, verdrahtet in
+   US-81). Klebt am unteren Rand über der Hauptnavigation. */
+.wochenplan-fuss {
+    position: sticky;
+    bottom: var(--lp-abstand);
+    display: flex;
+    justify-content: center;
+}
+
+.wochenplan-fuss__knopf {
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--lp-schatten);
+}
+
+/*
  * US-51: Anzeige von Raumfarbe und Raum-Icon. Die Farbe wirkt als Akzent — nie als
  * Vollflächen-Tönung (Mockup): ein 38px-Icon-Badge mit aus der Raumfarbe
  * abgeleitetem (reduziertem) Hintergrund und ein 3px linker Kartenrand.
