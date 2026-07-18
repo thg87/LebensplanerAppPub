@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "Dqt8jJq3",
+  "version": "ihghp8zo",
   "assets": [
     {
       "hash": "sha256-dV1he5ffI47g9GAa3klrgC4hHUyAYIMR6DCa9rAcC+8=",
@@ -54,16 +54,20 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-GYXQdEw/8UVaHQNCsW4jOQQ5BjVJRb2sqpG23GsNpGY=",
-      "url": "_framework/Lebensplaner.App.p47s2k6o8j.wasm"
+      "hash": "sha256-zbKlVgmD/7eWsjp9BhQsL08/MeYqlXqfxmNqTRQlfHo=",
+      "url": "_framework/Lebensplaner.App.jczx4a3cxy.wasm"
     },
     {
-      "hash": "sha256-CV9PsK9XuZSxP3lCJsOsE9fgJLMDmlLrJr5AKjLzXEY=",
-      "url": "_framework/Lebensplaner.Core.v64vmh0nen.wasm"
+      "hash": "sha256-oxPGSwNNUK4E7x1ta4zuj6XlhXzrbXuRmEPqhwagVcA=",
+      "url": "_framework/Lebensplaner.Core.vl16mwfq11.wasm"
     },
     {
-      "hash": "sha256-fnVGPrxmfpsHLX+Yrcq3ilFPvQRTgEXbVH4k69fvbV0=",
-      "url": "_framework/Lebensplaner.Haushalt.eskhm7229a.wasm"
+      "hash": "sha256-27DN5DH/U3cy0uxviOpGBdARzHL7SbXcp2LGqmvBl8U=",
+      "url": "_framework/Lebensplaner.Essen.vbjsgc26o9.wasm"
+    },
+    {
+      "hash": "sha256-SsJ/q9Y82SezRls4hCxIMZZ7Bjl0pLjXeDx5AYtIHZA=",
+      "url": "_framework/Lebensplaner.Haushalt.mk13ripcbn.wasm"
     },
     {
       "hash": "sha256-BhnXnsFwC7Tq4djwtfYZ9cLakDkDjNbkPJclEHHxdGw=",
@@ -222,8 +226,8 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-PIt+S21q3BoVulwxE4w8PzRbF9nXG8S6IHev8bKo/WU=",
-      "url": "_framework/dotnet.070xsgzwok.js"
+      "hash": "sha256-PIsC9xUaRlkmX2ZTSOgdHCic0wtsydBV/HisPx094EI=",
+      "url": "_framework/dotnet.89z3ab6wk9.js"
     },
     {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
@@ -266,7 +270,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-9243oKqKaTlM17Lsy4NfebAH2iUiONEysCEL/wuYlsc=",
+      "hash": "sha256-7Foi03xIpC0XF1oe7kWhX7fr6S3wOX143PhJ9aePrSQ=",
       "url": "index.html"
     },
     {
