@@ -910,3 +910,85 @@ a {
 .raumfarbe--neutral {
     --lp-raumfarbe: transparent;
 }
+
+/*
+ * US-50: Icon-Schnellauswahl und Farbreihe im Raum-Dialog. Reihenfolge im
+ * Markup: Name → Icon → Farbe (Mockup). Nur kuratierte Auswahl, keine freie
+ * Eingabe (F-AG/F-AE). Beide bleiben auf dem Handy bedienbar: Kacheln/Chips
+ * halten effektiv ≥ 44px Trefferfläche, das Grid bricht per repeat() um.
+ */
+.lp-icongrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--lp-abstand-klein);
+}
+
+.lp-icongrid__feld {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--lp-tippziel);
+    padding: 0;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--lp-text);
+    background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    cursor: pointer;
+}
+
+/* Die „Kein Icon"-Kachel trägt nur das ∅-Zeichen — leiser als ein Emoji, damit
+   es nicht wie eine echte Auswahl konkurriert. */
+.lp-icongrid__feld:first-child {
+    color: var(--lp-text-leise);
+    font-size: 1.1rem;
+}
+
+.lp-icongrid__feld--aktiv {
+    border-color: var(--lp-akzent);
+    box-shadow: inset 0 0 0 1px var(--lp-akzent);
+}
+
+.lp-farbreihe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+}
+
+/* Der sichtbare Kreis ist 34px (Mockup), die effektive Trefferfläche aber ≥ 44px:
+   der Kreis sitzt in einem transparenten Tippziel-Quadrat, sodass das mobile
+   Antippen bequem bleibt, ohne dass die Chips optisch aufblähen. */
+.lp-farbreihe__chip {
+    width: var(--lp-tippziel);
+    height: var(--lp-tippziel);
+    padding: 5px;
+    background-clip: content-box;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--lp-raumfarbe);
+    box-shadow: inset 0 0 0 2px transparent;
+}
+
+/* „Keine Farbe": diagonaler Strich auf neutralem Grund statt einer Farbe. */
+.lp-farbreihe__chip--keine {
+    background-color: var(--lp-flaeche);
+    background-image: linear-gradient(
+        135deg,
+        transparent calc(50% - 1px),
+        var(--lp-text-leise) calc(50% - 1px),
+        var(--lp-text-leise) calc(50% + 1px),
+        transparent calc(50% + 1px)
+    );
+    background-clip: content-box;
+    box-shadow: inset 0 0 0 1px var(--lp-trennlinie);
+}
+
+/* Der weiße Ring markiert die aktive Farbe (Mockup) — er liegt im 5px-Rand
+   zwischen Kreis und Tippziel, wandert also bei jeder neuen Wahl mit. */
+.lp-farbreihe__chip--aktiv {
+    box-shadow:
+        0 0 0 2px var(--lp-hintergrund),
+        0 0 0 4px var(--lp-text);
+}
