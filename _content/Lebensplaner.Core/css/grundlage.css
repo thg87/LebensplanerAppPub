@@ -1111,6 +1111,101 @@ a {
 }
 
 /*
+ * US-68: Zutaten- und Zubereitungs-Editor im Rezept-Dialog. Jede Zeile ist eine
+ * Reihe aus Eingabefeldern plus einem Entfernen-Knopf; darunter steht der
+ * „+ hinzufügen"-Knopf. Bewusst eigene Klassen statt .lp-feld — hier stehen
+ * mehrere Felder nebeneinander in einer Zeile, nicht untereinander.
+ */
+.rezept-editor {
+    margin-bottom: var(--lp-abstand);
+}
+
+.rezept-editor h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lp-text-leise);
+    margin: 0 0 var(--lp-abstand-klein);
+}
+
+.rezept-editor__zeilen {
+    list-style: none;
+    margin: 0 0 var(--lp-abstand-klein);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.rezept-zutat {
+    display: flex;
+    gap: var(--lp-abstand-klein);
+    align-items: center;
+}
+
+/* Menge und Einheit bleiben schmal, der Name nimmt den Rest — sonst drückt eine
+   lange Zutat die kleinen Felder aus der Zeile. min-width:0 lässt den Namen bei
+   Bedarf schrumpfen, statt die Zeile über die Dialogbreite zu sprengen. */
+.rezept-zutat__menge {
+    flex: none;
+    width: 5rem;
+}
+
+.rezept-zutat__einheit {
+    flex: none;
+    width: 6rem;
+}
+
+.rezept-zutat__name {
+    flex: 1;
+    min-width: 0;
+}
+
+.rezept-schritt {
+    display: flex;
+    gap: var(--lp-abstand-klein);
+    align-items: flex-start;
+}
+
+.rezept-schritt__nummer {
+    flex: none;
+    /* Auf die Höhe des Feldrands ausgerichtet, nicht der Textzeile. */
+    min-height: var(--lp-tippziel);
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: var(--lp-text-leise);
+}
+
+.rezept-schritt__text {
+    flex: 1;
+    min-width: 0;
+    /* Erbt nicht von selbst — dieselbe Feldoptik wie input/select (.lp-feld). */
+    font: inherit;
+    font-size: max(16px, 1rem);
+    color: var(--lp-text);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    resize: vertical;
+}
+
+/* Der Entfernen-Knopf bleibt quadratisch und schmal — er trägt nur das ✕. */
+.rezept-editor__entfernen {
+    flex: none;
+    padding: 0;
+    width: var(--lp-tippziel);
+}
+
+/* Der Speichern-/Anlegen-Knopf am Fuß des Dialogs, rechtsbündig (Muster
+   .aufgabe__aktionen). */
+.rezept-dialog__aktionen {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--lp-abstand);
+}
+
+/*
  * Rückfragen (Raum löschen, Sicherung/Standard-Set ersetzen): dieselbe
  * ARIA-Rolle wie ein Formularfehler (role=alertdialog statt alert), aber
  * keine Fehlermeldung — deshalb als zentriertes Overlay statt inline im
