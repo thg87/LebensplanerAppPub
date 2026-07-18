@@ -1928,6 +1928,31 @@ a {
 }
 
 /*
+ * US-87: Gruppierung nach Ladenkategorie. Jede Gruppe trägt eine kleine, leise Überschrift
+ * (Obst & Gemüse / Kühlregal / Vorrat & Trocken / Sonstiges) über ihrer Positionsliste. Die
+ * Gruppen stehen mit etwas Abstand untereinander; die Überschrift ordnet, ohne wie ein eigenes
+ * Kartenelement zu wirken (Tiefe durch Schichtung, nicht durch Rahmen).
+ */
+.einkauf-gruppe + .einkauf-gruppe {
+    margin-top: var(--lp-abstand);
+}
+
+.einkauf-gruppe__titel {
+    margin: 0 0 var(--lp-abstand-klein);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--lp-text-leise);
+}
+
+/* Innerhalb einer Gruppe folgt die eigene Positionsliste direkt auf die abgeleitete — ein
+   kleiner Abstand trennt beide, ohne die Gruppe zu sprengen. */
+.einkauf-gruppe .einkauf-liste + .einkauf-liste {
+    margin-top: var(--lp-abstand-klein);
+}
+
+/*
  * US-83: Eigene Positionen. Die Liste selbst nutzt .einkauf-liste/.einkauf-position wie die
  * abgeleiteten (durchgestrichen bei „erledigt"); nur der Entfernen-Knopf und das
  * Eingabefeld+„+" darunter sind eigen. Ein Abstand nach oben trennt sie sichtbar von der
