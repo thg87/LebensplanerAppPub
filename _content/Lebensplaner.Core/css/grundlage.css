@@ -356,6 +356,28 @@ a {
     margin: 0;
 }
 
+/* US-38: Filterleiste der Aufgaben-Liste. Kompakte Felder, die von selbst auf
+   schmalen Viewports umbrechen — keine eigene Klapp-Logik nötig (eine
+   Komponente, zwei Größen, CLAUDE.md). Auf dem Desktop reicht die Breite für
+   eine Zeile, auf dem Handy verteilen sich die Felder auf mehrere schmale
+   Zeilen statt eine hohe Spalte zu bilden. */
+.lp-filterleiste {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.6rem var(--lp-abstand);
+    margin-bottom: var(--lp-abstand);
+}
+
+.lp-filterleiste .lp-feld {
+    flex: 1 1 9rem;
+    margin-bottom: 0;
+}
+
+.lp-filterleiste input[type="search"] {
+    flex: 1 1 12rem;
+}
+
 .lp-liste {
     list-style: none;
     margin: 0;
