@@ -2189,6 +2189,49 @@ a {
 }
 
 /*
+ * US-105: Die Sollmenge jeder Packlisten-Position ist editierbar. Das Feld sitzt rechts in der
+ * Zeile, außerhalb des Abhak-Labels (sonst würde ein Klick ins Feld die Gepackt-Checkbox
+ * umschalten). Ein kompaktes Zahlenfeld plus das „×" als leises Einheitszeichen.
+ */
+.packliste-menge {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.packliste-menge__feld {
+    /* Kompaktes Zahlenfeld in der Feldoptik von .lp-feld input (eigene Kontur auf der Karte). */
+    font: inherit;
+    /* 16px ist die iOS-Zoom-Grenze beim Tippen ins Feld (siehe .lp-feld input). */
+    font-size: max(16px, 1rem);
+    font-variant-numeric: tabular-nums;
+    color: var(--lp-text);
+    background: rgba(255, 255, 255, 0.04);
+    width: 4rem;
+    text-align: right;
+    min-height: var(--lp-tippziel);
+    padding: 0 0.5rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+}
+
+.packliste-menge__einheit {
+    flex: none;
+    font-weight: 600;
+    color: var(--lp-text-leise);
+}
+
+/* Gepackte Position: auch die Menge gedämpft, passend zum durchgestrichenen Namen (US-82-Muster). */
+.einkauf-position--erledigt .packliste-menge__feld {
+    color: var(--lp-text-leise);
+}
+
+.packliste-mengenfehler {
+    margin-bottom: var(--lp-abstand);
+}
+
+/*
  * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
  * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
  * Entfernen-Knopf — mehr Felder als eine Zutatenzeile (.rezept-zutat), darum bricht
