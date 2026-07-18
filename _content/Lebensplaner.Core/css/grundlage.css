@@ -2137,3 +2137,38 @@ a {
     font-size: 0.9rem;
     margin-top: 0.2rem;
 }
+
+/*
+ * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
+ * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
+ * Entfernen-Knopf — mehr Felder als eine Zutatenzeile (.rezept-zutat), darum bricht
+ * die Zeile auf schmalen Viewports von selbst um (flex-wrap), statt die Felder zu
+ * stauchen. Der Container/„+ hinzufügen"-Rahmen und der Entfernen-Knopf sind die
+ * geteilten .rezept-editor-Klassen; nur die Feldbreiten sind eigen.
+ */
+.reise-position {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+    align-items: center;
+}
+
+.reise-position__titel {
+    flex: 2 1 10rem;
+    min-width: 0;
+}
+
+.reise-position__kategorie {
+    flex: 1 1 8rem;
+    min-width: 0;
+}
+
+.reise-position__modus {
+    flex: none;
+    width: 8rem;
+}
+
+.reise-position__menge {
+    flex: none;
+    width: 5rem;
+}
