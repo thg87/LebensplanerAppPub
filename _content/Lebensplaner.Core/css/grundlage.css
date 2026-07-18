@@ -1271,6 +1271,29 @@ a {
     flex: none;
 }
 
+/* US-78: Die primäre(n) Detail-Aktion(en) — heute „Zum Wochenplan", später zusätzlich
+   „Einkaufsliste erstellen" (US-84). Knöpfe stehen nebeneinander und brechen auf
+   schmalen Geräten um. */
+.rezept-detail__aktionen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+    margin-bottom: var(--lp-abstand);
+}
+
+/* Bestätigung nach dem Einplanen (US-78): ruhig, nicht die Akzentfarbe als Text
+   (Kontrast, ADR 0014) — der Haken trägt die positive Bedeutung. */
+.rezept-detail__eingeplant {
+    margin: 0 0 var(--lp-abstand);
+    color: var(--lp-text);
+    font-weight: 600;
+}
+
+.rezept-detail__eingeplant::before {
+    content: "✓ ";
+    color: var(--lp-akzent);
+}
+
 .rezept-detail__bild {
     display: block;
     width: 100%;
@@ -1658,6 +1681,107 @@ a {
 
 .rezeptwahl-eintrag__name {
     font-weight: 600;
+}
+
+/*
+ * US-78: „Zum Wochenplan" von der Rezept-Detailseite. Der Auswahl-Dialog
+ * (WochenplanWahlDialog) zeigt die frei blätterbare Woche (‹ Bezeichnung ›) und
+ * darunter je Tag die drei Mahlzeit-Slots als kompakte 3er-Reihe von Tippzielen.
+ * Ein belegter Slot nennt sein Rezept, damit das Ersetzen (AC2) sichtbar ist. Er
+ * sitzt im geteilten LpDialog und erbt dessen Scroll auf dem Handy.
+ */
+.wochenwahl-hinweis {
+    margin: 0 0 var(--lp-abstand);
+    color: var(--lp-text-leise);
+}
+
+.wochenwahl-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lp-abstand);
+    margin-bottom: var(--lp-abstand);
+}
+
+.wochenwahl-nav__woche {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.wochenwahl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.wochenwahl-tag {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.wochenwahl-tag__kopf {
+    display: flex;
+    align-items: baseline;
+    gap: var(--lp-abstand-klein);
+}
+
+.wochenwahl-tag__wochentag {
+    font-weight: 600;
+}
+
+.wochenwahl-tag__datum {
+    color: var(--lp-text-leise);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Die drei Mahlzeit-Slots eines Tages nebeneinander — drei schmale Ziele passen auch
+   auf dem Handy in eine Zeile, ohne Querscrollen. */
+.wochenwahl-tag__slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--lp-abstand-klein);
+}
+
+.wochenwahl-slot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-height: var(--lp-tippziel);
+    padding: var(--lp-abstand-klein);
+    border: 1px dashed var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    background: transparent;
+    color: var(--lp-text-leise);
+    text-align: left;
+    cursor: pointer;
+}
+
+.wochenwahl-slot:hover {
+    border-color: var(--lp-akzent);
+    color: var(--lp-text);
+}
+
+/* Ein belegter Slot ist voller gerahmt und nennt sein Rezept — ein Tipp ersetzt es. */
+.wochenwahl-slot--belegt {
+    border-style: solid;
+    color: var(--lp-text);
+}
+
+.wochenwahl-slot__mahlzeit {
+    font-size: 0.8rem;
+}
+
+.wochenwahl-slot__rezept {
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /*
