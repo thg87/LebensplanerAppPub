@@ -1022,6 +1022,95 @@ a {
 }
 
 /*
+ * US-67: Rezept-Übersicht (Modul Essen). Jede Karte ist als Ganzes ein Link zur
+ * Detailseite (US-70): Bild-Thumbnail links, Titel/Meta/Tags rechts. Das Grid
+ * füllt auf breiten Schirmen mehrere Spalten und bleibt auf dem Handy einspaltig
+ * — auto-fill + minmax(min(100%, …)) verhindert das Querscrollen bei sehr
+ * schmalen Viewports (die Spalte wird nie breiter als der Platz).
+ */
+.rezept-grid {
+    /* Eigenständig statt zusätzlich zu .lp-liste: sonst konkurrierten zwei
+       gleich spezifische `display`-Deklarationen (flex vs. grid), und welche
+       gewinnt, hinge allein an der Quellreihenfolge. Die Listen-Resets stehen
+       deshalb hier direkt. */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: var(--lp-abstand-klein);
+}
+
+/* Der Grid-Platz ist das <li>; die Karte (der <a>) füllt ihn und wird so je
+   Zeile gleich hoch, statt auf die eigene Inhaltshöhe zu schrumpfen. */
+.rezept-grid > li {
+    display: flex;
+}
+
+.rezept-karte {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand);
+    min-height: var(--lp-tippziel);
+    color: inherit;
+    text-decoration: none;
+}
+
+.rezept-karte__bild {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 1.6rem;
+}
+
+/* min-width:0 lässt Titel und Meta bei Bedarf abschneiden, statt die Karte zu
+   sprengen — sonst drückt ein langer Rezeptname das Grid über die Viewportbreite. */
+.rezept-karte__text {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.rezept-karte__titel {
+    font-family: var(--lp-schrift-anzeige);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rezept-karte__meta {
+    font-size: 0.9rem;
+}
+
+.rezept-karte__tags {
+    list-style: none;
+    margin: 0.15rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+}
+
+.rezept-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1rem 0.6rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.8rem;
+    color: var(--lp-text-leise);
+}
+
+/*
  * Rückfragen (Raum löschen, Sicherung/Standard-Set ersetzen): dieselbe
  * ARIA-Rolle wie ein Formularfehler (role=alertdialog statt alert), aber
  * keine Fehlermeldung — deshalb als zentriertes Overlay statt inline im
