@@ -1606,6 +1606,60 @@ a {
     box-shadow: var(--lp-schatten);
 }
 
+/* US-77: Die Rezept-Auswahl im Wochenplan-Slot-Dialog (RezeptWahlDialog). Eine Liste
+   großzügiger Tippziele — jede Zeile ist als Ganzes der Auswahl-Knopf (Muster
+   rezept-karte). Sie sitzt im geteilten LpDialog, erbt also dessen Scroll auf dem
+   Handy. */
+.rezeptwahl-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.rezeptwahl-eintrag {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+    width: 100%;
+    min-height: var(--lp-tippziel);
+    padding: var(--lp-abstand-klein);
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    background: transparent;
+    color: var(--lp-text);
+    text-align: left;
+    cursor: pointer;
+}
+
+.rezeptwahl-eintrag:hover {
+    border-color: var(--lp-akzent);
+}
+
+.rezeptwahl-eintrag__bild {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--lp-radius);
+    background: rgba(255, 255, 255, 0.04);
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.rezeptwahl-eintrag__bild-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.rezeptwahl-eintrag__name {
+    font-weight: 600;
+}
+
 /*
  * US-51: Anzeige von Raumfarbe und Raum-Icon. Die Farbe wirkt als Akzent — nie als
  * Vollflächen-Tönung (Mockup): ein 38px-Icon-Badge mit aus der Raumfarbe
