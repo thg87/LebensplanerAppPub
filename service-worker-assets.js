@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "RS4/mKzp",
+  "version": "TAFkdzL9",
   "assets": [
     {
       "hash": "sha256-Vu6sut+Kn+XO8ktuEKCGSLhItO0c87Pc2mhMSMmDdt0=",
@@ -54,16 +54,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-HUM8C0e1Cx3EDkxMJyKd9PWIxte80/fJRRSukUsyhlA=",
-      "url": "_framework/Lebensplaner.App.3s7y9qlbjx.wasm"
+      "hash": "sha256-14aZBlf3a2KLsOxsshrsOZpHOxEmutu0x0j06FAnoMU=",
+      "url": "_framework/Lebensplaner.App.xqq7qzn7cu.wasm"
     },
     {
-      "hash": "sha256-jOKUIpz8S7LYIXAA1aGgxbgdA08o62pKl+tsXStW6q0=",
-      "url": "_framework/Lebensplaner.Core.4gv5b9su4m.wasm"
+      "hash": "sha256-KzOVckxN9qwhPafV4XHuv+A6tPFD+bvFILZKJKvbUhE=",
+      "url": "_framework/Lebensplaner.Core.juyvpqdpxo.wasm"
     },
     {
-      "hash": "sha256-2ew66qfbpnsTgGCwz/dOKMIHqk+rx2S4Yk/tdCm+PUQ=",
-      "url": "_framework/Lebensplaner.Haushalt.5tgvuuztge.wasm"
+      "hash": "sha256-Zu6RMaeoG1THUp6SAznaHbROdzmPPHliFiFyJePt6lQ=",
+      "url": "_framework/Lebensplaner.Haushalt.ya10bok2bk.wasm"
     },
     {
       "hash": "sha256-CFPYiqycDQnH+YaCiZLKWsdJKx0Gm9PaXcZhSugBMi8=",
@@ -166,8 +166,8 @@ self.assetsManifest = {
       "url": "_framework/System.IO.Pipelines.0luqpzcwkx.wasm"
     },
     {
-      "hash": "sha256-ZgZQ393wc/ztzC3I4RLkuDHQB/hAULgYZq9N2oJ0IW0=",
-      "url": "_framework/System.Linq.akcwquyp7x.wasm"
+      "hash": "sha256-A9dhuzuIOIuJ5euYuZOnuhnHn/yAQPZ8k6Ns46SEbeo=",
+      "url": "_framework/System.Linq.d0jzmupd4j.wasm"
     },
     {
       "hash": "sha256-AlnW0l4iyjGNgX9Et2nPvFPNfqhCRkoB6U+DthEvkkk=",
@@ -186,12 +186,12 @@ self.assetsManifest = {
       "url": "_framework/System.Private.Uri.eodce6l570.wasm"
     },
     {
-      "hash": "sha256-DSrW9JkkwqATjjbAERYyCP/w8l4494TW7i7qrDPABVI=",
-      "url": "_framework/System.Runtime.1vrw1pbqvp.wasm"
-    },
-    {
       "hash": "sha256-R9aUORxsL1Uy5IL5uONuC7aiSLohp3NX7irrSitGLh0=",
       "url": "_framework/System.Runtime.InteropServices.JavaScript.78mfkxc91d.wasm"
+    },
+    {
+      "hash": "sha256-st0a/3Ux166eamA2ALTSuXpTT+b6OMs0IzL9hpPyOe4=",
+      "url": "_framework/System.Runtime.u0byylyf0c.wasm"
     },
     {
       "hash": "sha256-EtCAv8n8nbXWUJNH16d5QxTfbrvBzSNzfiMZBRA5N64=",
@@ -222,8 +222,8 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-52S3/WlXrkHsGuy/PFJyXzYkkT+GiYRQp85FUjns0fk=",
-      "url": "_framework/dotnet.drgx41e7db.js"
+      "hash": "sha256-Y84O4ScyU0MES2RWptiZIINqxcxKrMBzEZJ2b8E/PsQ=",
+      "url": "_framework/dotnet.73jfwge2qf.js"
     },
     {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
@@ -266,7 +266,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-yh3yEKkIjGHxHJ8y6rbDL313IvCdgtImUqnEaTSu9nw=",
+      "hash": "sha256-+mXSAHH/2LourEAIG4xNjSY3WJJ2LHnrWGhVMITaFAg=",
       "url": "index.html"
     },
     {
