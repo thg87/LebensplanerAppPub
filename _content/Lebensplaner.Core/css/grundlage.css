@@ -2172,3 +2172,21 @@ a {
     flex: none;
     width: 5rem;
 }
+
+/*
+ * US-102: „Reise aus Vorlage erzeugen"-Dialog. Die Reserve-Nacht ist eine Checkbox mit
+ * danebenstehendem Text (kein gestapeltes Label wie die anderen .lp-feld-Zeilen), darum
+ * eine eigene Zeile aus Checkbox + Text. Die berechneten Nächte (US-97) stehen als
+ * ruhige, etwas kräftigere Zeile über dem Namensfeld — reine Anzeige, kein Eingabefeld.
+ */
+.reise-erzeugen__reserve {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+}
+
+.reise-erzeugen__naechte {
+    font-family: var(--lp-schrift-anzeige);
+    margin-bottom: var(--lp-abstand);
+}
