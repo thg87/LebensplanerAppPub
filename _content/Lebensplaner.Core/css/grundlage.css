@@ -304,6 +304,57 @@ a {
     font-weight: 600;
 }
 
+/*
+ * Segment-/Tab-Leiste (US-63): die Unternavigation eines Bereichs, angelehnt an
+ * das iOS-„Segmented Control". Ein Rahmen mit gleich breiten Feldern; der aktive
+ * Tab hebt sich als eigene Fläche in Akzentfarbe ab.
+ *
+ * Noch mit den bestehenden Tokens gebaut. Die Akzentfarbe hängt an der
+ * Grundlage-Palette — ein späteres Umfärben (ADR 0014, US-88) ist ein Wertetausch
+ * an einer Stelle, kein Umbau dieser Regel.
+ */
+.lp-segmentleiste {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+
+    background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    margin-bottom: var(--lp-abstand);
+}
+
+.lp-segment {
+    /* Gleich breite Tabs, das ganze Feld ist Tippziel — nicht nur die Schrift. */
+    flex: 1;
+    min-height: var(--lp-tippziel);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--lp-abstand-klein);
+
+    border-radius: calc(var(--lp-radius) - 5px);
+    color: var(--lp-text-leise);
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.lp-segment:hover {
+    color: var(--lp-text);
+}
+
+.lp-segment.active {
+    background: var(--lp-flaeche-schwebend);
+    color: var(--lp-akzent);
+    font-weight: 600;
+}
+
 /* Fehler tragen nicht nur Farbe: Rot allein sieht nicht jeder (CLAUDE.md denkt
    Barrierefreiheit mit). Deshalb steht immer auch Text da. */
 .lp-fehler {
