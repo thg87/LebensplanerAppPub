@@ -12,43 +12,15 @@
  * Echtes Liquid Glass rechnet das OS in Echtzeit, CSS kann das nicht.
  */
 
-/* Space Grotesk und Inter selbst gehostet statt über fonts.googleapis.com
-   geladen — ein Netzaufruf beim Start wäre ein Bug, kein Feature (CLAUDE.md:
-   „Offline ist der Normalfall"). Nur der Latin-Schnitt je Schnittstärke, kein
-   variables Font-File: kleinstmögliche Dateizahl für das, was die App
-   tatsächlich zeigt. */
-@font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("../fonts/inter-400.woff2") format("woff2");
-}
+/* „Space Grotesk" selbst gehostet statt über fonts.googleapis.com geladen — ein
+   Netzaufruf beim Start wäre ein Bug, kein Feature (CLAUDE.md: „Offline ist der
+   Normalfall"). Nur der Latin-Schnitt je Schnittstärke, kein variables Font-File:
+   kleinstmögliche Dateizahl für das, was die App tatsächlich zeigt.
 
-@font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url("../fonts/inter-500.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url("../fonts/inter-600.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url("../fonts/inter-700.woff2") format("woff2");
-}
-
+   Nur die *Anzeige*-Schrift (Überschriften, Score-Zahl) ist eine mitgelieferte
+   Web-Font. Fließtext und Bedienelemente bleiben `system-ui` (auf iOS echtes
+   SF Pro) — ADR 0014 hält das ausdrücklich fest, um die native Lesbarkeit zu
+   bewahren. Deshalb steht hier nur Space Grotesk, keine Grundschrift-Web-Font. */
 @font-face {
     font-family: "Space Grotesk";
     font-style: normal;
@@ -76,7 +48,7 @@
 :root {
     color-scheme: dark;
 
-    --lp-schrift: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --lp-schrift: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     /* Überschriften und die Score-Zahl — die auffälligeren, kürzeren Texte. */
     --lp-schrift-anzeige: "Space Grotesk", var(--lp-schrift);
 

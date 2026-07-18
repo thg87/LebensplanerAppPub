@@ -1,4 +1,4 @@
-/* Manifest version: HDiDFnm0 */
+/* Manifest version: hJAeK8dO */
 // Caution! Be sure you understand the caveats before publishing an application with
 // offline support. See https://aka.ms/blazor-offline-considerations
 
@@ -26,7 +26,13 @@ self.addEventListener('message', event => {
 
 const cacheNamePrefix = 'offline-cache-';
 const cacheName = `${cacheNamePrefix}${self.assetsManifest.version}`;
-const offlineAssetsInclude = [ /\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/, /\.webmanifest$/ ];
+// `\.woff2?$` statt nur `\.woff$`: Die selbst gehostete Anzeige-Schrift „Space
+// Grotesk" (ADR 0014) liegt als `.woff2` vor. `\.woff$` matchte die *nicht* (das `$`
+// verlangt das Ende direkt nach „woff", die Datei endet aber auf „woff2"). Damit
+// blieb die Schrift aus dem Offline-Cache — auf einer Homescreen-App ohne Netz
+// wäre die Anzeige-Schrift dann still auf den Fallback zurückgefallen. Offline ist
+// der Normalfall, kein Sonderfall (CLAUDE.md, Regel 2).
+const offlineAssetsInclude = [ /\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff2?$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/, /\.webmanifest$/ ];
 const offlineAssetsExclude = [ /^service-worker\.js$/ ];
 
 // Replace with your base path if you are hosting on a subfolder. Ensure there is a trailing '/'.
