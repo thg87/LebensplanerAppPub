@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "CbPOAygM",
+  "version": "IfgdTXae",
   "assets": [
     {
       "hash": "sha256-rJFEKTnOHm1iAkNFg7TK/s920sh0y3vKyh5iRFi8H3o=",
@@ -58,20 +58,20 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/teilen.js"
     },
     {
-      "hash": "sha256-hGIjfVG0fFHIFSeN5veiR1Vd0mvNsQNZ5BHwAawpOJk=",
-      "url": "_framework/Lebensplaner.App.4ad96zw7ut.wasm"
+      "hash": "sha256-SG5+LdvowNpT+q3IP6jS0aq1ZWs+zp7QA2DgAXD1yu8=",
+      "url": "_framework/Lebensplaner.App.49wsw7o3rn.wasm"
     },
     {
-      "hash": "sha256-60uZi4LHMevqyBOvCf0X1diYvWbFXsFxnZS7h3BwjZ8=",
-      "url": "_framework/Lebensplaner.Core.pvyug6cwa8.wasm"
+      "hash": "sha256-cxk2oUclRsgHOcYLVeovc9Mj5malZV5ACbDPoTQZ+8s=",
+      "url": "_framework/Lebensplaner.Core.bq0rh7b07u.wasm"
     },
     {
-      "hash": "sha256-3C8LlCSS8XR5UpMGVB7YQd3ToKnMYcNWAgU4gRvwMqI=",
-      "url": "_framework/Lebensplaner.Essen.cwx5dm3awx.wasm"
+      "hash": "sha256-qYglxqa3pyKcsVNUE/U3Zs0XBa91AqMygJJPw+D7Aco=",
+      "url": "_framework/Lebensplaner.Essen.rb3ac3hbry.wasm"
     },
     {
-      "hash": "sha256-wkruZwvzqKRCG489vbY5Q4wVr31zzznOJU1a9KCoK4c=",
-      "url": "_framework/Lebensplaner.Haushalt.yog1chtkfx.wasm"
+      "hash": "sha256-33XhbQ7W4IU6mkf8FWQdlafOxuOhGAOh/Yp40/pZOyk=",
+      "url": "_framework/Lebensplaner.Haushalt.f0p5wqqkc5.wasm"
     },
     {
       "hash": "sha256-TGP1ie8kcd7peo9KZ+S1B3uRADbA7Md9HA71R/K7xuA=",
@@ -230,8 +230,8 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-v898ozpuB2z2SIfjK4tX9zeD4RqHGCSv9jLQapmr7bY=",
-      "url": "_framework/dotnet.hod8pgo3us.js"
+      "hash": "sha256-ck9sXzzMSfG16pvb5j9aYhPQRntxGZd0HGv0aArK1jc=",
+      "url": "_framework/dotnet.myrcw6eb7s.js"
     },
     {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
@@ -274,7 +274,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-PwRpNBl5UkxInshonBoPX6CBahR5/X2gqaL5mF3de9Q=",
+      "hash": "sha256-0pGT0Q/CAR6H2KhqD36iYI/zlBmWWvKYCe51RLPT7Ug=",
       "url": "index.html"
     },
     {
