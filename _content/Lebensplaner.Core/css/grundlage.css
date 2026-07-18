@@ -1234,6 +1234,124 @@ a {
 }
 
 /*
+ * US-70: Die Rezept-Detailseite. Kopf mit Zurück-Pfeil und Titel (der Titel darf
+ * bei Bedarf abschneiden, statt den Bearbeiten-Knopf aus der Zeile zu drücken),
+ * ein optionales Hero-Bild, Zutaten mit Portions-Stepper und die nummerierte
+ * Zubereitung.
+ */
+.rezept-detail__kopf {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+/* Der Titel schrumpft und schneidet ab, bevor er die Kopfzeile sprengt. */
+.rezept-detail__kopf h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rezept-detail__bild {
+    display: block;
+    width: 100%;
+    max-height: 16rem;
+    object-fit: cover;
+    border-radius: var(--lp-radius);
+    margin-bottom: var(--lp-abstand);
+}
+
+.rezept-detail__meta {
+    margin: 0 0 var(--lp-abstand);
+}
+
+.rezept-detail__tags {
+    margin-bottom: var(--lp-abstand);
+}
+
+.rezept-detail__abschnitt {
+    margin-bottom: var(--lp-abstand-gross, var(--lp-abstand));
+}
+
+.rezept-detail__abschnitt h2 {
+    font-size: 1.05rem;
+    margin: 0 0 var(--lp-abstand-klein);
+}
+
+/* Überschrift links, Stepper rechts — bricht auf schmalen Geräten um, statt den
+   Stepper aus der Zeile zu drücken. */
+.rezept-detail__abschnitt-kopf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+    margin-bottom: var(--lp-abstand-klein);
+}
+
+.rezept-detail__abschnitt-kopf h2 {
+    margin: 0;
+}
+
+.portions-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+}
+
+/* Feste Mindestbreite, damit „−/+" nicht springen, wenn die Zahl von 1 auf 12
+   wechselt. */
+.portions-stepper__wert {
+    min-width: 6.5rem;
+    text-align: center;
+    color: var(--lp-text-leise);
+    font-variant-numeric: tabular-nums;
+}
+
+.rezept-detail__zutaten,
+.rezept-detail__schritte {
+    margin: 0;
+}
+
+.rezept-detail__zutaten {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.rezept-detail__zutat {
+    display: flex;
+    gap: var(--lp-abstand);
+    align-items: baseline;
+}
+
+/* Die Menge steht in einer festen Spalte, damit die Namen linksbündig fluchten. */
+.rezept-detail__menge {
+    flex: none;
+    min-width: 5.5rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--lp-text-leise);
+}
+
+.rezept-detail__zutat-name {
+    min-width: 0;
+}
+
+.rezept-detail__schritte {
+    padding-left: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.rezept-detail__schritt {
+    padding-left: 0.3rem;
+}
+
+/*
  * Rückfragen (Raum löschen, Sicherung/Standard-Set ersetzen): dieselbe
  * ARIA-Rolle wie ein Formularfehler (role=alertdialog statt alert), aber
  * keine Fehlermeldung — deshalb als zentriertes Overlay statt inline im
