@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "sPjtqkGG",
+  "version": "kG10AHOb",
   "assets": [
     {
       "hash": "sha256-jwsXC9ge+cSDyCa+LsJeRrwkmh6Khe7a3gNiPOAbopQ=",
@@ -54,16 +54,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-Saiu2ty6LVCxtki+tPhKnHjpTV/793J7fGo/LLOtbzA=",
-      "url": "_framework/Lebensplaner.App.jl36woktvk.wasm"
+      "hash": "sha256-Rx4sCD6SiBDgw4xOsVGa0s6IAtslS38+well2zAOvek=",
+      "url": "_framework/Lebensplaner.App.t3flaei1am.wasm"
     },
     {
-      "hash": "sha256-ZOLYCfRAJwzYkg9CG47CcXTTjDJYF2Bb4UZH/SJ17wg=",
-      "url": "_framework/Lebensplaner.Core.o12l4vc892.wasm"
+      "hash": "sha256-cQkIyIxtoSjhDP5wIFQzdOASpPW1vOwdZqGNnh9Kv00=",
+      "url": "_framework/Lebensplaner.Core.vod56bp36b.wasm"
     },
     {
-      "hash": "sha256-ngMV6/+ZHXwhGYKTYFjR1oxxEZsKseWRnt+/PUE4F1M=",
-      "url": "_framework/Lebensplaner.Haushalt.6mwev6ttyz.wasm"
+      "hash": "sha256-U4pF9ZEJQ/u0r9l8jlJ1r0oJKazjB6Xk0MiZ2EtwmWM=",
+      "url": "_framework/Lebensplaner.Haushalt.ts65ghd0wl.wasm"
     },
     {
       "hash": "sha256-CFPYiqycDQnH+YaCiZLKWsdJKx0Gm9PaXcZhSugBMi8=",
@@ -230,12 +230,12 @@ self.assetsManifest = {
       "url": "_framework/dotnet.native.u31nt9bth6.wasm"
     },
     {
-      "hash": "sha256-qm3f7wEQ7acxUyIBo8Vcir8pg8JwgCic9zMXacRmc3k=",
-      "url": "_framework/dotnet.q4sh5w2w8o.js"
-    },
-    {
       "hash": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
       "url": "_framework/dotnet.runtime.web2r9gqbh.js"
+    },
+    {
+      "hash": "sha256-nmqtz7O8F8SxncCik/lbl2nZ+4A3mvTT7OjKVl5Ndmw=",
+      "url": "_framework/dotnet.y0k4jxw1x2.js"
     },
     {
       "hash": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -266,7 +266,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-r3tV0wamroBhpzm/ds+V42dI5mVv7WdE0bnayR2Nu9c=",
+      "hash": "sha256-C443DEDCABRGPpVHju9AGqOKcn6ZjNLmg5VbZV5gKcM=",
       "url": "index.html"
     },
     {
