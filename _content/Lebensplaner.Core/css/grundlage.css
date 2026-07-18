@@ -378,6 +378,46 @@ a {
     flex: 1 1 12rem;
 }
 
+/* US-45: Tag-Eingabe (Chips + Vorschläge, F-AD). Das Eingabefeld und der
+   "Hinzufügen"-Knopf stehen nebeneinander, brechen aber auf schmalen
+   Viewports um statt das Feld zu stauchen. */
+.tag-eingabe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+}
+
+.tag-eingabe input {
+    flex: 1 1 10rem;
+}
+
+.tag-chips {
+    list-style: none;
+    margin: var(--lp-abstand-klein) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+}
+
+/* Ein Chip ist ein <button>, der sich selbst entfernt — die ganze Fläche ist
+   das Tippziel, nicht nur das "×" am Ende. min-height statt fester Höhe hält
+   das Tippziel bei 44px (CLAUDE.md), ohne den Chip quadratisch aufzublähen. */
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--lp-tippziel);
+    padding: 0 0.75rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--lp-text);
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
 .lp-liste {
     list-style: none;
     margin: 0;
