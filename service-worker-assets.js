@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "XCUyniCb",
+  "version": "obirh1KN",
   "assets": [
     {
       "hash": "sha256-3Wb/cWHXZ1l6bm5Il7C/rmC6tVolTXgFI3GYq8zaCTo=",
@@ -42,20 +42,20 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/teilen.js"
     },
     {
-      "hash": "sha256-aV+JBRPcH3pqzx4iljkmpBSinVXKl6Pr9fMazDcOg2Q=",
-      "url": "_framework/Lebensplaner.App.xqqggpipa7.wasm"
+      "hash": "sha256-pmJG1YCnqzBkpsQE4sOzUaGJ87P6VPTyrsRT3K4ekBA=",
+      "url": "_framework/Lebensplaner.App.ilubbmbdz6.wasm"
     },
     {
-      "hash": "sha256-mG8qoQNK+LIx7bLH/j241DCoUCv1oHgeGFP9X0HmdcQ=",
-      "url": "_framework/Lebensplaner.Core.4levgdn5yb.wasm"
+      "hash": "sha256-ZAO/47NHrXePPtWWmnDpxgwN+blxjPHJ77JXEZwkj8Y=",
+      "url": "_framework/Lebensplaner.Core.grkq57rfjd.wasm"
     },
     {
-      "hash": "sha256-FgCEmJLpdY13Q90S9izhbJHOqXrcz5CTk7dp50xwjQI=",
-      "url": "_framework/Lebensplaner.Essen.uqdqo0udtc.wasm"
+      "hash": "sha256-OFUaAsv/M2QV8IN9mGqk7CxJdgNQ0uECerUXtOvNCZU=",
+      "url": "_framework/Lebensplaner.Essen.4lsy0saci1.wasm"
     },
     {
-      "hash": "sha256-My0HkS0CcLXOy1fnCvY4GedhaZlH1SyQT15QJkL5CkI=",
-      "url": "_framework/Lebensplaner.Haushalt.twzofum82m.wasm"
+      "hash": "sha256-M3Od/5/WQL6us8Xgs7+D3PgxDIeGnly6Z5kogMuZ6W4=",
+      "url": "_framework/Lebensplaner.Haushalt.hvid4erz4c.wasm"
     },
     {
       "hash": "sha256-TGP1ie8kcd7peo9KZ+S1B3uRADbA7Md9HA71R/K7xuA=",
@@ -214,8 +214,8 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-J+Pv++0IBvqgEApbIMvdSBslDvSOI1NDb6LVGDm3QRM=",
-      "url": "_framework/dotnet.ldjnv3rd1t.js"
+      "hash": "sha256-fKDR2LyLwM8V2KxWi9zuB4T9UAE0p48YZR7ImO4UpFk=",
+      "url": "_framework/dotnet.g3cdmvfudo.js"
     },
     {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
@@ -258,7 +258,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-XAQh4GAMvY1DSipDMO/gdwLV8i6PDMzOC8/0NtNQtWU=",
+      "hash": "sha256-2vc/zzzfrPmbxmGUwmXYAiFQ3GissfO6zhJXV5P1Qkw=",
       "url": "index.html"
     },
     {
