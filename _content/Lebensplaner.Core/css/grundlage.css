@@ -2167,6 +2167,28 @@ a {
 }
 
 /*
+ * US-104: Die Packliste einer Reise. Zeitraum leise unter dem Titel, dann Gruppen nach
+ * Kategorie-Freitext. Die Zeilen selbst (Checkbox + Menge + Name, durchgestrichen wenn
+ * gepackt) sowie die Steuerleiste (Fortschritt + „ausblenden") teilen sich die
+ * .einkauf-*-Bausteine der Einkaufsliste (US-82) — dasselbe Muster einer abhakbaren
+ * Gruppenliste; hier bekommt nur die Gruppen-Überschrift und der Zeitraum eigene Klassen.
+ */
+.packliste-zeitraum {
+    margin-top: -0.35rem;
+    margin-bottom: var(--lp-abstand);
+}
+
+.packliste-gruppe {
+    margin-bottom: var(--lp-abstand);
+}
+
+.packliste-gruppe__titel {
+    font-family: var(--lp-schrift-anzeige);
+    font-size: 1rem;
+    margin: 0 0 var(--lp-abstand-klein);
+}
+
+/*
  * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
  * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
  * Entfernen-Knopf — mehr Felder als eine Zutatenzeile (.rezept-zutat), darum bricht
