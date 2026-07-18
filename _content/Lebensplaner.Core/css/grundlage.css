@@ -887,6 +887,90 @@ a {
 }
 
 /*
+ * Zeilen-Aktionen als Overflow-Menü (US-60). Die Räume-Zeile trägt nur noch das
+ * Wesentliche: Badge · Name+Anzahl · Score-Ring · einen •••-Knopf. Die vier
+ * früheren Inline-Knöpfe (↑ ↓ ✎ 🗑) wandern in ein Action-Sheet (LpDialog) —
+ * dadurch bekommt der Name Luft und der Ring kollidiert nicht mehr mit dem
+ * umbrechenden „N Aufgaben"-Text. Ersetzt die früheren Inline-style-Attribute
+ * am <li> durch eine benannte Klasse.
+ */
+.raum-zeile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-inline-start: 16px;
+}
+
+.raum-zeile .raum__name {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.raum-zeile .raum__name strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Der einzelne Überlauf-Knopf (•••) je Zeile übernimmt die .lp-icon-knopf-Optik,
+   trägt aber die kräftigere Textfarbe — er ist die einzige Aktion der Zeile. */
+.raum-menue-knopf {
+    color: var(--lp-text);
+}
+
+/*
+ * Action-Sheet-Liste (US-60), generisch benannt: volle Breite, große Tippziele,
+ * Trennlinien statt Rahmen. Ein späterer zweiter Konsument (z. B. Aufgaben-Zeilen)
+ * erbt sie ohne Umbau. Löschen steht als destruktive Aktion in Fehlerfarbe.
+ */
+.lp-aktionsliste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.lp-aktion {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 6px;
+    background: none;
+    border: none;
+    font: inherit;
+    font-size: 1.05rem;
+    color: var(--lp-text);
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lp-aktion + .lp-aktion {
+    border-top: 1px solid var(--lp-trennlinie);
+}
+
+.lp-aktion svg {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    color: var(--lp-text-leise);
+}
+
+.lp-aktion:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.lp-aktion--gefahr,
+.lp-aktion--gefahr svg {
+    color: var(--lp-fehler-text);
+}
+
+/*
  * Rückfragen (Raum löschen, Sicherung/Standard-Set ersetzen): dieselbe
  * ARIA-Rolle wie ein Formularfehler (role=alertdialog statt alert), aber
  * keine Fehlermeldung — deshalb als zentriertes Overlay statt inline im
