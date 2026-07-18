@@ -100,6 +100,10 @@ function anwenden(db, transaktion, aktion, fertig) {
             vorgabeSetzen(transaktion.objectStore(aktion.store), aktion, fertig);
             break;
 
+        case 'kennungsformVereinheitlichen':
+            kennungsformVereinheitlichen(transaktion, aktion, fertig);
+            break;
+
         default:
             throw new Error(`Unbekannte Migrationsaktion "${aktion.art}".`);
     }
@@ -124,6 +128,63 @@ function vorgabeSetzen(store, aktion, fertig) {
                 () => cursor.continue();
         } else {
             cursor.continue();
+        }
+    };
+}
+
+// Schreibt in jedem Datensatz eines Stores die Einträge eines Array-Feldes von der
+// alten Kennungsform {"Name":X,"Basiseinheit":N} auf die generische Form
+// {"Quelle":Q,"Wert":"X<trennzeichen>N"} um (US-92, Migration 10).
+//
+// Wie `vorgabeSetzen` läuft das über einen Cursor und strikt nacheinander: die
+// nächste Zeile erst, wenn das Update der vorigen durch ist. Der Store hält im
+// Regelfall genau ein Singleton-Dokument, die Schleife ist also kurz — aber die
+// Regel gilt trotzdem.
+function kennungsformVereinheitlichen(transaktion, aktion, fertig) {
+    const anfrage = transaktion.objectStore(aktion.store).openCursor();
+
+    anfrage.onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (!cursor) {
+            fertig();
+            return;
+        }
+
+        // Unverzichtbar: JSON-Zugriff und put()/update() werfen SYNCHRON — etwa wenn
+        // ein Eintrag nicht die erwartete Form hat. Ohne dieses abort() liefe die
+        // versionchange-Transaktion trotz der Exception weiter und committete, was
+        // schon in ihr steht: halb umgeschriebene Haken auf einem Gerät ohne Backup
+        // (CLAUDE.md). Genau dieser Fehler saß in diesem Projekt schon zweimal hier.
+        try {
+            const wert = cursor.value;
+            const eintraege = wert[aktion.arrayFeld];
+
+            if (Array.isArray(eintraege) && eintraege.length > 0) {
+                wert[aktion.arrayFeld] = eintraege.map((eintrag) => {
+                    // Fremdform ist ein Abbruchgrund, kein stiller Umbau: Ohne diese
+                    // Prüfung entstünde bei fehlendem Feld die Kennung
+                    // "undefined<trenner>undefined" — ein unlesbarer Schlüssel, der auf
+                    // einem Gerät ohne Backup als Datenverlust in Warteposition läge.
+                    // Symmetrisch zu SicherungsDienst.KennungsformVereinheitlichenAnwenden.
+                    if (typeof eintrag?.Name !== 'string' || typeof eintrag.Basiseinheit !== 'number') {
+                        throw new Error(
+                            `Ein Eintrag in "${aktion.arrayFeld}" trägt nicht die erwartete Form ` +
+                            `{"Name":…,"Basiseinheit":…}.`);
+                    }
+                    return {
+                        Quelle: aktion.quelle,
+                        Wert: `${eintrag.Name}${aktion.trennzeichen}${eintrag.Basiseinheit}`
+                    };
+                });
+                cursor.update(wert).onsuccess = () => cursor.continue();
+            } else {
+                // Leeres oder fehlendes Feld: kein Haken, nichts umzuschreiben — und
+                // kein erfundener Eintrag.
+                cursor.continue();
+            }
+        } catch (fehler) {
+            transaktion.abort();
+            throw fehler;
         }
     };
 }
