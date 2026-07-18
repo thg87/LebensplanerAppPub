@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "o26wX2PX",
+  "version": "s8ho3+SH",
   "assets": [
     {
       "hash": "sha256-AM3lBavnU0weHbVqcE36QvZh/7k0Ofd1Slx5kPHzrKA=",
@@ -54,20 +54,20 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-cfno0NRgL4xDvCAy2MzdbFu0Saqzab2bEI0BcQylJig=",
-      "url": "_framework/Lebensplaner.App.tt48jvy1cy.wasm"
+      "hash": "sha256-ndOfyjQ4mgnM3au91ZffwDC0CUGr4bn2E4tj1bEA0I8=",
+      "url": "_framework/Lebensplaner.App.3sn0w1zrh0.wasm"
     },
     {
-      "hash": "sha256-Q1sNHPl+PaBa2m9yRgorRByzroE7x6eTUF54hY9jbYk=",
-      "url": "_framework/Lebensplaner.Core.fl055d11a6.wasm"
+      "hash": "sha256-2+3yMBlFDpU7T59cxylWSqPHnLHRKus2U3XkPN++8h0=",
+      "url": "_framework/Lebensplaner.Core.ffro1rm0xn.wasm"
     },
     {
-      "hash": "sha256-LdFgzJgymgEJOJg0Rjic7UwOeP3ZvegZ1vNf+KdJOVE=",
-      "url": "_framework/Lebensplaner.Essen.tca3ebuj43.wasm"
+      "hash": "sha256-V3TD4zUhqAz2OtGVc32JpmsjLiZNjf0xr37OjTYmg6o=",
+      "url": "_framework/Lebensplaner.Essen.d7erjmws7g.wasm"
     },
     {
-      "hash": "sha256-blWTNBF/pEs+BufOptNNc0CzcCFyV/xldyBKrfytTdw=",
-      "url": "_framework/Lebensplaner.Haushalt.27vyz0srry.wasm"
+      "hash": "sha256-KTnHnuyCuL9zn6WJAG/VGRlH5caID/s3WLXYYDIuN6o=",
+      "url": "_framework/Lebensplaner.Haushalt.941qh82foc.wasm"
     },
     {
       "hash": "sha256-e6MajNfXMb0zRGQP7eKdXBHzkGdl2E4Ex1q/+oCvjoM=",
@@ -234,12 +234,12 @@ self.assetsManifest = {
       "url": "_framework/dotnet.native.u31nt9bth6.wasm"
     },
     {
-      "hash": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
-      "url": "_framework/dotnet.runtime.web2r9gqbh.js"
+      "hash": "sha256-0mjHDa3WOP9HTG3KINzSM7CJgFd+aiyBtvyRgNV23h4=",
+      "url": "_framework/dotnet.q6yns4nv2q.js"
     },
     {
-      "hash": "sha256-QoSpLN2WcXX1H+HlUgi5bQ/MdsD6GtP/l7+1qMYhBh4=",
-      "url": "_framework/dotnet.yrdkpchm2n.js"
+      "hash": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
+      "url": "_framework/dotnet.runtime.web2r9gqbh.js"
     },
     {
       "hash": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -270,7 +270,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-agQUoHFeb32LUMjkTo1IAYWUJXMpRauApERVgWoIK8w=",
+      "hash": "sha256-YQRwuNQ9oYQA8Sdx2/SnRMO1t1ZfVmXKqy/fv3EJY+E=",
       "url": "index.html"
     },
     {
