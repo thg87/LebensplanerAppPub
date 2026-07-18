@@ -937,6 +937,14 @@ a {
     font-size: 1.3rem;
 }
 
+/* Destruktive Variante des Icon-Knopfs (US-72: „Rezept löschen"). Nur der Ton
+   ändert sich in die Fehlerfarbe — dieselbe zurückhaltende Kennzeichnung wie
+   .lp-aktion--gefahr im Action-Sheet, kein gefüllter Alarmknopf. */
+.lp-icon-knopf--gefahr,
+.lp-icon-knopf--gefahr svg {
+    color: var(--lp-fehler-text);
+}
+
 /*
  * Zeilen-Aktionen als Overflow-Menü (US-60). Die Räume-Zeile trägt nur noch das
  * Wesentliche: Badge · Name+Anzahl · Score-Ring · einen •••-Knopf. Die vier
@@ -1251,6 +1259,16 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* US-72: Bearbeiten und Löschen stehen rechts in der Kopfzeile nebeneinander —
+   sie dürfen nicht schrumpfen (flex:none), damit der Titel links den Platz
+   hergibt. */
+.rezept-detail__kopf-aktionen {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+    flex: none;
 }
 
 .rezept-detail__bild {
