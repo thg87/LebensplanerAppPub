@@ -1813,6 +1813,45 @@ a {
     font-variant-numeric: tabular-nums;
 }
 
+/*
+ * US-82: Steuerleiste über der Liste — links der Fortschritt „X von N erledigt", rechts der
+ * Umschalter „Erledigte ausblenden". Bricht auf schmalen Geräten um.
+ */
+.einkauf-steuerung {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lp-abstand-klein);
+    margin-bottom: var(--lp-abstand);
+}
+
+.einkauf-fortschritt {
+    margin: 0;
+    color: var(--lp-text-leise);
+    font-variant-numeric: tabular-nums;
+}
+
+.einkauf-ausblenden {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+    min-height: var(--lp-tippziel);
+    color: var(--lp-text-leise);
+    cursor: pointer;
+}
+
+.einkauf-ausblenden input {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--lp-akzent);
+}
+
+/* US-82: Steht die Liste komplett auf „erledigt", quittiert die Seite das freundlich. */
+.einkauf-fertig {
+    color: var(--lp-erfolg-text);
+}
+
 .einkauf-liste {
     list-style: none;
     margin: 0;
@@ -1822,17 +1861,39 @@ a {
     gap: var(--lp-abstand-klein);
 }
 
-/* Eine Zeile je Position: Menge (fest links), Name (füllt), Herkunft (leise rechts).
-   Auf schmalen Geräten darf die Herkunft umbrechen, ohne die Zeile zu sprengen. */
+/* Eine Zeile je Position: die Checkbox samt Menge (fest links) und Name (füllt) sitzen in
+   einem klickbaren Label, die Herkunft (leise) rechts. Auf schmalen Geräten darf die
+   Herkunft umbrechen, ohne die Zeile zu sprengen. */
 .einkauf-position {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     flex-wrap: wrap;
     gap: 0.35rem var(--lp-abstand-klein);
     min-height: var(--lp-tippziel);
     padding: var(--lp-abstand-klein);
     border: 1px solid var(--lp-trennlinie);
     border-radius: var(--lp-radius);
+}
+
+/* Das Label ist das Tippziel zum Abhaken (US-82): Checkbox + Menge + Name. */
+.einkauf-position__haken {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.35rem var(--lp-abstand-klein);
+    flex: 1;
+    min-width: 0;
+    min-height: var(--lp-tippziel);
+    align-content: center;
+    cursor: pointer;
+}
+
+.einkauf-position__haken input {
+    flex: none;
+    align-self: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--lp-akzent);
 }
 
 .einkauf-position__menge {
@@ -1850,6 +1911,13 @@ a {
     flex: none;
     color: var(--lp-text-leise);
     font-size: 0.85rem;
+}
+
+/* Abgehakt: Menge und Name durchgestrichen und gedämpft (US-82, AC1). */
+.einkauf-position--erledigt .einkauf-position__menge,
+.einkauf-position--erledigt .einkauf-position__name {
+    text-decoration: line-through;
+    color: var(--lp-text-leise);
 }
 
 /*
