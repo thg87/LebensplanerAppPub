@@ -11,7 +11,7 @@
          die Navigation läge auf dem iPhone unter dem Home-Indikator. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Lebensplaner</title>
-    <link href="_framework/dotnet.eop7le6v1z.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-QjXavTcvmsaZodshgEwLI7j8LZy1YiUYkWY1yZv1UsQ=" />
+    <link href="_framework/dotnet.er7tjf6gc8.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-dkTKtPAwDI6xjVIcq1uKWpgmDZBiPYKpO0NG7HyVOcY=" />
     <!-- Erst die Grundlage aus Core (Tokens, Basis), dann die Schale, dann der
          Rest der Vorlage: Später Geladenes darf Früheres überschreiben. -->
     <link rel="stylesheet" href="_content/Lebensplaner.Core/css/grundlage.css" />
@@ -36,7 +36,7 @@
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.eop7le6v1z.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.er7tjf6gc8.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.puryxhmhq9.js",
     "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.web2r9gqbh.js"
   },
@@ -44,8 +44,8 @@
   "integrity": {
     "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
     "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
-    "./_framework/dotnet.eop7le6v1z.js": "sha256-QjXavTcvmsaZodshgEwLI7j8LZy1YiUYkWY1yZv1UsQ=",
-    "./_framework/dotnet.js": "sha256-QjXavTcvmsaZodshgEwLI7j8LZy1YiUYkWY1yZv1UsQ=",
+    "./_framework/dotnet.er7tjf6gc8.js": "sha256-dkTKtPAwDI6xjVIcq1uKWpgmDZBiPYKpO0NG7HyVOcY=",
+    "./_framework/dotnet.js": "sha256-dkTKtPAwDI6xjVIcq1uKWpgmDZBiPYKpO0NG7HyVOcY=",
     "./_framework/dotnet.native.js": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
     "./_framework/dotnet.native.puryxhmhq9.js": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
     "./_framework/dotnet.runtime.js": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
@@ -64,6 +64,11 @@
             <div class="ladescreen__ring">
                 <div class="ladescreen__mitte"></div>
             </div>
+            <!-- Ladefortschritt (US-54): bewusst als eigenes, zentriertes Element
+                 NEBEN dem rotierenden Ring — läge es im Ring, drehte der Text mit.
+                 Text via ::after aus Blazors --blazor-load-percentage-text, Fallback
+                 "Lädt…". aria-hidden, weil die Statusmeldung schon am Container hängt. -->
+            <div class="ladescreen__text" aria-hidden="true"></div>
         </div>
     </div>
 

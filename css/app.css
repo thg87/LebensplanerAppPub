@@ -79,6 +79,32 @@
     background: #0a0f0c;
 }
 
+/*
+ * Ladefortschritt in der Ringmitte (US-54). Der Text sitzt NICHT im
+ * rotierenden .ladescreen__ring, sondern als eigenes, über der dunklen Mitte
+ * zentriertes Element — sonst würde er mit dem Ring drehen. Der Inhalt kommt
+ * aus Blazors --blazor-load-percentage-text (Blazor setzt die Variable auf
+ * :root, sie vererbt sich hierher). Fallback ist deutschsprachig "Lädt…" statt
+ * des Template-"Loading". Farbe/Schrift über die Tokens der grundlage.css.
+ * Unter prefers-reduced-motion bleibt dieser Text die einzige erlaubte
+ * Veränderung (Information, keine Dekoration) und wird deshalb nicht stillgelegt.
+ */
+.ladescreen__text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--lp-schrift-anzeige);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lp-akzent);
+    pointer-events: none;
+}
+
+.ladescreen__text::after {
+    content: var(--blazor-load-percentage-text, "Lädt…");
+}
+
 @keyframes ladescreen-drehen {
     to {
         transform: rotate(360deg);
