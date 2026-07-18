@@ -517,6 +517,14 @@ a {
     font-size: 0.9rem;
 }
 
+/* US-51: Raum-Angabe auf der Aufgaben-Karte — Icon-Badge und Name in einer Zeile,
+   mittig zueinander ausgerichtet. */
+.aufgabe__raum {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
 .aufgabe__ueberfaellig {
     color: var(--lp-fehler-text);
     font-weight: 600;
@@ -909,6 +917,48 @@ a {
 
 .raumfarbe--neutral {
     --lp-raumfarbe: transparent;
+}
+
+/*
+ * US-51: Anzeige von Raumfarbe und Raum-Icon. Die Farbe wirkt als Akzent — nie als
+ * Vollflächen-Tönung (Mockup): ein 38px-Icon-Badge mit aus der Raumfarbe
+ * abgeleitetem (reduziertem) Hintergrund und ein 3px linker Kartenrand.
+ *
+ * Der Badge-Hintergrund entsteht per color-mix aus --lp-raumfarbe (der Palettenton,
+ * gesetzt über die .raumfarbe--*-Klasse am Container) und der neutralen Fläche — so
+ * bleibt der Ton ruhig genug, dass das Emoji lesbar bleibt und der Liquid-Glass-Look
+ * erhalten bleibt. Für einen Raum ohne Farbe ist --lp-raumfarbe transparent; die
+ * Mischung ergibt dann einen neutralen Badge (kein erfundener Ton). Ein Raum ohne
+ * Icon zeigt gar kein Badge (Markup rendert es nicht), ohne Farbe keinen Rand.
+ */
+.lp-raum-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+    line-height: 1;
+    border-radius: var(--lp-radius);
+    background-color: color-mix(in oklch, var(--lp-raumfarbe) 22%, var(--lp-flaeche));
+    border: 1px solid color-mix(in oklch, var(--lp-raumfarbe) 45%, var(--lp-trennlinie));
+}
+
+/* Kleiner für die Aufgaben-Karten (Dashboard, Raum-Detail-Kopf): dort steht das
+   Badge in einer Textzeile neben dem Raum-Namen, nicht allein in einer Listenzeile. */
+.lp-raum-badge--klein {
+    width: 26px;
+    height: 26px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+/* Der 3px-Farbrand der Listen-Karte (Mockup). Nur gesetzt, wenn der Raum eine
+   bekannte Farbe trägt — sonst bleibt die Karte randlos wie heute (keine
+   transparente 3px-Kante, die still Layout kostet). */
+.lp-karte--raumrand {
+    border-inline-start: 3px solid var(--lp-raumfarbe);
 }
 
 /*
