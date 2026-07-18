@@ -41,39 +41,68 @@
         content: "An error has occurred."
     }
 
-.loading-progress {
+/*
+ * Neon-Ladescreen (US-53). Ersetzt den blauen Blazor-Template-Spinner. Läuft vor
+ * der .NET-Runtime, deshalb reines CSS, kein Interop. Echoet den Score-Ring-Look
+ * aus grundlage.css (conic-gradient in --lp-akzent, dunkle Mitte, Glow), mit
+ * eigenen Klassen statt .lp-score-ring (F-AK). Farben kommen aus den Tokens der
+ * grundlage.css (in index.html davor eingebunden), damit der Screen bei einer
+ * Theme-Anpassung mitzieht — einzige Ausnahme ist die dunkle Ring-Mitte (#0a0f0c,
+ * analog zum Score-Ring).
+ */
+.ladescreen {
     position: absolute;
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    inset: 20vh 0 auto 0;
-    margin: 0 auto 0 auto;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--lp-hintergrund);
 }
 
-    .loading-progress circle {
-        fill: none;
-        stroke: #e0e0e0;
-        stroke-width: 0.6rem;
-        transform-origin: 50% 50%;
-        transform: rotate(-90deg);
-    }
-
-        .loading-progress circle:last-child {
-            stroke: #1b6ec2;
-            stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
-            transition: stroke-dasharray 0.05s ease-in-out;
-        }
-
-.loading-progress-text {
-    position: absolute;
-    text-align: center;
-    font-weight: bold;
-    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+.ladescreen__ring {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    /* Rotierendes Segment: Akzentbogen, der in Transparenz ausläuft — eine
+       unbestimmte Ladeanzeige, kein springender Prozentbalken. */
+    background: conic-gradient(from 0deg, var(--lp-akzent), transparent 65%);
+    /* Rotation (~1,2 s) und atmender Glow (~2 s) laufen parallel. */
+    animation: ladescreen-drehen 1.2s linear infinite,
+               ladescreen-glow 2s ease-in-out infinite;
 }
 
-    .loading-progress-text:after {
-        content: var(--blazor-load-percentage-text, "Loading");
+.ladescreen__mitte {
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    background: #0a0f0c;
+}
+
+@keyframes ladescreen-drehen {
+    to {
+        transform: rotate(360deg);
     }
+}
+
+@keyframes ladescreen-glow {
+    0%, 100% {
+        box-shadow: 0 0 16px color-mix(in srgb, var(--lp-akzent) 25%, transparent);
+    }
+
+    50% {
+        box-shadow: 0 0 30px color-mix(in srgb, var(--lp-akzent) 50%, transparent);
+    }
+}
+
+/* Projekt-Konvention (wie .lp-dialog, .wisch): unter prefers-reduced-motion
+   stehen Rotation und Glow-Puls still, der Ring bleibt statisch sichtbar. */
+@media (prefers-reduced-motion: reduce) {
+    .ladescreen__ring {
+        animation: none;
+        box-shadow: 0 0 20px color-mix(in srgb, var(--lp-akzent) 35%, transparent);
+    }
+}
 
 code {
     color: #c02d76;

@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "rPw53JOB",
+  "version": "83F030oM",
   "assets": [
     {
       "hash": "sha256-+jZL9K9Co5V0yeCOk9UXoGDDM2wckJ78aLEU15SUlJ4=",
@@ -54,16 +54,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-TZnfSsRuT1k8dwS3l0ZHr96H35smkxvIcwPLL1OJn4w=",
-      "url": "_framework/Lebensplaner.App.hvyvvili2k.wasm"
+      "hash": "sha256-8Spw9fTGOyWe8XXTfBoyUejeZ/7Q+qFTAnt20Ml0qlM=",
+      "url": "_framework/Lebensplaner.App.rh940793cd.wasm"
     },
     {
-      "hash": "sha256-RrK6vyw6dlTjD52XvmJWR/kKQDnhPDl9RH9QRjigV8Q=",
-      "url": "_framework/Lebensplaner.Core.6tq0mwjtho.wasm"
+      "hash": "sha256-idqSwMj72q4dm1GCqX45+kqVTMWm/P9b0QfPx+pSatQ=",
+      "url": "_framework/Lebensplaner.Core.tbusup3h4g.wasm"
     },
     {
-      "hash": "sha256-7TgjNY3S2OETLAjvUxnn2lLdbXZTHlbHjQlhUSQLHw8=",
-      "url": "_framework/Lebensplaner.Haushalt.1nr05qy3ri.wasm"
+      "hash": "sha256-Fy6CBd5Y5SL1Byku9EY4Y2q7LxbA5fw0ztzRF75MGMg=",
+      "url": "_framework/Lebensplaner.Haushalt.tj6vfg7mej.wasm"
     },
     {
       "hash": "sha256-BhnXnsFwC7Tq4djwtfYZ9cLakDkDjNbkPJclEHHxdGw=",
@@ -222,8 +222,8 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-1IG416uOlh90NI/yP0DTfwvMXeEaPWilX0kokyrdm6U=",
-      "url": "_framework/dotnet.0pxdu6q1cr.js"
+      "hash": "sha256-QjXavTcvmsaZodshgEwLI7j8LZy1YiUYkWY1yZv1UsQ=",
+      "url": "_framework/dotnet.eop7le6v1z.js"
     },
     {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
@@ -250,7 +250,7 @@ self.assetsManifest = {
       "url": "_framework/icudt_no_CJK.lfu7j35m59.dat"
     },
     {
-      "hash": "sha256-ltilJ/YZ4iUsXWYuP3L4nGzcwbwIKo3MOSsWgw+iaRQ=",
+      "hash": "sha256-9IffhlZykzInJjsbiCWkfVevV4ZVfA42+GihUka3k9U=",
       "url": "css/app.css"
     },
     {
@@ -266,7 +266,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-5IE4I4pa+JWffoznMc9VyuT6mBrqEjiTgRFXkGnnYkY=",
+      "hash": "sha256-SMZ2YEyc7XfQ6S4ntyoqMbGxbn5MgGO4LttWG9VFs9s=",
       "url": "index.html"
     },
     {
