@@ -350,6 +350,12 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: var(--lp-abstand);
+    /* US-58: Sektionsabstand nach unten, wie .lp-feld/.rueckgaengig. Ohne ihn
+       kleben Kopfzeile und folgende Sektion (z. B. Score-Karte auf der
+       Raum-Detailseite) mit 0 px aneinander. Auf Listen-Seiten mit
+       dazwischenliegender <h2> kollabiert der Rand korrekt — kein doppelter
+       Abstand. */
+    margin-bottom: var(--lp-abstand);
 }
 
 .lp-kopfzeile h1 {
@@ -731,6 +737,11 @@ a {
     display: flex;
     align-items: center;
     gap: var(--lp-abstand);
+    /* US-58: Sektionsabstand nach unten, wie .lp-feld/.rueckgaengig. Ersetzt die
+       frühere lokale inline-Notlösung (margin-top an der Trend-Karte im
+       Dashboard); angrenzende Ränder kollabieren, es entsteht kein doppelter
+       Abstand. */
+    margin-bottom: var(--lp-abstand);
 }
 
 .lp-score-ring {
