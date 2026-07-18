@@ -1977,6 +1977,24 @@ a {
 }
 
 /*
+ * US-85: Teilen-Werkzeuge über der Liste — der „Teilen"- bzw. „Als Text kopieren"-Knopf und
+ * eine leise Rückmeldung daneben. Web Share ist nicht überall verfügbar; wo es fehlt, tritt
+ * das Kopieren an seine Stelle, und wo auch das fehlt, entfällt der Knopf ganz (kein toter
+ * Knopf). Bricht auf schmalen Geräten um.
+ */
+.einkauf-werkzeuge {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+    margin-bottom: var(--lp-abstand);
+}
+
+.einkauf-teilen__meldung {
+    color: var(--lp-text-leise);
+}
+
+/*
  * US-51: Anzeige von Raumfarbe und Raum-Icon. Die Farbe wirkt als Akzent — nie als
  * Vollflächen-Tönung (Mockup): ein 38px-Icon-Badge mit aus der Raumfarbe
  * abgeleitetem (reduziertem) Hintergrund und ein 3px linker Kartenrand.
