@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "spMxB4db",
+  "version": "cYFR/uHN",
   "assets": [
     {
       "hash": "sha256-+uAGfxmqKSGljHJeN62551/6x8atcBCdKeW40AccmQc=",
@@ -54,16 +54,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-V9YtbERa1KkVBZyRIcG5UsoTEwiIBq+DQy4dHqDQpNw=",
-      "url": "_framework/Lebensplaner.App.rv62far7z9.wasm"
+      "hash": "sha256-LOrYvPmYmrX2ftl6tCudsROivMzJ4kLwF/4IXqmKQ+4=",
+      "url": "_framework/Lebensplaner.App.w9j98harvq.wasm"
     },
     {
-      "hash": "sha256-/SPBzaA3tqhXc4Vk/o1AOTErE9ma/RDR63VU/2GAyr8=",
-      "url": "_framework/Lebensplaner.Core.9d6vupx4uy.wasm"
+      "hash": "sha256-MK0jdAVwbItHhFP6RCqKaZAue6JbSwdZmoEmndkrYjY=",
+      "url": "_framework/Lebensplaner.Core.oid3uez16i.wasm"
     },
     {
-      "hash": "sha256-+sd16BSsmLlqCEiFN349eFW9zi86MQ/gLtsJbXaoWHU=",
-      "url": "_framework/Lebensplaner.Haushalt.2u4my53p45.wasm"
+      "hash": "sha256-Wzfw6itmTGaqoea94qoLgQjqI8p1kojYiJcOY2Z8qwA=",
+      "url": "_framework/Lebensplaner.Haushalt.da7jl2yqwc.wasm"
     },
     {
       "hash": "sha256-BhnXnsFwC7Tq4djwtfYZ9cLakDkDjNbkPJclEHHxdGw=",
@@ -222,6 +222,10 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
+      "hash": "sha256-XEOk/5FRX9qMAk16cqjMNeFJvYYK4eRlIUWPGmvm3sA=",
+      "url": "_framework/dotnet.4gabvxpuee.js"
+    },
+    {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
       "url": "_framework/dotnet.native.puryxhmhq9.js"
     },
@@ -232,10 +236,6 @@ self.assetsManifest = {
     {
       "hash": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
       "url": "_framework/dotnet.runtime.web2r9gqbh.js"
-    },
-    {
-      "hash": "sha256-tv4ham6L2D592YP76EjEMuVKYHZlvsR+Ik8OJcCFYu8=",
-      "url": "_framework/dotnet.ueiqjbi08b.js"
     },
     {
       "hash": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -266,7 +266,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-Sxz2Aq9qTQQokle7sVDqgFeNyZwvBh5hedHa2KOezdc=",
+      "hash": "sha256-Cub+GIaB8byzNMOXPkyFwe6IhWlk1px1mSy2V9D3i/g=",
       "url": "index.html"
     },
     {
