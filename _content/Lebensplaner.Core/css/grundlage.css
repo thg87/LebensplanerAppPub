@@ -1921,6 +1921,55 @@ a {
 }
 
 /*
+ * US-83: Eigene Positionen. Die Liste selbst nutzt .einkauf-liste/.einkauf-position wie die
+ * abgeleiteten (durchgestrichen bei „erledigt"); nur der Entfernen-Knopf und das
+ * Eingabefeld+„+" darunter sind eigen. Ein Abstand nach oben trennt sie sichtbar von der
+ * abgeleiteten Liste bzw. dem Leertext.
+ */
+.einkauf-eigene {
+    margin-top: var(--lp-abstand);
+}
+
+.einkauf-eigene__liste {
+    margin-bottom: var(--lp-abstand-klein);
+}
+
+/* Der Entfernen-Knopf bleibt quadratisch und schmal — er trägt nur das ✕ (Muster
+   .rezept-editor__entfernen). */
+.einkauf-eigene__entfernen {
+    flex: none;
+    padding: 0;
+    width: var(--lp-tippziel);
+}
+
+/* Eingabezeile: das Textfeld füllt, der „+"-Knopf bleibt quadratisch daneben. */
+.einkauf-eigene__hinzufuegen {
+    display: flex;
+    gap: var(--lp-abstand-klein);
+    align-items: center;
+}
+
+.einkauf-eigene__feld {
+    flex: 1;
+    min-width: 0;
+    /* Erbt nicht von selbst — dieselbe Feldoptik wie .lp-feld input. */
+    font: inherit;
+    font-size: max(16px, 1rem);
+    color: var(--lp-text);
+    background: rgba(255, 255, 255, 0.04);
+    min-height: var(--lp-tippziel);
+    padding: 0 0.75rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+}
+
+.einkauf-eigene__plus {
+    flex: none;
+    padding: 0;
+    width: var(--lp-tippziel);
+}
+
+/*
  * US-51: Anzeige von Raumfarbe und Raum-Icon. Die Farbe wirkt als Akzent — nie als
  * Vollflächen-Tönung (Mockup): ein 38px-Icon-Badge mit aus der Raumfarbe
  * abgeleitetem (reduziertem) Hintergrund und ein 3px linker Kartenrand.
