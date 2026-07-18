@@ -1804,6 +1804,13 @@ a {
     font-variant-numeric: tabular-nums;
 }
 
+/* US-84: Steht die Liste für ein einzelnes Rezept, nennt die Karte dessen Namen
+ * (statt der KW-Zeile). Derselbe leise Zweitzeilen-Look, aber ohne Ziffern-Tabellierung. */
+.einkauf-quelle__rezept {
+    margin: 0.15rem 0 0;
+    color: var(--lp-text-leise);
+}
+
 .einkauf-quelle__kennzahlen {
     display: flex;
     flex-wrap: wrap;
