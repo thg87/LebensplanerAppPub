@@ -2139,6 +2139,34 @@ a {
 }
 
 /*
+ * US-103: Die Reise-Übersicht. Wie die Vorlagen-Karte ist der Link selbst die .lp-karte
+ * (Muster .reisevorlage-karte/.rezept-karte) — die ganze Fläche führt zur Packliste
+ * (`reisen/{id}`, US-104), ohne tote Randzone. Die Karte trägt eine Zeile mehr als die
+ * Vorlagen-Karte: Titel, Zeitraum (leise) und den Packfortschritt.
+ */
+.reise-karte {
+    display: block;
+    min-height: var(--lp-tippziel);
+    color: inherit;
+    text-decoration: none;
+}
+
+.reise-karte__titel {
+    font-family: var(--lp-schrift-anzeige);
+}
+
+.reise-karte__meta {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+.reise-karte__fortschritt {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    color: var(--lp-text-leise);
+}
+
+/*
  * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
  * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
  * Entfernen-Knopf — mehr Felder als eine Zutatenzeile (.rezept-zutat), darum bricht
