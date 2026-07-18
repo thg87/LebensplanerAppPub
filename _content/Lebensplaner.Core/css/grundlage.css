@@ -545,9 +545,24 @@ a {
     opacity: 1;
 }
 
+/* Ohne das hier hängen Titel, Fälligkeitszeile, Aufwand/Einfluss-Zeile und die
+   Knopfreihe direkt aufeinander — kein Element davon bringt von sich aus einen
+   Rand mit (<strong> ist inline, die Zeilen-Divs sind schlicht), und
+   .aufgabe__aktionen allein reichte nur für die letzte Lücke. Der Abstand
+   kommt jetzt aus einer Stelle statt aus einzelnen Rändern, die leicht
+   auseinanderlaufen. */
 .wisch__vordergrund {
     position: relative;
     transform: translateX(var(--wisch-versatz, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.wisch__vordergrund .aufgabe__aktionen {
+    /* Der Gap oben deckt diesen Abstand schon ab — sonst wären es zwei Ränder
+       hintereinander. */
+    margin-top: 0;
 }
 
 /* Zurückfedern nur, wenn gerade nicht gezogen wird — während der Geste
