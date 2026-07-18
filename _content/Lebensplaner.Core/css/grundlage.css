@@ -1070,6 +1070,12 @@ a {
     font-size: 1.6rem;
 }
 
+/* US-69: Ein echtes Foto füllt denselben 64×64-Slot randlos aus (object-fit),
+   statt verzerrt zu werden. */
+.rezept-karte__bild--foto {
+    object-fit: cover;
+}
+
 /* min-width:0 lässt Titel und Meta bei Bedarf abschneiden, statt die Karte zu
    sprengen — sonst drückt ein langer Rezeptname das Grid über die Viewportbreite. */
 .rezept-karte__text {
@@ -1203,6 +1209,28 @@ a {
     display: flex;
     justify-content: flex-end;
     margin-top: var(--lp-abstand);
+}
+
+/* US-69: Die Bild-Vorschau im Rezept-Dialog. Ein gewähltes Foto wird auf
+   Feldbreite gezeigt, in der Höhe gedeckelt; ohne Bild steht derselbe Rahmen als
+   neutraler Platzhalter da (Muster .avatar--leer). */
+.rezept-bild-vorschau {
+    display: block;
+    width: 100%;
+    max-height: 12rem;
+    object-fit: cover;
+    border-radius: var(--lp-radius);
+    margin-bottom: var(--lp-abstand-klein);
+}
+
+.rezept-bild-vorschau--leer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6rem;
+    border: 1px dashed var(--lp-trennlinie);
+    background: var(--lp-hintergrund);
+    font-size: 1.8rem;
 }
 
 /*
