@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "I78lSeYs",
+  "version": "bQ0uLn97",
   "assets": [
     {
       "hash": "sha256-jwsXC9ge+cSDyCa+LsJeRrwkmh6Khe7a3gNiPOAbopQ=",
@@ -54,16 +54,16 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/installation.js"
     },
     {
-      "hash": "sha256-yDWb/5WuKj0qCXy7a2yN0Ls9skaYZehSqeyNdCr3Q2c=",
-      "url": "_framework/Lebensplaner.App.okat3uo7hv.wasm"
+      "hash": "sha256-fsaXFp1zkwDAx4n4S3GqwLsMdh3T1pQNORO5itnimz4=",
+      "url": "_framework/Lebensplaner.App.udhid1sy5l.wasm"
     },
     {
-      "hash": "sha256-/RKOxbGTz9UBmKWp1hM43I7P/yAMtsVuUUzqc6PpB3A=",
-      "url": "_framework/Lebensplaner.Core.hnzym1roia.wasm"
+      "hash": "sha256-yeCCVs2Xkcm0MiKnPtAhK+SlilSI9oHSkORjjH0t7U8=",
+      "url": "_framework/Lebensplaner.Core.n4poqkafkz.wasm"
     },
     {
-      "hash": "sha256-UwxarCJWmlnKriSotl9Gycb6kgHe2H3JTxl8j9wMWQU=",
-      "url": "_framework/Lebensplaner.Haushalt.xb4zbykcl3.wasm"
+      "hash": "sha256-HcS3nU3mmqLpycJtUxUkil2LYYqGaHI1DPLL5+5XjZc=",
+      "url": "_framework/Lebensplaner.Haushalt.nrs9ic8f29.wasm"
     },
     {
       "hash": "sha256-CFPYiqycDQnH+YaCiZLKWsdJKx0Gm9PaXcZhSugBMi8=",
@@ -222,8 +222,8 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
-      "hash": "sha256-TeRA9RqcHdU++s7CvwnofxGo0IiE6jgvCrEUF1hTHXk=",
-      "url": "_framework/dotnet.hves614w0d.js"
+      "hash": "sha256-q0i7e1OL7WGNlHEJM9taVXAxpnXHUZpvnhJYLJZTxMM=",
+      "url": "_framework/dotnet.htj0flfuns.js"
     },
     {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
@@ -266,7 +266,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-NUCZkw6JrFhzPhqGY/h16Gw0QsmYj6QUK67V7letEao=",
+      "hash": "sha256-DSLwrUZCRoum3xFqC9JgKvEOIrhQchUxNgO1uyHA2Fc=",
       "url": "index.html"
     },
     {
