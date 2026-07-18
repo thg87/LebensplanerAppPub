@@ -684,6 +684,14 @@ a {
     }
 }
 
+/* Grabber (US-59, F-23): der kurze Ziehbalken oben im Sheet. Nur auf
+   Handybreite sichtbar (Regel weiter unten in der 640px-Media-Query) — im
+   zentrierten Desktop-Fenster gibt es keine Wisch-Geste und damit auch keinen
+   Balken. Rein darstellend, ohne eigene Höhe im Desktop-Fluss. */
+.lp-dialog__grabber {
+    display: none;
+}
+
 .lp-dialog__kopf {
     display: flex;
     align-items: center;
@@ -716,6 +724,27 @@ a {
         padding-bottom: env(safe-area-inset-bottom);
         animation: lp-dialog-einfahren 0.25s ease-out;
     }
+
+    /* Nur hier ist die Swipe-nach-unten-Geste aktiv (dialog.js), also nur hier
+       der sichtbare Ziehbalken. */
+    .lp-dialog__grabber {
+        display: block;
+        width: 36px;
+        height: 4px;
+        margin: 8px auto 0;
+        border-radius: 999px;
+        background: var(--lp-trennlinie);
+        /* Der Griffbereich soll die Geste zuverlässig auslösen — nicht am
+           4px-Balken „vorbeigreifen". Touch trifft eine großzügigere Fläche. */
+        touch-action: none;
+    }
+
+    /* Nachlauf nach dem Loslassen: Zurückschnappen bzw. Weggleiten (dialog.js
+       setzt/entfernt die Klasse). Während des Ziehens (kein Nachlauf) folgt das
+       transform ohne Übergang direkt dem Finger. */
+    .lp-dialog--nachlauf {
+        transition: transform 0.25s ease-out;
+    }
 }
 
 @keyframes lp-dialog-einfahren {
@@ -731,6 +760,13 @@ a {
 @media (prefers-reduced-motion: reduce) {
     .lp-dialog {
         animation: none;
+    }
+
+    /* Kein animiertes Nachlaufen bei reduzierter Bewegung — dialog.js springt
+       ohnehin direkt in den Endzustand; diese Regel stellt sicher, dass auch
+       kein CSS-Übergang mitläuft. */
+    .lp-dialog--nachlauf {
+        transition: none;
     }
 }
 
