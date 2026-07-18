@@ -122,6 +122,20 @@
     --lp-erfolg-text: #3cff8a;
 
     --lp-schatten: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    /* Raumfarben (US-49, F-AF) — feste 6er-Palette als oklch(0.7 0.15 <hue>): satte
+       Töne, die zum Neon-Akzent des dunklen Designs passen (gedämpfte Pastelle wirkten
+       zu blass). Nur der Hue variiert, Lightness/Chroma bleiben fest.
+       Gespeichert wird in Raum.Farbe der Schlüssel ("blau"), nicht dieser Wert — so
+       lässt sich ein Ton hier nachjustieren, ohne Nutzerdaten anzufassen (keine
+       Migration). Der Neon-Grün-Akzent bleibt für interaktive Zustände reserviert;
+       die Raumfarben liegen bewusst nicht im selben Grünbereich. */
+    --lp-raumfarbe-blau: oklch(0.7 0.15 250);
+    --lp-raumfarbe-rot: oklch(0.7 0.15 25);
+    --lp-raumfarbe-tuerkis: oklch(0.7 0.15 195);
+    --lp-raumfarbe-lila: oklch(0.7 0.15 300);
+    --lp-raumfarbe-orange: oklch(0.7 0.15 60);
+    --lp-raumfarbe-pink: oklch(0.7 0.15 340);
 }
 
 *,
@@ -860,4 +874,39 @@ a {
         -webkit-backdrop-filter: blur(30px) saturate(160%);
         backdrop-filter: blur(30px) saturate(160%);
     }
+}
+
+/*
+ * Raumfarben-Utility-Klassen (US-49). Sie tragen nur den gewählten Palettenton in
+ * eine lokale --lp-raumfarbe-Variable ein — was daraus wird (3px-Kartenrand,
+ * abgeleiteter Badge-Hintergrund), entscheidet die Anzeige in US-51. Der
+ * Klassenname entspricht genau dem, was Raumpalette.CssKlasse(schluessel) liefert;
+ * "raumfarbe--neutral" ist der Fallback ohne Farbe (kein Ton gesetzt).
+ */
+.raumfarbe--blau {
+    --lp-raumfarbe: var(--lp-raumfarbe-blau);
+}
+
+.raumfarbe--rot {
+    --lp-raumfarbe: var(--lp-raumfarbe-rot);
+}
+
+.raumfarbe--tuerkis {
+    --lp-raumfarbe: var(--lp-raumfarbe-tuerkis);
+}
+
+.raumfarbe--lila {
+    --lp-raumfarbe: var(--lp-raumfarbe-lila);
+}
+
+.raumfarbe--orange {
+    --lp-raumfarbe: var(--lp-raumfarbe-orange);
+}
+
+.raumfarbe--pink {
+    --lp-raumfarbe: var(--lp-raumfarbe-pink);
+}
+
+.raumfarbe--neutral {
+    --lp-raumfarbe: transparent;
 }
