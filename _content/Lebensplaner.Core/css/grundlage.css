@@ -1152,12 +1152,25 @@ a {
 }
 
 /* min-width:0 lässt Titel und Meta bei Bedarf abschneiden, statt die Karte zu
-   sprengen — sonst drückt ein langer Rezeptname das Grid über die Viewportbreite. */
+   sprengen — sonst drückt ein langer Rezeptname das Grid über die Viewportbreite.
+   flex:1 lässt den Textblock den freien Platz füllen und schiebt so die
+   Favoriten-Markierung (US-137) an den rechten Kartenrand. */
 .rezept-karte__text {
+    flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+}
+
+/* US-137: Favoriten-Markierung auf der Übersichtskarte — reine Anzeige (D-2), kein
+   Umschalten hier. Der grüne Akzentstern steht rechts und schrumpft nie (flex:none),
+   damit der Titel links den Platz hergibt. */
+.rezept-karte__favorit {
+    flex: none;
+    align-self: center;
+    display: inline-flex;
+    color: var(--lp-akzent);
 }
 
 .rezept-karte__titel {
@@ -1330,12 +1343,21 @@ a {
 
 /* US-72: Bearbeiten und Löschen stehen rechts in der Kopfzeile nebeneinander —
    sie dürfen nicht schrumpfen (flex:none), damit der Titel links den Platz
-   hergibt. */
+   hergibt. Seit US-137 steht davor der Favoriten-Stern. */
 .rezept-detail__kopf-aktionen {
     display: flex;
     align-items: center;
     gap: var(--lp-abstand-klein);
     flex: none;
+}
+
+/* US-137: Der aktive Favoriten-Stern im Detail-Kopf trägt den grünen Akzent
+   (gefüllt, Muster .lp-icon-knopf--akzent); der inaktive bleibt der leise
+   Umriss-Stern des neutralen .lp-icon-knopf. */
+.rezept-detail__favorit--aktiv {
+    border-color: rgba(52, 255, 122, 0.35);
+    background: rgba(52, 255, 122, 0.12);
+    color: var(--lp-akzent);
 }
 
 /* US-78: Die primäre(n) Detail-Aktion(en) — heute „Zum Wochenplan", später zusätzlich
