@@ -93,6 +93,12 @@
 
     --lp-erfolg-text: #3cff8a;
 
+    /* Warn-/Mittelton für die Sauberkeits-Ampel (US-127, D-1): Amber zwischen dem
+       grünen Akzent (Gut) und der Fehler-/Überfällig-Signalfarbe (Kritisch). Sattes
+       Amber, das auf dem dunklen Grund klar über 3:1 (UI-Element) liegt — der Ring ist
+       eine Fläche, kein Fließtext. */
+    --lp-warnung: #ffb020;
+
     --lp-schatten: 0 8px 32px rgba(0, 0, 0, 0.35);
 
     /* Raumfarben (US-49, F-AF) — feste 6er-Palette als oklch(0.7 0.15 <hue>): satte
@@ -834,8 +840,37 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: conic-gradient(var(--lp-akzent) calc(var(--score-pct, 0) * 1%), rgba(255, 255, 255, 0.07) 0);
-    box-shadow: 0 0 24px rgba(52, 255, 122, 0.35);
+    /* Die Ringfarbe ist eine Variable, damit die Stufen-Varianten (US-127) sie
+       überschreiben, ohne dass jede Aufrufstelle eine Inline-Farbe setzt. Vorgabe ist
+       der Neon-Akzent (= Stufe „Gut"), sodass ein Ring ohne Varianten-Klasse aussieht
+       wie bisher. Bewusst kein `transition` auf der Farbe: die Stufe springt beim
+       Wechsel schlicht um — nichts zu animieren, nichts, was prefers-reduced-motion
+       respektieren müsste (US-127). */
+    --lp-ring-farbe: var(--lp-akzent);
+    --lp-ring-glow: rgba(52, 255, 122, 0.35);
+    background: conic-gradient(var(--lp-ring-farbe) calc(var(--score-pct, 0) * 1%), rgba(255, 255, 255, 0.07) 0);
+    box-shadow: 0 0 24px var(--lp-ring-glow);
+}
+
+/* US-127 (Idee 1, D-1): Der Ring färbt sich mit der Sauberkeitsstufe. Nur der
+   conic-gradient-Vordergrund und das Leuchten wechseln — die Zahl in der Mitte bleibt
+   der eigentliche Träger der Aussage (CLAUDE.md, „Text, nicht nur Farbe"). Die
+   Zuordnung Stufe → Klasse liegt an einer Stelle in Lebensplaner.Haushalt
+   (Sauberkeitsfarbe.RingKlasse); hier stehen nur die Farbwerte. Kritisch trägt die
+   bestehende Überfällig-Signalfarbe, damit die App eine Rot-Sprache hat, nicht zwei. */
+.lp-score-ring--gut {
+    --lp-ring-farbe: var(--lp-akzent);
+    --lp-ring-glow: rgba(52, 255, 122, 0.35);
+}
+
+.lp-score-ring--mittel {
+    --lp-ring-farbe: var(--lp-warnung);
+    --lp-ring-glow: rgba(255, 176, 32, 0.32);
+}
+
+.lp-score-ring--kritisch {
+    --lp-ring-farbe: var(--lp-fehler-text);
+    --lp-ring-glow: rgba(255, 148, 120, 0.32);
 }
 
 .lp-score-ring__mitte {
