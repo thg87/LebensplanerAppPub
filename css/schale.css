@@ -340,3 +340,52 @@
     font-size: 0.95rem;
     color: var(--lp-akzent);
 }
+
+/*
+ * Modul-Kacheln der Startseite (US-123, ADR 0020): je Modul ein Einstieg mit kompakter
+ * Kennzahl (Score-Ring). Der Ring selbst ist ein Core-Baustein (lp-score-ring--klein,
+ * grundlage.css) — hier steht nur das Kachel-Layout drumherum. Trägt bis ~320 px, weil
+ * der Titel (flex: 1) schrumpft und Icon wie Ring feste Größen behalten.
+ */
+.lp-modulliste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+}
+
+.lp-modulkachel {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand);
+    min-height: var(--lp-tippziel);
+    padding: var(--lp-abstand);
+    background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius-gross);
+    box-shadow: var(--lp-schatten);
+    color: inherit;
+    text-decoration: none;
+    -webkit-backdrop-filter: var(--lp-glas-filter);
+    backdrop-filter: var(--lp-glas-filter);
+}
+
+.lp-modulkachel__icon {
+    flex: none;
+    display: inline-flex;
+}
+
+.lp-modulkachel__icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--lp-akzent);
+}
+
+.lp-modulkachel__titel {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--lp-schrift-anzeige);
+    font-weight: 600;
+}
