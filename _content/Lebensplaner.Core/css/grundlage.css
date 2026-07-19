@@ -2650,3 +2650,141 @@ a {
     font-family: var(--lp-schrift-anzeige);
     margin-bottom: var(--lp-abstand);
 }
+
+/* ===========================================================================
+ * US-154: Abschluss-Animationen — drei dezente, kurze Rückmeldungen (150–300 ms)
+ * beim Abschließen einer Aktion. Angestoßen aus animationen.js, das C# nur EIN
+ * Ereignis meldet (CLAUDE.md: Animieren gehört in JS/CSS); hier steht die reine
+ * Optik. „Cool & modern, nicht verspielt": ein gezeichneter Haken, ein
+ * Neon-Aufleuchten, ein Glas-Ripple — kein Konfetti, keine Hüpf-Physik.
+ *
+ * prefers-reduced-motion: Die Bewegung entfällt vollständig (Muster US-23/US-25,
+ * dialog.js). animationen.js legt dann kein Overlay an, sondern kurz
+ * `.lp-anim-statisch` — ein unbewegter Zustandswechsel ohne Animation/Transition.
+ * Die Media-Query unten schaltet zusätzlich jede Overlay-Animation ab, falls
+ * JS-matchMedia und CSS je auseinanderlaufen (Gürtel und Hosenträger).
+ * ------------------------------------------------------------------------- */
+
+/* Der Wirt bekommt für die Dauer der Animation eine Positionierung, falls er
+   sonst statisch wäre — nur damit die absolute Overlay-Schicht ihn als
+   Bezugsrahmen nimmt. position:relative verschiebt nichts im Layout (kein Sprung). */
+.lp-anim-wirt {
+    position: relative;
+}
+
+/* Die Overlay-Schicht: liegt über dem Element, fängt nie einen Tipp ab
+   (pointer-events:none — die nächste Aktion darf nicht blockiert werden), erbt die
+   Eckenrundung des Wirts, damit Leuchten/Ripple der Kartenform folgen, und
+   beschneidet den Ripple an dieser Form (overflow:hidden). */
+.lp-anim {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+/* Haken: zeichnet sich in ~260 ms, die Schicht trägt ihn kurz und verschwindet. */
+.lp-anim--haken {
+    color: var(--lp-akzent);
+    animation: lp-anim-schicht 300ms ease-out both;
+}
+
+.lp-anim--haken svg {
+    width: 44%;
+    max-width: 56px;
+    height: auto;
+}
+
+.lp-anim--haken path {
+    /* pathLength="1" im SVG normiert die Pfadlänge — dasharray/offset in [0,1]
+       zeichnen den Haken sauber nach, ohne die echte Länge auszurechnen. */
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: lp-anim-haken 260ms ease-out forwards;
+}
+
+/* Neon-Aufleuchten: ein kurzer Puls im Akzent, innen und außen, dann weg. */
+.lp-anim--neon {
+    animation: lp-anim-neon 280ms ease-out both;
+}
+
+/* Glas-Ripple: ein aus der Mitte aufziehender, milchiger Kreis, an der
+   Kartenform beschnitten (overflow:hidden oben). Ohne Zeigerposition (C# meldet
+   nur das Ereignis, kein Frame) startet er mittig. */
+.lp-anim--ripple::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 40%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.22),
+        rgba(57, 255, 138, 0.14) 55%,
+        rgba(57, 255, 138, 0) 72%);
+    animation: lp-anim-ripple 300ms ease-out both;
+}
+
+@keyframes lp-anim-schicht {
+    from { opacity: 0; }
+    18% { opacity: 1; }
+    72% { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes lp-anim-haken {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes lp-anim-neon {
+    0% {
+        opacity: 0;
+        box-shadow:
+            inset 0 0 0 1px rgba(57, 255, 138, 0),
+            0 0 0 0 rgba(57, 255, 138, 0);
+    }
+    35% {
+        opacity: 1;
+        box-shadow:
+            inset 0 0 18px 1px rgba(57, 255, 138, 0.5),
+            0 0 22px 2px rgba(57, 255, 138, 0.4);
+    }
+    100% {
+        opacity: 0;
+        box-shadow:
+            inset 0 0 10px 1px rgba(57, 255, 138, 0),
+            0 0 30px 4px rgba(57, 255, 138, 0);
+    }
+}
+
+@keyframes lp-anim-ripple {
+    from {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.85;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(6);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Sicherheitsnetz: keine Overlay-Bewegung, egal was JS erzeugt hat. */
+    .lp-anim,
+    .lp-anim--haken path,
+    .lp-anim--ripple::before {
+        animation: none;
+    }
+
+    /* Der statische Ersatz: ein kurzer, unbewegter Akzent-Umriss (animationen.js
+       legt die Klasse an und nimmt sie nach kurzer Zeit wieder weg). Bewusst ohne
+       transition — es soll nichts laufen, nur der Zustand kurz anders sein. */
+    .lp-anim-statisch {
+        box-shadow: inset 0 0 0 2px var(--lp-akzent);
+    }
+}
