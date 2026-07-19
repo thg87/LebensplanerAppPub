@@ -479,6 +479,43 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* US-128: Schnellfilter-Chips auf dem Aufgaben-Tab — die Ein-Tipp-Abkürzung auf
+   den bestehenden Tag-Filter (US-46). Eine waagerechte, umbrechende Reihe von
+   Toggle-Buttons; sie trägt margin-bottom wie die Filterleiste, damit sie nicht
+   an ihr klebt. */
+.lp-schnellfilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+    margin: 0 0 var(--lp-abstand) 0;
+}
+
+/* Ein Chip ist ein <button>: die ganze Fläche ist Tippziel, min-height hält es
+   bei 44px (CLAUDE.md), ohne den Chip aufzublähen — dieselbe Optik wie .tag-chip. */
+.lp-schnellfilter__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--lp-tippziel);
+    padding: 0 0.9rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--lp-text);
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Der aktive Chip: aria-pressed trägt die Semantik (Tastatur/VoiceOver), der
+   Akzentton macht ihn nur zusätzlich sichtbar — nicht Farbe allein (CLAUDE.md,
+   Muster .packliste-position__einkauf--aktiv). */
+.lp-schnellfilter__chip[aria-pressed="true"] {
+    border-color: var(--lp-akzent);
+    color: var(--lp-akzent);
+    font-weight: 600;
+}
+
 .lp-liste {
     list-style: none;
     margin: 0;
