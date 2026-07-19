@@ -76,9 +76,15 @@
     transform: translateX(-50%);
     z-index: 10;
 
+    /* Seit US-115 ein vertikaler Stapel: Dots oben, darunter der Viewport mit den
+       Seiten. Die Breite ist gedeckelt, damit zwei/eine Seite auf dem Desktop nicht
+       auseinanderlaufen; overflow:hidden klippt die nebeneinanderliegenden Seiten am
+       abgerundeten Rand. Das Innen-Padding tragen Dots und Seiten selbst (padding:0). */
     display: flex;
-    justify-content: center;
-    gap: 6px;
+    flex-direction: column;
+    gap: 0;
+    width: min(94vw, 27rem);
+    overflow: hidden;
 
     /* Der deckende Wert ist die Voraussetzung, nicht der Notfall: Wer kein
        backdrop-filter hat, bekommt eine lesbare Leiste — nur eben keine
@@ -87,7 +93,7 @@
     border: 1px solid var(--lp-trennlinie);
     border-radius: 20px;
     box-shadow: var(--lp-schatten);
-    padding: 8px;
+    padding: 0;
 }
 
 /*
@@ -120,6 +126,105 @@
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
     }
+}
+
+/*
+ * Seitenweise Navigation (US-115): Dots + Viewport + Spur.
+ * Die Spur trägt die Seiten nebeneinander (je flex:0 0 100%); welche sichtbar
+ * ist, setzt die Komponente per inline translateX (Dot-Tap in C#, kein
+ * Frame-für-Frame-Interop). Das eigentliche Wischen ist reine Zugabe und folgt
+ * in US-116 — diese Leiste ist ohne Wischen vollständig bedienbar.
+ */
+.nav-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 0 4px;
+}
+
+/* Die Dots sind Buttons (Tastatur/Fokus, role="tab"); der Button-Eigenlook wird
+   hier zurückgesetzt, sodass nur der Punkt bleibt. */
+.nav-dot {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    transition: width 0.25s ease, background 0.25s ease;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nav-dot.an {
+    width: 18px;
+    border-radius: 3px;
+    background: var(--lp-akzent);
+}
+
+/* Wer weniger Bewegung eingestellt hat, bekommt keinen gleitenden Seitenwechsel —
+   weder die Spur noch das Wachsen des aktiven Dots. */
+@media (prefers-reduced-motion: reduce) {
+    .nav-spur,
+    .nav-dot {
+        transition: none;
+    }
+}
+
+.nav-viewport {
+    overflow: hidden;
+    width: 100%;
+    /* Vertikales Scrollen bleibt; die horizontale Wisch-Geste übernimmt später US-116. */
+    touch-action: pan-y;
+}
+
+.nav-spur {
+    display: flex;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-seite {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 4px;
+    /* Der Safe-Area-Abstand des iPhone-Home-Indikators sitzt bereits im `bottom`
+       der schwebenden .navleiste — hier nur der reguläre Innenabstand. */
+    padding: 4px 6px 10px;
+}
+
+/* In den Seiten dürfen die Ziele die Breite gleichmäßig teilen (space-around),
+   bleiben aber nie unter dem Tippziel — nichts wird bis ~320 px abgeschnitten. */
+.nav-seite .navziel {
+    max-width: none;
+    min-width: 60px;
+    padding: 8px 6px;
+}
+
+/* Das Icon trägt das Badge: relativ positioniert, damit der Punkt oben rechts
+   an der Ecke sitzt statt am ganzen Ziel. */
+.navziel__icon {
+    position: relative;
+    display: inline-flex;
+}
+
+.navziel__badge {
+    position: absolute;
+    top: -7px;
+    left: 11px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: var(--lp-fehler-rand);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 17px;
+    text-align: center;
+    /* Ein deckender Ring in der Leistenfarbe hebt das Badge vom Icon ab. */
+    box-shadow: 0 0 0 2px var(--lp-flaeche-schwebend);
+    font-variant-numeric: tabular-nums;
 }
 
 .navziel {
