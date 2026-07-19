@@ -2370,6 +2370,20 @@ a {
 }
 
 /*
+ * US-110: Rückbezug „gekauft ✓" auf einer Reiseposition. Reise besitzt den Haken NICHT
+ * (ADR 0016) — die Reise liest ihn nur aus Einkauf durch; das hier ist reine Anzeige,
+ * keine Interaktion. Dezent im Akzent, damit es als erledigt gelesen wird, ohne den
+ * „Auf Einkaufsliste"-Knopf zu überstrahlen.
+ */
+.packliste-position__gekauft {
+    flex: none;
+    white-space: nowrap;
+    color: var(--lp-akzent);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/*
  * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
  * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
  * Entfernen-Knopf — mehr Felder als eine Zutatenzeile (.rezept-zutat), darum bricht
