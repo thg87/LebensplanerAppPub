@@ -174,13 +174,24 @@
 .nav-viewport {
     overflow: hidden;
     width: 100%;
-    /* Vertikales Scrollen bleibt; die horizontale Wisch-Geste übernimmt später US-116. */
+    /* Vertikales Scrollen bleibt nativ (pan-y); die horizontale Wisch-Geste (US-116)
+       fängt nav-wisch.js selbst ab und zieht die Spur mit. */
     touch-action: pan-y;
 }
 
 .nav-spur {
     display: flex;
+    /* Welche Seite ruht, sagt --nav-x (C# setzt es je Seite als Fallback ohne JS).
+       Ist die Wisch-Geste aktiv (US-116, nav-wisch.js), überschreibt deren inline
+       `transform` diese Regel — beide fassen so nie dieselbe Eigenschaft an. */
+    transform: translateX(var(--nav-x, 0%));
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Während des Ziehens folgt die Spur dem Finger ohne Transition (nav-wisch.js
+   setzt/entfernt diese Klasse); beim Loslassen schnappt sie mit Transition. */
+.nav-spur.zieht {
+    transition: none;
 }
 
 .nav-seite {
