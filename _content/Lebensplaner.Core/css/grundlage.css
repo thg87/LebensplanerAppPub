@@ -2288,6 +2288,74 @@ a {
 }
 
 /*
+ * US-107: Spontane Position ergänzen. Ein eigener Block über/unter der Packliste (immer sichtbar,
+ * auch bei leerer Reise) — die Zeile aus Titel-, Kategorie- und Mengenfeld plus „+"-Knopf bricht
+ * auf schmalen Viewports von selbst um (flex-wrap), statt die Felder zu stauchen (Muster
+ * .reise-position). Die Feldoptik teilt sich .einkauf-eigene__feld; nur die Flex-Anteile sind eigen.
+ */
+.packliste-spontan {
+    margin-bottom: var(--lp-abstand);
+}
+
+.packliste-spontan__titel {
+    font-family: var(--lp-schrift-anzeige);
+    font-size: 1rem;
+    margin: 0 0 var(--lp-abstand-klein);
+}
+
+.packliste-spontan__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+    align-items: center;
+}
+
+.packliste-spontan__titel-feld,
+.packliste-spontan__kategorie-feld,
+.packliste-spontan__menge-feld {
+    /* Erbt nicht von selbst — dieselbe Feldoptik wie .lp-feld input / .einkauf-eigene__feld. */
+    font: inherit;
+    /* 16px ist die iOS-Zoom-Grenze beim Tippen ins Feld (siehe .lp-feld input). */
+    font-size: max(16px, 1rem);
+    color: var(--lp-text);
+    background: rgba(255, 255, 255, 0.04);
+    min-height: var(--lp-tippziel);
+    padding: 0 0.75rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+    min-width: 0;
+}
+
+.packliste-spontan__titel-feld {
+    flex: 2 1 10rem;
+}
+
+.packliste-spontan__kategorie-feld {
+    flex: 1 1 8rem;
+}
+
+.packliste-spontan__menge-feld {
+    flex: none;
+    width: 5rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.packliste-spontan__plus {
+    flex: none;
+    padding: 0;
+    width: var(--lp-tippziel);
+}
+
+/* Der Entfernen-Knopf einer spontanen Position bleibt quadratisch und schmal — er trägt nur das ✕
+   (Muster .rezept-editor__entfernen / .einkauf-eigene__entfernen). */
+.packliste-position__entfernen {
+    flex: none;
+    padding: 0;
+    width: var(--lp-tippziel);
+}
+
+/*
  * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
  * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
  * Entfernen-Knopf — mehr Felder als eine Zutatenzeile (.rezept-zutat), darum bricht
