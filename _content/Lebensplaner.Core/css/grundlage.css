@@ -397,6 +397,58 @@ a {
     font-size: 0.95rem;
 }
 
+/* Der passive Sicherungs-Hinweis (US-144). Bewusst leiser als der
+   Installationshinweis: kein Fehlerton, sondern die dezente Glasfläche der App — er
+   erinnert nur, dass das einzige Backup (ADR 0003) alt wird, statt vor akutem
+   Datenverlust zu warnen. Wer beide gleich laut macht, macht den wichtigeren leiser
+   (CLAUDE.md). */
+.hinweis--leise {
+    background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
+    color: var(--lp-text-leise);
+}
+
+.hinweis--leise strong {
+    color: var(--lp-text);
+    font-weight: 600;
+}
+
+/* Text links, Schließen-Knopf rechts. flex-start, damit der Knopf oben an der ersten
+   Textzeile sitzt und nicht mittig zu einem mehrzeiligen Absatz rutscht. */
+.hinweis-leise__zeile {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--lp-abstand);
+}
+
+.hinweis-leise__zeile > div {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Ein volles 44px-Tippziel (CLAUDE.md) ohne eigene Fläche/Rahmen — der Banner ist
+   schon die Fläche. Nur ein leiser Farbwechsel beim Überfahren. */
+.hinweis-leise__schliessen {
+    flex: 0 0 auto;
+    min-width: var(--lp-tippziel);
+    min-height: var(--lp-tippziel);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--lp-radius);
+    color: var(--lp-text-leise);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.hinweis-leise__schliessen:hover {
+    color: var(--lp-text);
+}
+
 /* US-29/US-30: Seitenkopf mit „+"-Knopf. Pro Listen-Seite ein „+" im Kopf statt
    eines globalen Floating-Action-Buttons — der müsste kontextabhängig raten,
    was er anlegt. */
