@@ -215,8 +215,20 @@ a {
     color: var(--lp-text-leise);
 }
 
+/* US-133: Die Zutaten-Felder (.rezept-zutat__*) und Reise-Positionsfelder
+   (.reise-position__*) hängen hier mit dran, statt die Optik zu kopieren — so
+   bleibt „dieselbe Feldoptik wie .lp-feld input" die einzige Quelle und driftet
+   nicht auseinander. Die Flex-Anteile dieser Felder stehen weiter eigenständig
+   bei den jeweiligen Zeilen-Regeln und bleiben davon unberührt. */
 .lp-feld input,
-.lp-feld select {
+.lp-feld select,
+.rezept-zutat__menge,
+.rezept-zutat__einheit,
+.rezept-zutat__name,
+.reise-position__titel,
+.reise-position__kategorie,
+.reise-position__modus,
+.reise-position__menge {
     /* Erbt nicht von selbst: Formularelemente haben ihre eigene Schrift. */
     font: inherit;
     color: var(--lp-text);
