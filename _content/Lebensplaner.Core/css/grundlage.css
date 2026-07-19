@@ -516,6 +516,17 @@ a {
     font-weight: 600;
 }
 
+/* US-129: Die Sammel-Aktion über der gefilterten Liste. Steht abgesetzt zwischen
+   Filterleiste und Liste; auf Handybreite trägt der Knopf die volle Zeilenbreite. */
+.lp-sammelaktion {
+    display: flex;
+    margin: 0 0 var(--lp-abstand) 0;
+}
+
+.lp-sammelaktion .lp-knopf {
+    flex: 1 1 auto;
+}
+
 .lp-liste {
     list-style: none;
     margin: 0;
