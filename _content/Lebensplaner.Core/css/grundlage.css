@@ -2232,6 +2232,62 @@ a {
 }
 
 /*
+ * US-106: Nächte-Editor der Reise plus „Mengen neu vorschlagen". Ein eigener Block über der
+ * Packliste — die Nächte gehören zur Reise als Ganzem, nicht zu einer einzelnen Position. Das
+ * kompakte Zahlenfeld übernimmt die Optik von .packliste-menge__feld (dieselbe Feldkontur auf
+ * der Karte), nur linksbündig.
+ */
+.packliste-naechte {
+    margin-bottom: var(--lp-abstand);
+}
+
+.packliste-naechte__zeile {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+}
+
+.packliste-naechte__zeile label {
+    font-weight: 600;
+}
+
+.packliste-naechte__feld {
+    font: inherit;
+    /* 16px ist die iOS-Zoom-Grenze beim Tippen ins Feld (siehe .lp-feld input). */
+    font-size: max(16px, 1rem);
+    font-variant-numeric: tabular-nums;
+    color: var(--lp-text);
+    background: rgba(255, 255, 255, 0.04);
+    width: 4rem;
+    text-align: right;
+    min-height: var(--lp-tippziel);
+    padding: 0 0.5rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+}
+
+.packliste-naechte__hinweis {
+    margin: var(--lp-abstand-klein) 0 0;
+}
+
+.packliste-naechte__hinweis:empty {
+    display: none;
+}
+
+.packliste-naechte__fehler {
+    margin: var(--lp-abstand-klein) 0 0;
+}
+
+.packliste-naechte__vorschlag {
+    margin-top: var(--lp-abstand-klein);
+}
+
+.packliste-naechte__nichtverfuegbar,
+.packliste-naechte__meldung {
+    margin: var(--lp-abstand-klein) 0 0;
+}
+
+/*
  * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
  * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
  * Entfernen-Knopf — mehr Felder als eine Zutatenzeile (.rezept-zutat), darum bricht
