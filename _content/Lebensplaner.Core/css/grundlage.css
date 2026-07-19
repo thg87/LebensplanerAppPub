@@ -1042,6 +1042,15 @@ a {
     white-space: nowrap;
 }
 
+/* US-151: Der persönliche Rekord „Beste Serie" — nur sichtbar, wenn er die aktuelle
+   Serie übertrifft (bei Serie 0 die Erinnerung nach einem Rückschlag). Etwas kräftiger
+   als der gedämpfte Zähltext daneben, damit die Zahl trotz Muted-Ton nicht untergeht;
+   ein Hauch Abstand nach oben trennt sie vom Abzeichen-/Neustart-Text. */
+.lp-serie__rekord {
+    margin-top: 4px !important;
+    font-weight: 600;
+}
+
 /* Kleine Variante für eine Zeile (Räume-Liste): ein Ring pro Raum, ohne
    eigenes Leuchten — zwölf glühende Ringe untereinander wären Lärm. */
 .lp-score-ring--klein {
