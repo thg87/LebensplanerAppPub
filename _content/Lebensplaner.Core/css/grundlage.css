@@ -1005,6 +1005,18 @@ a {
     margin-bottom: 4px;
 }
 
+/* US-149: Die Serie „Tage ohne offene Aufgaben" nutzt das Reihen-Layout der
+   Score-Karte (.lp-score-karte: Symbol links, Text rechts). Die Flamme steht für
+   den Symbolplatz des Score-Rings; sie schrumpft nicht (flex:none) und der
+   Textblock daneben darf umbrechen, damit die Karte bis ~320 px ohne Überlauf
+   trägt (CLAUDE.md: kein Gedränge). Bei Serie 0 fehlt die Flamme — dann steht nur
+   der ermutigende Neustart-Text, kein „0-Tage-Erfolg". */
+.lp-serie__flamme {
+    flex: none;
+    font-size: 2rem;
+    line-height: 1;
+}
+
 /* Kleine Variante für eine Zeile (Räume-Liste): ein Ring pro Raum, ohne
    eigenes Leuchten — zwölf glühende Ringe untereinander wären Lärm. */
 .lp-score-ring--klein {
