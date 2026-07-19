@@ -2355,6 +2355,20 @@ a {
     width: var(--lp-tippziel);
 }
 
+/* US-109: Der „auf Einkaufsliste"-Umschalter je Position. Leiser Knopf im Ruhezustand; ist die
+   Position markiert, hebt der Akzentton den aktiven Zustand hervor (aria-pressed trägt die
+   Semantik, die Farbe nur die Sichtbarkeit). Er schrumpft nicht — der Text bleibt lesbar. */
+.packliste-position__einkauf {
+    flex: none;
+    white-space: nowrap;
+}
+
+.packliste-position__einkauf--aktiv {
+    color: var(--lp-akzent);
+    border-color: var(--lp-akzent);
+    font-weight: 600;
+}
+
 /*
  * US-100: Positions-Editor im Reisevorlagen-Dialog. Jede Position ist eine Zeile aus
  * Titel, Kategorie (Freitext + Vorschläge), Mengenmodus und Menge plus einem
