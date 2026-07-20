@@ -671,6 +671,54 @@ a {
     font-weight: 600;
 }
 
+/* US-169 (ADR 0023): Das Rückstands-Widget auf der Startseite `/`. Eine Glaskarte
+   (.lp-karte) mit Warn-Akzent aus den bestehenden --lp-fehler-* Tokens (D-4) — kein
+   neuer Farbwert, keine Kollision mit dem grünen Akzent (ADR 0014). Der Rückstand
+   steht immer zusätzlich als Text da, nicht nur als Farbe (Barrierefreiheit). */
+.rueckstand {
+    /* Der Warn-Akzent als Kante links, wie bei einer überfälligen Aufgabenkarte —
+       das Extra zur Schriftfarbe, nicht ihr Träger. */
+    border-inline-start: 3px solid var(--lp-fehler-rand);
+    margin-bottom: var(--lp-abstand);
+}
+
+.rueckstand__kopf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem;
+    margin-bottom: var(--lp-abstand-klein);
+}
+
+.rueckstand__titel {
+    margin: 0;
+    color: var(--lp-fehler-text);
+    font-size: 1.1rem;
+}
+
+.rueckstand__anzahl {
+    color: var(--lp-fehler-text);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Die Rückstands-Zeilen sind bewusst leichter als die Widget-Karte selbst — kein
+   Glas auf Glas: eine ruhige eigene Fläche, die Warn-Kante liefert .aufgabe--ueberfaellig. */
+.rueckstand__posten {
+    background: var(--lp-fehler-flaeche);
+    border-radius: var(--lp-radius);
+    padding: var(--lp-abstand-klein);
+}
+
+.rueckstand__alle {
+    display: inline-block;
+    margin-top: var(--lp-abstand-klein);
+    color: var(--lp-fehler-text);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
 /* Der Raumname als Tippziel zur Detailansicht (US-36/F-C) — ein Block, kein
    Inline-Link, damit die volle Zeile den Mindest-Tippbereich erreicht und sich
    nicht mit den separaten Zeilen-Aktionen (Umbenennen/Löschen) überlagert. */
