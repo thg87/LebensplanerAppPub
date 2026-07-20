@@ -703,11 +703,15 @@ a {
     font-size: 0.9rem;
 }
 
-/* Die Rückstands-Zeilen sind bewusst leichter als die Widget-Karte selbst — kein
-   Glas auf Glas: eine ruhige eigene Fläche, die Warn-Kante liefert .aufgabe--ueberfaellig. */
-.rueckstand__posten {
+/* US-170: Die Rückstands-Zeilen sind seit der Interaktion wischbare Aufgabenkarten
+   (WischbareAufgabenkarte, Core) — dieselbe Geste und dasselbe Erledigen-Feedback wie
+   auf /haushalt und /ueberfaellig. Ihre sichtbare Fläche ist .wisch__vordergrund; im
+   Widget bleibt sie bewusst leichter als eine volle Glaskarte (kein Glas auf Glas in der
+   .rueckstand-Karte): eine ruhige eigene Warn-Fläche, die Kante liefert .aufgabe--ueberfaellig. */
+.rueckstand .wisch__vordergrund {
     background: var(--lp-fehler-flaeche);
-    border-radius: var(--lp-radius);
+    border: none;
+    box-shadow: none;
     padding: var(--lp-abstand-klein);
 }
 
