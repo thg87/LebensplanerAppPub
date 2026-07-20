@@ -1042,6 +1042,76 @@ a {
     white-space: nowrap;
 }
 
+/* US-164: Die vollere Gesamt-Verlaufsansicht — ein Diagramm mit Y-Werteachse (Score
+   0–100) und X-Datumsachse statt der achsenlosen Mini-Sparkline. Die Geometrie kommt
+   aus Verlaufsdiagramm.Berechnen (US-163); hier nur die Darstellung.
+
+   Grid: die Y-Werte in der schmalen linken Spalte, das Plot-SVG rechts, die beiden
+   Datumsmarken darunter in der Plot-Spalte. minmax(0, 1fr) statt 1fr, damit das SVG
+   auf schmalen Screens schrumpfen darf und nichts überläuft (CLAUDE.md: kein Gedränge,
+   bis ~320 px). Die Y-Beschriftung verteilt sich per space-between exakt auf die fünf
+   Gitterlinien (0/25/50/75/100), ohne Pixelmathematik — das Plot-SVG stretcht
+   (preserveAspectRatio=none) auf dieselbe Grid-Höhe, also decken sich Zahl und Linie. */
+.lp-verlauf__diagramm {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+        "yachse plot"
+        ".      xachse";
+    column-gap: 8px;
+    row-gap: 4px;
+    margin: 10px 0;
+}
+
+.lp-verlauf__y {
+    grid-area: yachse;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+    font-size: 0.7rem;
+    line-height: 1;
+    color: var(--lp-text-leise);
+}
+
+.lp-verlauf__plot {
+    grid-area: plot;
+    display: block;
+    width: 100%;
+    height: 128px;
+    /* overflow: das gestretchte SVG bleibt in seiner Grid-Zelle. */
+    overflow: visible;
+}
+
+.lp-verlauf__x {
+    grid-area: xachse;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--lp-text-leise);
+}
+
+/* vector-effect: non-scaling-stroke hält Linienstärken konstant, obwohl das SVG
+   ungleichmäßig gestretcht wird (preserveAspectRatio=none) — sonst würden waagerechte
+   und senkrechte Striche unterschiedlich dick. */
+.lp-verlauf__gitter {
+    stroke: var(--lp-trennlinie);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+}
+
+.lp-verlauf__linie {
+    stroke: var(--lp-akzent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.lp-verlauf__punkt {
+    fill: var(--lp-akzent);
+}
+
 /* US-151: Der persönliche Rekord „Beste Serie" — nur sichtbar, wenn er die aktuelle
    Serie übertrifft (bei Serie 0 die Erinnerung nach einem Rückschlag). Etwas kräftiger
    als der gedämpfte Zähltext daneben, damit die Zahl trotz Muted-Ton nicht untergeht;
