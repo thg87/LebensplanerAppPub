@@ -1112,6 +1112,41 @@ a {
     fill: var(--lp-akzent);
 }
 
+/* US-167: Kopfzeile der Verlaufs-Karte — Titel links, der Je-Raum-Umschalter rechts.
+   Umbricht auf schmalen Screens (Titel oben, Auswahl darunter) statt zu quetschen, bis
+   ~320 px ohne Überlauf (CLAUDE.md: kein Gedränge). */
+.lp-verlauf__kopf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+/* Der Umschalter ist ein .lp-feld (erbt die Feld-/Select-Optik), aber liegend statt
+   gestapelt und kompakt: Label und Select nebeneinander in der Kopfzeile. Später im
+   Stylesheet als .lp-feld, also gewinnt flex-direction:row hier. */
+.lp-verlauf__auswahl {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0;
+    flex: 0 1 auto;
+}
+
+.lp-verlauf__auswahl > label {
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.lp-verlauf__auswahl select {
+    /* Nicht auf volle Kartenbreite strecken — nur so breit wie der Raumname braucht,
+       mit einer sinnvollen Untergrenze fürs Tippziel. */
+    width: auto;
+    min-width: 8rem;
+    max-width: 12rem;
+}
+
 /* US-151: Der persönliche Rekord „Beste Serie" — nur sichtbar, wenn er die aktuelle
    Serie übertrifft (bei Serie 0 die Erinnerung nach einem Rückschlag). Etwas kräftiger
    als der gedämpfte Zähltext daneben, damit die Zahl trotz Muted-Ton nicht untergeht;
