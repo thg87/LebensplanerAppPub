@@ -487,8 +487,14 @@ a {
     margin-bottom: 0;
 }
 
-.lp-filterleiste input[type="search"] {
-    flex: 1 1 12rem;
+/* US-181: Das Suchfeld bekommt mehr Breite als die übrigen Filterfelder. Die
+   Basis gehört auf das umgebende .lp-feld (waagerechtes Kind der Filterleiste),
+   NICHT auf das <input>: Das Input steckt in einem .lp-feld mit
+   flex-direction:column, dort wirkt flex-basis auf die Höhe — die frühere Regel
+   .lp-filterleiste input[type="search"] { flex:1 1 12rem } blähte das Feld auf
+   ~12rem Höhe auf. */
+.lp-filterleiste .lp-feld--suche {
+    flex: 2 1 12rem;
 }
 
 /* US-45: Tag-Eingabe (Chips + Vorschläge, F-AD). Das Eingabefeld und der
