@@ -2272,7 +2272,21 @@ a {
     color: var(--lp-erfolg-text);
 }
 
-.einkauf-liste {
+/*
+ * US-187 (UX-Review V7): Der gemeinsame Zeilen-Baustein für abhakbare Listen. Die Einkaufsliste
+ * (EinkaufSeite/US-82), der scoped Einkauf (EinkaufslisteSeite/US-76) und die Reise-Packliste
+ * (ReisePacklisteSeite/US-104) teilen ihn — vorher hatte jeder Screen seine eigene Zeilenanatomie.
+ * Generisch benannt statt modulnah (ADR 0009: Core kennt keine Module): Die Zeile weiß nichts von
+ * „Einkauf" oder „Reise", sie trägt nur Checkbox · Menge · Name in fester Reihenfolge und rechts
+ * einen optionalen Herkunfts-/Aktions-Slot.
+ *
+ * Anatomie: Die Checkbox steht frei (nicht in einem umschließenden Label), Menge und Name sind ihre
+ * Geschwister — nur so lässt sich die Reihenfolge Checkbox · Menge · Name einhalten, wenn die Menge
+ * (Packliste/US-105) ein editierbares Feld AUSSERHALB des Abhak-Labels sein muss. Menge und Name
+ * verweisen je als <label for="…"> auf dieselbe Checkbox und bleiben so Tippziele zum Abhaken; das
+ * editierbare Mengenfeld trägt bewusst KEIN Label, damit ein Klick ins Feld nicht abhakt.
+ */
+.lp-abhakliste {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -2281,10 +2295,7 @@ a {
     gap: var(--lp-abstand-klein);
 }
 
-/* Eine Zeile je Position: die Checkbox samt Menge (fest links) und Name (füllt) sitzen in
-   einem klickbaren Label, die Herkunft (leise) rechts. Auf schmalen Geräten darf die
-   Herkunft umbrechen, ohne die Zeile zu sprengen. */
-.einkauf-position {
+.lp-abhakzeile {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -2295,47 +2306,53 @@ a {
     border-radius: var(--lp-radius);
 }
 
-/* Das Label ist das Tippziel zum Abhaken (US-82): Checkbox + Menge + Name. */
-.einkauf-position__haken {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.35rem var(--lp-abstand-klein);
-    flex: 1;
-    min-width: 0;
-    min-height: var(--lp-tippziel);
-    align-content: center;
-    cursor: pointer;
-}
-
-.einkauf-position__haken input {
+/* Die Checkbox steht frei links und ist selbst das Tippziel (US-82); Menge/Name toggeln über ihr
+   for-Attribut mit. */
+.lp-abhakzeile__haken {
     flex: none;
     align-self: center;
     width: 1.25rem;
     height: 1.25rem;
     accent-color: var(--lp-akzent);
+    cursor: pointer;
 }
 
-.einkauf-position__menge {
+/* Menge: fest links nach der Checkbox. Als <label> (Einkauf: statischer Text) ein zusätzliches
+   Abhak-Tippziel; als Feld-Container (Packliste) bewusst KEIN Label. Das Label füllt die volle
+   Zeilenhöhe (align-self: stretch), damit die Abhak-Klickfläche das 44px-Tippziel trägt statt nur
+   die Texthöhe (CLAUDE.md). */
+.lp-abhakzeile__menge {
     flex: none;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
+    cursor: pointer;
 }
 
-.einkauf-position__name {
+.lp-abhakzeile__name {
     flex: 1;
     min-width: 0;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-.einkauf-position__herkunft {
+.lp-abhakzeile__herkunft {
     flex: none;
     color: var(--lp-text-leise);
     font-size: 0.85rem;
 }
 
-/* Abgehakt: Menge und Name durchgestrichen und gedämpft (US-82, AC1). */
-.einkauf-position--erledigt .einkauf-position__menge,
-.einkauf-position--erledigt .einkauf-position__name {
+/* Abgehakt/gepackt: Name und statische Menge durchgestrichen und gedämpft — dieselbe Optik auf
+   allen abhakbaren Listen (US-187, AC/V7). Ein editierbares Mengenfeld (Packliste) wird nur
+   gedämpft, nicht durchgestrichen (siehe .packliste-menge__feld) — ein Strich durch ein
+   Eingabefeld liest sich als deaktiviert. */
+.lp-abhakzeile--erledigt .lp-abhakzeile__name,
+.lp-abhakzeile--erledigt .lp-abhakzeile__menge {
     text-decoration: line-through;
     color: var(--lp-text-leise);
 }
@@ -2361,12 +2378,12 @@ a {
 
 /* Innerhalb einer Gruppe folgt die eigene Positionsliste direkt auf die abgeleitete — ein
    kleiner Abstand trennt beide, ohne die Gruppe zu sprengen. */
-.einkauf-gruppe .einkauf-liste + .einkauf-liste {
+.einkauf-gruppe .lp-abhakliste + .lp-abhakliste {
     margin-top: var(--lp-abstand-klein);
 }
 
 /*
- * US-83: Eigene Positionen. Die Liste selbst nutzt .einkauf-liste/.einkauf-position wie die
+ * US-83: Eigene Positionen. Die Liste selbst nutzt .lp-abhakliste/.lp-abhakzeile wie die
  * abgeleiteten (durchgestrichen bei „erledigt"); nur der Entfernen-Knopf und das
  * Eingabefeld+„+" darunter sind eigen. Ein Abstand nach oben trennt sie sichtbar von der
  * abgeleiteten Liste bzw. dem Leertext.
@@ -2667,8 +2684,9 @@ a {
     color: var(--lp-text-leise);
 }
 
-/* Gepackte Position: auch die Menge gedämpft, passend zum durchgestrichenen Namen (US-82-Muster). */
-.einkauf-position--erledigt .packliste-menge__feld {
+/* Gepackte Position: auch das Mengenfeld gedämpft, passend zum durchgestrichenen Namen
+   (US-82/US-187-Muster). Kein Durchstreichen des Feldes — siehe .lp-abhakzeile--erledigt. */
+.lp-abhakzeile--erledigt .packliste-menge__feld {
     color: var(--lp-text-leise);
 }
 
@@ -2800,18 +2818,19 @@ a {
     width: var(--lp-tippziel);
 }
 
-/* US-109: Der „auf Einkaufsliste"-Umschalter je Position. Leiser Knopf im Ruhezustand; ist die
-   Position markiert, hebt der Akzentton den aktiven Zustand hervor (aria-pressed trägt die
-   Semantik, die Farbe nur die Sichtbarkeit). Er schrumpft nicht — der Text bleibt lesbar. */
+/* US-109 / US-187 (UX-Review V7): Der „auf Einkaufsliste"-Umschalter je Position ist ein kompakter
+   Icon-Knopf (Einkaufswagen, .lp-icon-knopf, ≥44px) statt eines breiten Textknopfs — die seltenste
+   Aktion der Zeile beansprucht nicht mehr den größten Knopf des Screens. aria-pressed trägt den
+   gedrückten Zustand für Tastatur/VoiceOver (nicht nur Farbe, CLAUDE.md); die gefüllte Akzentfläche
+   macht ihn zusätzlich sichtbar. */
 .packliste-position__einkauf {
     flex: none;
-    white-space: nowrap;
 }
 
 .packliste-position__einkauf--aktiv {
+    border-color: rgba(52, 255, 122, 0.35);
+    background: rgba(52, 255, 122, 0.12);
     color: var(--lp-akzent);
-    border-color: var(--lp-akzent);
-    font-weight: 600;
 }
 
 /*
