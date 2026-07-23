@@ -383,9 +383,23 @@
     color: var(--lp-akzent);
 }
 
-.lp-modulkachel__titel {
+/* Titel + optionale Kennzahl-Unterzeile stehen gestapelt und nehmen den Raum zwischen Icon und
+   Ring ein (US-182). Der Ring bzw. nichts sitzt rechts daneben. */
+.lp-modulkachel__text {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.lp-modulkachel__titel {
     font-family: var(--lp-schrift-anzeige);
     font-weight: 600;
+}
+
+/* Die Text-Kennzahl (Essen/Einkauf/Reise): leise Unterzeile unter dem Titel. */
+.lp-modulkachel__kennzahl {
+    color: var(--lp-text-leise);
+    font-size: 0.85rem;
 }
