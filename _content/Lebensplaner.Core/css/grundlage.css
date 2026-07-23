@@ -469,6 +469,33 @@ a {
     margin: 0;
 }
 
+/* US-183: Der gemeinsame Seitenkopf (LpSeitenkopf) legt Zurück-Pfeil, Titel und
+   Aktionen in eine Zeile. Die Titelgruppe darf schrumpfen (min-width:0), damit ein
+   langer Titel (Rezept-/Raum-/Reisename) ellipsiert statt die Aktionen aus der Zeile
+   zu drängen. Ersetzt die früheren, pro Screen wiederholten Inline-Styles und die
+   modulspezifischen `.rezept-detail__kopf`-Klassen. */
+.lp-seitenkopf__titel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.lp-seitenkopf__titel h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Die Aktionen rechts dürfen nicht schrumpfen (flex:none), damit der Titel links den
+   Platz hergibt. */
+.lp-seitenkopf__aktionen {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+    flex: none;
+}
+
 /* US-38: Filterleiste der Aufgaben-Liste. Kompakte Felder, die von selbst auf
    schmalen Viewports umbrechen — keine eigene Klapp-Logik nötig (eine
    Komponente, zwei Größen, CLAUDE.md). Auf dem Desktop reicht die Breite für
@@ -1616,34 +1643,12 @@ a {
 }
 
 /*
- * US-70: Die Rezept-Detailseite. Kopf mit Zurück-Pfeil und Titel (der Titel darf
- * bei Bedarf abschneiden, statt den Bearbeiten-Knopf aus der Zeile zu drücken),
- * ein optionales Hero-Bild, Zutaten mit Portions-Stepper und die nummerierte
+ * US-70: Die Rezept-Detailseite. Kopf (Zurück-Pfeil + Titel + Aktionen) läuft seit
+ * US-183 über den gemeinsamen `LpSeitenkopf` (`.lp-seitenkopf__titel` /
+ * `.lp-seitenkopf__aktionen` oben) — hier bleibt nur, was rezept-spezifisch ist:
+ * das optionale Hero-Bild, Zutaten mit Portions-Stepper und die nummerierte
  * Zubereitung.
  */
-.rezept-detail__kopf {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-}
-
-/* Der Titel schrumpft und schneidet ab, bevor er die Kopfzeile sprengt. */
-.rezept-detail__kopf h1 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* US-72: Bearbeiten und Löschen stehen rechts in der Kopfzeile nebeneinander —
-   sie dürfen nicht schrumpfen (flex:none), damit der Titel links den Platz
-   hergibt. Seit US-137 steht davor der Favoriten-Stern. */
-.rezept-detail__kopf-aktionen {
-    display: flex;
-    align-items: center;
-    gap: var(--lp-abstand-klein);
-    flex: none;
-}
 
 /* US-137: Der aktive Favoriten-Stern im Detail-Kopf trägt den grünen Akzent
    (gefüllt, Muster .lp-icon-knopf--akzent); der inaktive bleibt der leise
@@ -2389,6 +2394,10 @@ a {
  * eine leise Rückmeldung daneben. Web Share ist nicht überall verfügbar; wo es fehlt, tritt
  * das Kopieren an seine Stelle, und wo auch das fehlt, entfällt der Knopf ganz (kein toter
  * Knopf). Bricht auf schmalen Geräten um.
+ *
+ * Genutzt von der Essen-Einkaufsliste (EinkaufslisteSeite). Der eigenständige Einkauf-Screen
+ * (EinkaufSeite) trägt den Teilen-Knopf seit US-183 (UX-Review V3) stattdessen rechts in der
+ * Kopfzeile (LpSeitenkopf); dort steht die leise Rückmeldung darunter als eigene Zeile.
  */
 .einkauf-werkzeuge {
     display: flex;
