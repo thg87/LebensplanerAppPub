@@ -723,6 +723,39 @@ a {
     font-size: 0.9rem;
 }
 
+/* US-174 (ADR 0024): Der „Urlaub aktiv"-Banner auf `/haushalt` und `/`. Bewusst der ruhige
+   Gegenpol zum Rückstands-Widget darüber: dieselbe Glaskarte (.lp-karte), aber mit dem grünen
+   Akzent (ADR 0014, --lp-akzent) statt der Warnfarbe --lp-fehler-* — „kein Versäumnis, du bist
+   im Urlaub", kein Alarm. Die Aussage steht immer als Text da (Titel + erklärender Satz), nicht
+   nur als Farbe/Symbol (Barrierefreiheit). */
+.urlaubsbanner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--lp-abstand-klein);
+    /* Der grüne Akzent als Kante links — dasselbe Muster wie die Warnkante der
+       Rückstands-Karte, nur mit umgekehrter Aussage. */
+    border-inline-start: 3px solid var(--lp-akzent);
+    margin-bottom: var(--lp-abstand);
+}
+
+.urlaubsbanner__symbol {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
+.urlaubsbanner__titel {
+    margin: 0;
+    color: var(--lp-erfolg-text);
+    font-size: 1.1rem;
+}
+
+.urlaubsbanner__text {
+    margin: 0.25rem 0 0;
+    color: var(--lp-text-leise);
+    font-size: 0.9rem;
+}
+
 /* Der Raumname als Tippziel zur Detailansicht (US-36/F-C) — ein Block, kein
    Inline-Link, damit die volle Zeile den Mindest-Tippbereich erreicht und sich
    nicht mit den separaten Zeilen-Aktionen (Umbenennen/Löschen) überlagert. */
