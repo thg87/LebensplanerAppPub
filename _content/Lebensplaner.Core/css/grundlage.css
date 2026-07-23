@@ -625,6 +625,40 @@ a {
     color: var(--lp-text-leise);
 }
 
+/*
+ * US-189 (UX-Review V9): Der gemeinsame Leer-/Ladezustand (LpLeerzustand). Vorher war
+ * jeder leere Bereich ein loser `.lp-leer`-Absatz, mal mit eingebettetem Knopf, mal ohne —
+ * hier bekommt „leer" eine einheitliche, ruhige Form: optionales Symbol, ein Satz, optional
+ * genau eine Aktion, zentriert und mit Luft. Die Farbe sitzt am Container (nicht am Text),
+ * damit ein screen-eigener Ton wie `.einkauf-fertig` (grün, weiter unten definiert) sie
+ * am Wurzelelement überschreiben kann und der Satz sie erbt. `.lp-leer` bleibt daneben
+ * für gedämpfte Meta-Texte bestehen und wird NICHT ersetzt.
+ */
+.lp-leerzustand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+    padding: var(--lp-abstand-gross) var(--lp-abstand);
+    margin: 0 0 var(--lp-abstand) 0;
+    text-align: center;
+    color: var(--lp-text-leise);
+}
+
+.lp-leerzustand__symbol {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.lp-leerzustand__text {
+    margin: 0;
+    max-width: 34ch;
+}
+
+.lp-leerzustand__aktion {
+    margin-top: var(--lp-abstand-klein);
+}
+
 /* Sauberkeits-Score (US-33/34/36): trägt immer Text — eine Zahl oder "—" —,
    nie nur eine Farbe (Barrierefreiheit, wie .lp-erfolg). Gemeinsam mit
    Dashboard und Raum-Detail, deshalb hier statt in einer der beiden Schalen. */
