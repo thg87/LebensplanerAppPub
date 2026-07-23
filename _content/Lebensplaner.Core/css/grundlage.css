@@ -827,6 +827,31 @@ a {
     margin-top: var(--lp-abstand-klein);
 }
 
+/*
+ * US-186 (UX-Review V6): Die Aufgaben-Zeile auf /vorlagen trägt statt der früheren
+ * Inline-Textknöpfe (Löschen/Pause aufheben) nur noch einen •••-Überlaufknopf
+ * rechts — dasselbe Muster wie die Räume-Zeile (US-60, .raum-zeile). Der Name-Block
+ * nimmt den Rest der Breite; der Knopf sitzt oben, weil die Karte mehrzeilig ist.
+ */
+.aufgabe-zeile {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.aufgabe-zeile .aufgabe__name {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+}
+
+/* Wie .raum-menue-knopf (US-60): der einzige Aktions-Einstieg der Zeile trägt die
+   kräftigere Textfarbe statt des leisen Icon-Grautons. */
+.aufgabe-menue-knopf {
+    flex: none;
+    color: var(--lp-text);
+}
+
 /* US-25: die wischbare Karte. Der äußere Ring ist nur Bühne — transparent,
    an den Ecken abgeschnitten (`overflow: hidden`) — die sichtbare Karte ist
    `.wisch__vordergrund` und gleitet beim Ziehen darüber. Dahinter liegt der
