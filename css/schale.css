@@ -76,13 +76,14 @@
     transform: translateX(-50%);
     z-index: 10;
 
-    /* Seit US-115 ein vertikaler Stapel: Dots oben, darunter der Viewport mit den
-       Seiten. Die Breite ist gedeckelt, damit zwei/eine Seite auf dem Desktop nicht
-       auseinanderlaufen; overflow:hidden klippt die nebeneinanderliegenden Seiten am
-       abgerundeten Rand. Das Innen-Padding tragen Dots und Seiten selbst (padding:0). */
+    /* Seit US-185 einreihig (D-1): fünf Modul-Ziele nebeneinander, gleichmäßig verteilt.
+       Die Breite ist gedeckelt, damit die Leiste auf dem Desktop nicht auseinanderläuft;
+       overflow:hidden klippt die aktive Ziel-Fläche am abgerundeten Rand. Der
+       Safe-Area-Abstand des iPhone-Home-Indikators sitzt bereits im `bottom` — hier trägt
+       das Padding nur den regulären Innenabstand. */
     display: flex;
-    flex-direction: column;
-    gap: 0;
+    justify-content: space-around;
+    gap: 2px;
     width: min(94vw, 27rem);
     overflow: hidden;
 
@@ -93,7 +94,7 @@
     border: 1px solid var(--lp-trennlinie);
     border-radius: 20px;
     box-shadow: var(--lp-schatten);
-    padding: 0;
+    padding: 5px 5px 8px;
 }
 
 /*
@@ -128,90 +129,6 @@
     }
 }
 
-/*
- * Seitenweise Navigation (US-115): Dots + Viewport + Spur.
- * Die Spur trägt die Seiten nebeneinander (je flex:0 0 100%); welche sichtbar
- * ist, setzt die Komponente per inline translateX (Dot-Tap in C#, kein
- * Frame-für-Frame-Interop). Das eigentliche Wischen ist reine Zugabe und folgt
- * in US-116 — diese Leiste ist ohne Wischen vollständig bedienbar.
- */
-.nav-dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    padding: 8px 0 4px;
-}
-
-/* Die Dots sind Buttons (Tastatur/Fokus, role="tab"); der Button-Eigenlook wird
-   hier zurückgesetzt, sodass nur der Punkt bleibt. */
-.nav-dot {
-    width: 6px;
-    height: 6px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.22);
-    transition: width 0.25s ease, background 0.25s ease;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.nav-dot.an {
-    width: 18px;
-    border-radius: 3px;
-    background: var(--lp-akzent);
-}
-
-/* Wer weniger Bewegung eingestellt hat, bekommt keinen gleitenden Seitenwechsel —
-   weder die Spur noch das Wachsen des aktiven Dots. */
-@media (prefers-reduced-motion: reduce) {
-    .nav-spur,
-    .nav-dot {
-        transition: none;
-    }
-}
-
-.nav-viewport {
-    overflow: hidden;
-    width: 100%;
-    /* Vertikales Scrollen bleibt nativ (pan-y); die horizontale Wisch-Geste (US-116)
-       fängt nav-wisch.js selbst ab und zieht die Spur mit. */
-    touch-action: pan-y;
-}
-
-.nav-spur {
-    display: flex;
-    /* Welche Seite ruht, sagt --nav-x (C# setzt es je Seite als Fallback ohne JS).
-       Ist die Wisch-Geste aktiv (US-116, nav-wisch.js), überschreibt deren inline
-       `transform` diese Regel — beide fassen so nie dieselbe Eigenschaft an. */
-    transform: translateX(var(--nav-x, 0%));
-    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Während des Ziehens folgt die Spur dem Finger ohne Transition (nav-wisch.js
-   setzt/entfernt diese Klasse); beim Loslassen schnappt sie mit Transition. */
-.nav-spur.zieht {
-    transition: none;
-}
-
-.nav-seite {
-    flex: 0 0 100%;
-    display: flex;
-    justify-content: space-around;
-    gap: 4px;
-    /* Der Safe-Area-Abstand des iPhone-Home-Indikators sitzt bereits im `bottom`
-       der schwebenden .navleiste — hier nur der reguläre Innenabstand. */
-    padding: 4px 6px 10px;
-}
-
-/* In den Seiten dürfen die Ziele die Breite gleichmäßig teilen (space-around),
-   bleiben aber nie unter dem Tippziel — nichts wird bis ~320 px abgeschnitten. */
-.nav-seite .navziel {
-    max-width: none;
-    min-width: 60px;
-    padding: 8px 6px;
-}
-
 /* Das Icon trägt das Badge: relativ positioniert, damit der Punkt oben rechts
    an der Ecke sitzt statt am ganzen Ziel. */
 .navziel__icon {
@@ -239,27 +156,41 @@
 }
 
 .navziel {
+    /* Fünf Ziele teilen die Leistenbreite gleichmäßig (flex:1). min-width:0 lässt sie bis
+       ~320 px mitschrumpfen, ohne die Leiste zu sprengen — das Tippziel bleibt über die
+       Höhe (min-height) garantiert, nicht über eine feste Breite. */
     flex: 1;
-    max-width: 10rem;
+    min-width: 0;
 
     /* Das Tippziel ist der ganze Bereich, nicht nur Icon oder Schrift. */
     min-height: var(--lp-tippziel);
-    min-width: 64px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 3px;
-    padding: 8px 12px;
+    padding: 6px 2px;
 
     border-radius: 14px;
     color: var(--lp-text-leise);
     text-decoration: none;
-    font-size: 0.72rem;
+    /* Fünf statt vier Beschriftungen je Reihe: minimal kleiner, damit „Dashboard" bei
+       390 px ohne Umbruch/Abschnitt auf eine Zeile passt (US-185). */
+    font-size: 0.66rem;
     font-weight: 500;
 
     /* Kein blauer Aufblitzen-Kasten beim Antippen auf iOS. */
     -webkit-tap-highlight-color: transparent;
+}
+
+/* Die Beschriftung bleibt einzeilig: kein Zeilenumbruch, der die Leistenhöhe springen
+   ließe. Passt der Text ausnahmsweise nicht (sehr schmale Geräte), wird er sauber
+   gekürzt statt umzubrechen. */
+.navziel > span:last-child {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .navziel svg {
@@ -325,6 +256,9 @@
     margin: 2px 0 0 0;
 }
 
+/* Seit US-185 der Einstieg in die Einstellungen (D-1): ein Link, kein reines Icon —
+   44px-Tippziel, zugänglicher Name über aria-label. Mit Vorname die Initiale, ohne
+   Vorname das Zahnrad. */
 .lp-kopf-avatar {
     flex: none;
     width: 44px;
@@ -339,6 +273,17 @@
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--lp-akzent);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lp-kopf-avatar__icon {
+    display: inline-flex;
+}
+
+.lp-kopf-avatar__icon svg {
+    width: 22px;
+    height: 22px;
 }
 
 /*
