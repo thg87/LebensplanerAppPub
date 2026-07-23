@@ -295,6 +295,46 @@ a {
 }
 
 /*
+ * Datei-Auswahl (US-190): Der native <input type="file"> ist ein grauer System-
+ * Knopf, dessen Beschriftung vom Browser/OS kommt — ein Fremdkörper im dunklen
+ * Theme. Statt ihn anzuzeigen, trägt ein <label> in `.lp-knopf--leise`-Optik die
+ * sichtbare Fläche; das Input bleibt im DOM, nur außerhalb des Sichtbereichs.
+ * Bewusst NICHT `display:none`/`visibility:hidden` — beides nähme dem Input den
+ * Fokus und die Screenreader-Anbindung. Das ist das etablierte „visually hidden"-
+ * Muster (Position aus dem Fluss, auf 1px zusammengeschnitten).
+ */
+.lp-dateiwahl {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+}
+
+.lp-dateiwahl__eingabe {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Hat das versteckte Input den Fokus, muss das sichtbare Label als fokussiert
+   erkennbar sein — sonst tabbt man scheinbar ins Nichts. Bewusst `:has(:focus-visible)`
+   statt `:focus-within`: Letzteres leuchtet auch nach einem Maus-Klick dauerhaft
+   weiter, während echte Knöpfe nach der Maus keinen Ring zeigen. `:focus-visible`
+   übernimmt die Browser-Heuristik „nur bei Tastatur/VoiceOver", `:has` reicht sie
+   vom unsichtbaren Geschwister-Input ans Label weiter (iOS Safari ≥ 15.4). */
+.lp-dateiwahl:has(.lp-dateiwahl__eingabe:focus-visible) .lp-dateiwahl__knopf {
+    outline: 2px solid var(--lp-akzent);
+    outline-offset: 2px;
+}
+
+/*
  * Segment-/Tab-Leiste (US-63): die Unternavigation eines Bereichs, angelehnt an
  * das iOS-„Segmented Control". Ein Rahmen mit gleich breiten Feldern; der aktive
  * Tab hebt sich als eigene Fläche in Akzentfarbe ab.
