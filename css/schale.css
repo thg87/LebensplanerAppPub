@@ -174,8 +174,9 @@
     border-radius: 14px;
     color: var(--lp-text-leise);
     text-decoration: none;
-    /* Fünf statt vier Beschriftungen je Reihe: minimal kleiner, damit „Dashboard" bei
-       390 px ohne Umbruch/Abschnitt auf eine Zeile passt (US-185). */
+    /* Fünf statt vier Beschriftungen je Reihe: minimal kleiner, damit die längste
+       Beschriftung („Haushalt") bei 390 px ohne Umbruch/Abschnitt auf eine Zeile passt
+       (US-185; Wortwahl „Start"/„Essen" seit US-193). */
     font-size: 0.66rem;
     font-weight: 500;
 
