@@ -1970,6 +1970,28 @@ a {
     font-variant-numeric: tabular-nums;
 }
 
+/*
+ * V11 (US-192): Rückweg zur aktuellen Woche. Der leise „Heute"-Knopf sitzt in einer
+ * eigenen Zeile unter der KW-Navigation und wird nur außerhalb der aktuellen Woche
+ * gerendert — bewusst OHNE reservierte Höhe: in der aktuellen Woche (dem häufigsten
+ * Zustand) wäre ein permanenter Leerstreifen ein sichtbarer Dauerpreis. Der Knopf
+ * erscheint/verschwindet nur beim Wochenwechsel, bei dem das Raster darunter ohnehin
+ * komplett neu rendert; der Höhensprung fällt dort nicht auf. Die Kopfzeile darüber
+ * (Pfeil · KW · Pfeil) liegt in einer eigenen Zeile und bleibt davon unberührt. Der Knopf
+ * bleibt schmal (kein Vollbreiten-Knopf) und zentriert; die Höhe erfüllt das 44px-Tippziel
+ * aus `.lp-knopf`.
+ */
+.wochenplan-heute {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--lp-abstand);
+}
+
+.wochenplan-heute__knopf {
+    padding: 0 var(--lp-abstand);
+}
+
 .wochenplan {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
