@@ -1422,6 +1422,47 @@ a {
     max-width: 12rem;
 }
 
+/* US-198 (Idee 1): Die „20-Minuten"-Session auf der Haushalt-Übersicht. Der Einstieg
+   bleibt ein leiser Knopf (ADR 0027: der Glow-Knopf ist Formular-/Dialog-Primäraktionen
+   vorbehalten); ein Hauch Abstand nach oben trennt ihn von der Aufgabenliste darüber. */
+.lp-session__einstieg {
+    margin-top: var(--lp-abstand-klein);
+    margin-bottom: 0;
+}
+
+/* Kopf der aufgeklappten Session — Titel links, „Schließen" rechts; dieselbe Anatomie
+   wie die Verlaufs-Kopfzeile, damit sie sich einreiht. Umbricht auf schmalen Screens. */
+.lp-session__kopf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: var(--lp-abstand-klein);
+}
+
+/* Der Session-Titel ist eine echte <h3> (Überschriften-Navigation für VoiceOver), soll aber
+   optisch der Kartentitel bleiben — Standard-h3-Größe und -Ränder deshalb zurücknehmen. */
+.lp-session__kopf h3.lp-score-karte__titel {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.lp-session__gewinn {
+    font-weight: 600;
+}
+
+/* Eine Aufgabenzeile in der Session: Titel/Meta links, „Erledigt" rechts. Kompakter als
+   eine volle Karte (die Session ist selbst schon eine Karte), aber bis ~320 px ohne
+   Gedränge — der Knopf bleibt ein 44px-Tippziel (er erbt .lp-knopf). */
+.lp-session__aufgabe {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lp-abstand-klein);
+    padding: 8px 0;
+}
+
 /* US-151: Der persönliche Rekord „Beste Serie" — nur sichtbar, wenn er die aktuelle
    Serie übertrifft (bei Serie 0 die Erinnerung nach einem Rückschlag). Etwas kräftiger
    als der gedämpfte Zähltext daneben, damit die Zahl trotz Muted-Ton nicht untergeht;
