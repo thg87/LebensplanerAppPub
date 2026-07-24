@@ -352,10 +352,36 @@ a {
     border: 1px solid var(--lp-trennlinie);
     border-radius: var(--lp-radius);
     margin-bottom: var(--lp-abstand);
+
+    /* Sicherheitsnetz (US-196, V15): Passen mehr oder längere Tabs als je auf den
+       Schirm (ein künftiger sechster Tab, sehr lange Labels), scrollt die Leiste
+       waagerecht, statt rechts stumm abzuschneiden. Im Normalfall greift Stufe 1
+       (Media-Query unten) und es tritt kein Überlauf ein — dann erscheint auch kein
+       Scrollbalken. Der Balken wird versteckt: Eine Segmentleiste ist kein Dokument;
+       ein dauerhafter Scrollbalken über den Tabs sähe wie ein Defekt aus, und iOS
+       blendet beim Wischen ohnehin einen kurzen Overlay-Balken ein.
+
+       Bewusst OHNE Kanten-Fade rechts: Ein `mask-image` läge über der ganzen Leiste
+       und würde ihren stets sichtbaren Glas-Rahmen (Rahmen + abgerundete rechte Ecke)
+       mit ausblenden — auch im normalen, passenden Fall ohne Überlauf, wo es gerade
+       nichts anzudeuten gibt. Ein pinnbarer `::after`-Fade wiederum bräuchte einen
+       Wrapper, den dieser generische Core-Baustein nicht kennt (das Elternelement
+       stellt der aufrufende Screen). Da Stufe 1 echten Überlauf zur seltenen Ausnahme
+       macht und die Akzeptanz nur „scrollbar statt abgeschnitten" verlangt, bleibt die
+       Leiste ohne Fade — ehrlicher als ein Fade, der die Glas-Optik bricht. */
+    overflow-x: auto;
+    scrollbar-width: none;            /* Firefox: Scrollbalken ausblenden */
+}
+
+.lp-segmentleiste::-webkit-scrollbar {
+    display: none;                    /* WebKit/Blink (iOS Safari, Chrome) */
 }
 
 .lp-segment {
-    /* Gleich breite Tabs, das ganze Feld ist Tippziel — nicht nur die Schrift. */
+    /* Gleich breite Tabs, das ganze Feld ist Tippziel — nicht nur die Schrift.
+       `flex: 1` reicht: Ein Flex-Item schrumpft nie unter seine min-content-Breite
+       (min-width: auto), darum scrollt die Leiste bei Überlauf, statt zu clippen —
+       ein zusätzliches `flex-basis: auto` ist dafür nicht nötig. */
     flex: 1;
     min-height: var(--lp-tippziel);
 
@@ -368,6 +394,10 @@ a {
     color: var(--lp-text-leise);
     text-decoration: none;
     text-align: center;
+    /* Einzeilig halten: Ohne nowrap bräche das Label eines schrumpfenden Tabs
+       zweizeilig um und sprengte die 44px-Zeile — gewünscht ist Scrollen, nicht
+       Umbruch. */
+    white-space: nowrap;
     font-size: 0.9rem;
     font-weight: 500;
 
@@ -383,6 +413,34 @@ a {
     background: var(--lp-flaeche-schwebend);
     color: var(--lp-akzent);
     font-weight: 600;
+}
+
+/*
+ * Kompakt-Stufe für schmale Telefone (US-196, V15). Auf 375–393px (iPhone SE/mini
+ * bis Pro) lief die fünf Tabs breite Haushalt-Leiste (Übersicht · Räume · Aufgaben ·
+ * Überfällig · Urlaub) bei 0.9rem rechts über — „Urlaub" wurde zu „Urlaul…"
+ * abgeschnitten. Ursache ist NICHT flex-shrink, sondern min-width: auto: Ein
+ * Flex-Item schrumpft nie unter seine min-content-(Text-)Breite, die Summe passt also
+ * schlicht nicht.
+ *
+ * Rechnung (~0.55em Zeichenbreite, 38 Zeichen über alle fünf Labels):
+ *   0.9rem (14.4px): Text ≈ 300px + Innenabstand 5×2×8px (80px) + Gap 4×4px (16px)
+ *                    + Leisten-Polster 8px + Rahmen 2px  ≈ 407px  → > iPhone-Breite.
+ *   0.8rem (12.8px): Text ≈ 253–267px + Innenabstand 5×2×6.4px (64px) + Gap 4×2px
+ *                    (8px) + 8px + 2px  ≈ 335–349px  → unter 375px, mit Reserve.
+ *
+ * Verkleinert werden nur Schrift, Innenabstand und Gap. Die 44px-Tipphöhe
+ * (min-height) bleibt bewusst unangetastet.
+ */
+@media (max-width: 480px) {
+    .lp-segmentleiste {
+        gap: 2px;
+    }
+
+    .lp-segment {
+        font-size: 0.8rem;
+        padding: 0 0.4rem;
+    }
 }
 
 /* Fehler tragen nicht nur Farbe: Rot allein sieht nicht jeder (CLAUDE.md denkt
