@@ -1703,6 +1703,14 @@ a {
     font-size: 0.9rem;
 }
 
+/* US-200: Kochstand-Hinweis unter der Meta-Zeile, nur bei Sortierung „Lange nicht
+   gekocht". Etwas kleiner und leiser als die Meta-Zeile — er begründet nur die
+   Reihenfolge und soll die Karte nicht dominieren. */
+.rezept-karte__kochstand {
+    font-size: 0.8rem;
+    margin-top: 0.1rem;
+}
+
 .rezept-karte__tags {
     list-style: none;
     margin: 0.15rem 0 0;
