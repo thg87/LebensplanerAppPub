@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "1idP3Ruj",
+  "version": "kt9gVPvP",
   "assets": [
     {
       "hash": "sha256-+W/b8iw1IdvP7U+3Im5rFiMYLA4yx3byaGSP9Kj0O4w=",
@@ -50,28 +50,28 @@ self.assetsManifest = {
       "url": "_content/Lebensplaner.Core/js/teilen.js"
     },
     {
-      "hash": "sha256-8PZap7QoSq8/uzhSCtvkItGTS/Nw97PV6VFPSNMejGc=",
-      "url": "_framework/Lebensplaner.App.oanw9ojy79.wasm"
+      "hash": "sha256-6pPF6+4W0MUYvCO0psAe8NYCdDcJX4AsHLUYBLb2GXo=",
+      "url": "_framework/Lebensplaner.App.qgxasg7ygy.wasm"
     },
     {
-      "hash": "sha256-OBG7r1SX9GJlgj/y6HPcmlbx/r1puzjLVjfnxkkswIE=",
-      "url": "_framework/Lebensplaner.Core.ogi7sbhwjm.wasm"
+      "hash": "sha256-osjML46z4Bjvy9/A28zms9zDwJ4leSbwNIkqomW1ung=",
+      "url": "_framework/Lebensplaner.Core.ekkxlb96jb.wasm"
     },
     {
-      "hash": "sha256-IlCeyYfAvxGooWvzb8vzwOXVwYEpjrURrWaxiTFh3qo=",
-      "url": "_framework/Lebensplaner.Einkauf.y7469njrfh.wasm"
+      "hash": "sha256-X/PkYVDd/XJwsXXvxsZiMVUx0BDJC6GGZFv9z+UNdFo=",
+      "url": "_framework/Lebensplaner.Einkauf.rdf6o2c1py.wasm"
     },
     {
-      "hash": "sha256-G2SBWBe87unkyfxu3d2ybAfMcaxHVWpqcXBiJQn4Pnk=",
-      "url": "_framework/Lebensplaner.Essen.pziz9iepsf.wasm"
+      "hash": "sha256-kGJEom4ZyEqFC4KZOGy+JlVAyYr0LCBzfqD2jinlYpo=",
+      "url": "_framework/Lebensplaner.Essen.goclaguoc3.wasm"
     },
     {
-      "hash": "sha256-7owWex2W4i0n0aYqk/CJwl3DALXU9TYiT2krnPrwOEU=",
-      "url": "_framework/Lebensplaner.Haushalt.m6krq9hjyi.wasm"
+      "hash": "sha256-p8FOUE0mWRqsYozFuSPHoBema/e+NnmGExOZb25XYXQ=",
+      "url": "_framework/Lebensplaner.Haushalt.t35i48z64g.wasm"
     },
     {
-      "hash": "sha256-ge4LaalViyNLAkbZqgqHJpZa0V8fPpYFE7AYyPg9edA=",
-      "url": "_framework/Lebensplaner.Reise.ho5bp1q83r.wasm"
+      "hash": "sha256-WNiwImXkT2Ma054SEdNrkSTJjsGqFiAgW51UpxpLNk0=",
+      "url": "_framework/Lebensplaner.Reise.oggs2xn7gf.wasm"
     },
     {
       "hash": "sha256-TGP1ie8kcd7peo9KZ+S1B3uRADbA7Md9HA71R/K7xuA=",
@@ -230,6 +230,10 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.w3qd1tpl0e.js"
     },
     {
+      "hash": "sha256-pwknsblcY2iNE8XhhxChF2hbLgxzIpKMicQysN9JYz0=",
+      "url": "_framework/dotnet.hy49p3dw2h.js"
+    },
+    {
       "hash": "sha256-gQbHHzCnWx8iDOC65EKbql7bEltJkfao7lmkAbIRajw=",
       "url": "_framework/dotnet.native.puryxhmhq9.js"
     },
@@ -240,10 +244,6 @@ self.assetsManifest = {
     {
       "hash": "sha256-SOUHEQ3FhDAibBSR2u90NWZpoBjPuWRmH0BAATUlhJU=",
       "url": "_framework/dotnet.runtime.web2r9gqbh.js"
-    },
-    {
-      "hash": "sha256-7RYrBOxpy9UXdb8yvOsHIyIQKwo6ciTxVsK2XSYcS3E=",
-      "url": "_framework/dotnet.xf3mgvfylj.js"
     },
     {
       "hash": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -274,7 +274,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-iq+q97omkpBJ9xVqgdTQu+dkb4PXKLEpi2cXuD9UyB0=",
+      "hash": "sha256-dvSzpUFDODnIFUPfKcdyhUBH0OC6C9k8UhH+UEkOS1s=",
       "url": "index.html"
     },
     {
