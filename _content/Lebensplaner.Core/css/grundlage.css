@@ -2295,8 +2295,24 @@ a {
     line-height: 1;
 }
 
+/* US-201: Name und Kochstand-Hinweis stapeln sich in einer Textspalte neben dem
+   Bild — der Hinweis begründet die Vorsortierung „lange nicht gekocht". */
+.rezeptwahl-eintrag__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+}
+
 .rezeptwahl-eintrag__name {
     font-weight: 600;
+}
+
+/* US-201: leiser und etwas kleiner als der Name — er ordnet nur ein, dominiert die
+   Zeile nicht (Muster rezept-karte__kochstand, US-200). */
+.rezeptwahl-eintrag__kochstand {
+    font-size: 0.8rem;
+    color: var(--lp-text-leise);
 }
 
 /*
