@@ -2867,6 +2867,109 @@ a {
 }
 
 /*
+ * US-213 (Idee 6): Die Vorrats-Schnellwahl — die Merkliste wiederkehrender Basics (US-212) als
+ * Chip-Reihe beim Eigene-Position-Bereich. Ein Tipp auf einen Chip übernimmt den Basic in die
+ * Einkaufsliste; das ✕ daneben löscht ihn aus der Merkliste (sofort + Rückgängig, ADR 0026).
+ */
+.einkauf-schnellwahl {
+    margin-top: var(--lp-abstand);
+    margin-bottom: var(--lp-abstand);
+}
+
+.einkauf-schnellwahl__titel {
+    margin: 0 0 var(--lp-abstand-klein);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--lp-text-leise);
+}
+
+/* Umbrechende Reihe von Chips (Muster .lp-schnellfilter / .tag-chips). */
+.einkauf-schnellwahl__chips {
+    list-style: none;
+    margin: 0 0 var(--lp-abstand-klein);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-klein);
+}
+
+/* Ein Chip trägt ZWEI Geschwister-Knöpfe (Übernehmen · ✕) — kein <button> im <button>. Der Chip
+   ist die Pillen-Hülle (Rahmen/Radius, Muster .lp-schnellfilter__chip); die Knöpfe darin bleiben
+   flächig transparent, damit sich beide wie ein Chip anfühlen. */
+.einkauf-schnellwahl__chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Der Übernehmen-Knopf füllt den Chip; min-height hält das Tippziel bei 44px (CLAUDE.md). */
+.einkauf-schnellwahl__uebernehmen {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--lp-tippziel);
+    padding: 0 0.3rem 0 0.9rem;
+    border: none;
+    background: none;
+    color: var(--lp-text);
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Der ✕-Knopf ist ein eigenes, ≥44px großes Tippziel am Chip-Ende — die leisere Aktion, dezent
+   getönt, mit sprechendem aria-label (der Glyph ist aria-hidden). */
+.einkauf-schnellwahl__entfernen {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--lp-tippziel);
+    min-height: var(--lp-tippziel);
+    padding: 0 0.6rem;
+    border: none;
+    background: none;
+    color: var(--lp-text-leise);
+    font: inherit;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Eingabezeile fürs Anlegen: dieselbe Optik wie .einkauf-eigene__hinzufuegen — Feld füllt, „+"
+   bleibt quadratisch daneben. */
+.einkauf-schnellwahl__anlegen {
+    display: flex;
+    gap: var(--lp-abstand-klein);
+    align-items: center;
+}
+
+.einkauf-schnellwahl__feld {
+    flex: 1;
+    min-width: 0;
+    font: inherit;
+    font-size: max(16px, 1rem);
+    color: var(--lp-text);
+    background: rgba(255, 255, 255, 0.04);
+    min-height: var(--lp-tippziel);
+    padding: 0 0.75rem;
+    border: 1px solid var(--lp-trennlinie);
+    border-radius: var(--lp-radius);
+}
+
+.einkauf-schnellwahl__plus {
+    flex: none;
+    padding: 0;
+    width: var(--lp-tippziel);
+}
+
+/*
  * US-85: Teilen-Werkzeuge über der Liste — der „Teilen"- bzw. „Als Text kopieren"-Knopf und
  * eine leise Rückmeldung daneben. Web Share ist nicht überall verfügbar; wo es fehlt, tritt
  * das Kopieren an seine Stelle, und wo auch das fehlt, entfällt der Knopf ganz (kein toter
