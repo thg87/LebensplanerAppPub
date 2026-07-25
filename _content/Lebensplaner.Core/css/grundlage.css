@@ -921,6 +921,39 @@ a {
     font-size: 0.9rem;
 }
 
+/* US-205 (Idee 2, ADR 0029): Das Abreise-Banner auf `/`. Anatomie wie das Urlaubsbanner
+   (Glaskarte + Akzent-Kante links, Symbol links, Text mittig) — bewusst ruhig, kein Alarm:
+   ein Hinweis „du bist noch nicht fertig gepackt", keine Warnung. Der ganze Banner ist ein
+   Link (großes Tippziel) auf die Packliste; deshalb hier text-decoration/color neutralisiert,
+   damit die Glaskarte nicht wie ein blauer Textlink aussieht. Die Aussage steht immer als Text
+   da (Titel + Reisename), nicht nur als Farbe/Symbol (Barrierefreiheit). */
+.abreisebanner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--lp-abstand-klein);
+    border-inline-start: 3px solid var(--lp-akzent);
+    margin-bottom: var(--lp-abstand);
+    text-decoration: none;
+    color: inherit;
+}
+
+.abreisebanner__symbol {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
+.abreisebanner__titel {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.abreisebanner__text {
+    margin: 0.25rem 0 0;
+    color: var(--lp-text-leise);
+    font-size: 0.9rem;
+}
+
 /* US-203 (Idee 7, D-11): Die Wochen-Rückblick-Karte auf /haushalt. Reihen-Layout wie die
    Score-/Serien-Karte (Symbol links, Text mittig, leiser Schließen-Knopf rechts) — bewusst
    ruhig, kein Alarm: ein Rückblick, keine To-do-Karte. Sie erscheint nur Mo–Mi und ist
