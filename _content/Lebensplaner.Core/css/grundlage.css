@@ -954,6 +954,56 @@ a {
     font-size: 0.9rem;
 }
 
+/* US-208 (Idee 3, D-6/D-7): Das Nach-Reise-Lernschleife-Angebot auf der Packliste. Anatomie wie
+   das Urlaubs-/Abreisebanner (Glaskarte + grüne Akzent-Kante links, Symbol links, Text mittig) —
+   bewusst ruhig, kein Alarm: ein Angebot „willst du die Vorlage verbessern?", keine Warnung. Der
+   eigentliche Rückfluss läuft im Dialog; die Karte ist nur der Einstieg. */
+.lernschleife-angebot {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--lp-abstand-klein);
+    border-inline-start: 3px solid var(--lp-akzent);
+    margin-bottom: var(--lp-abstand);
+}
+
+.lernschleife-angebot__symbol {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
+.lernschleife-angebot__text {
+    min-width: 0;
+}
+
+.lernschleife-angebot__titel {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.lernschleife-angebot__frage {
+    margin: 0.25rem 0 0;
+    color: var(--lp-text-leise);
+    font-size: 0.9rem;
+}
+
+.lernschleife-angebot__oeffnen {
+    margin-top: var(--lp-abstand-klein);
+}
+
+/* Die kurze Rückmeldung, nachdem der Rückfluss beantwortet wurde. */
+.lernschleife-meldung {
+    margin-bottom: var(--lp-abstand);
+    color: var(--lp-erfolg-text);
+    font-size: 0.9rem;
+}
+
+/* Die Vorschau-Positionen im „als neue Vorlage"-Dialog — schlichte, nicht abhakbare Liste. */
+.lernschleife-vorschau {
+    padding: 0.25rem 0;
+    color: var(--lp-text-leise);
+}
+
 /* US-203 (Idee 7, D-11): Die Wochen-Rückblick-Karte auf /haushalt. Reihen-Layout wie die
    Score-/Serien-Karte (Symbol links, Text mittig, leiser Schließen-Knopf rechts) — bewusst
    ruhig, kein Alarm: ein Rückblick, keine To-do-Karte. Sie erscheint nur Mo–Mi und ist
