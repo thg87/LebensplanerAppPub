@@ -921,6 +921,37 @@ a {
     font-size: 0.9rem;
 }
 
+/* US-203 (Idee 7, D-11): Die Wochen-Rückblick-Karte auf /haushalt. Reihen-Layout wie die
+   Score-/Serien-Karte (Symbol links, Text mittig, leiser Schließen-Knopf rechts) — bewusst
+   ruhig, kein Alarm: ein Rückblick, keine To-do-Karte. Sie erscheint nur Mo–Mi und ist
+   session-weise wegklickbar (Muster Sicherungs-Banner US-144). */
+.lp-rueckblick {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--lp-abstand-klein);
+}
+
+.lp-rueckblick__symbol {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
+/* Der Textblock darf umbrechen (min-width:0), damit die Karte bis ~320 px ohne Überlauf
+   trägt (CLAUDE.md), während Symbol und Schließen-Knopf ihren Platz behalten. */
+.lp-rueckblick__text {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Der ehrliche „gemessen …"-Zusatz: noch leiser und kleiner als der übrige Kartentext —
+   eine Fußnote zur Lückenhaftigkeit (ADR 0013), die die zwei Zahlen relativiert, ohne zu
+   drängen. */
+.lp-rueckblick__messung {
+    margin-top: 4px !important;
+    font-size: 0.8rem;
+}
+
 /* Der Raumname als Tippziel zur Detailansicht (US-36/F-C) — ein Block, kein
    Inline-Link, damit die volle Zeile den Mindest-Tippbereich erreicht und sich
    nicht mit den separaten Zeilen-Aktionen (Umbenennen/Löschen) überlagert. */
