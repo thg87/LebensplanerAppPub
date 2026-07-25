@@ -2606,6 +2606,44 @@ a {
 }
 
 /*
+ * US-209: Einkaufsmodus „Im Laden". Ein Umschalter in der Steuerleiste rechts, neben dem
+ * „Erledigte ausblenden". Sichtbarer Zustand über die --an-Klasse (und aria-pressed im Markup);
+ * die Fachlogik bleibt unberührt (AC4), nur die Sicht ändert sich.
+ */
+.einkauf-steuerung__aktionen {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--lp-abstand-klein);
+}
+
+.einkauf-modus--an {
+    color: var(--lp-akzent);
+    font-weight: 600;
+}
+
+/*
+ * Im aktiven Modus wachsen die Abhak-Zeilen des Listen-Containers zu großzügigeren Touch-Zielen —
+ * dieselben .lp-abhakzeile-Bausteine (keine zweite Liste), nur höher, mit größerer Schrift und
+ * größerer Checkbox, damit die Liste beim Einkaufen mit einer Hand bequem abzuhaken ist. Trägt bis
+ * ~320 px (dieselben flexiblen Zeilen wie sonst).
+ */
+.einkauf-liste--im-laden .lp-abhakliste {
+    gap: var(--lp-abstand);
+}
+
+.einkauf-liste--im-laden .lp-abhakzeile {
+    min-height: calc(var(--lp-tippziel) * 1.4);
+    padding: var(--lp-abstand);
+    font-size: 1.15rem;
+}
+
+.einkauf-liste--im-laden .lp-abhakzeile__haken {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+/*
  * US-187 (UX-Review V7): Der gemeinsame Zeilen-Baustein für abhakbare Listen. Die Einkaufsliste
  * (EinkaufSeite/US-82), der scoped Einkauf (EinkaufslisteSeite/US-76) und die Reise-Packliste
  * (ReisePacklisteSeite/US-104) teilen ihn — vorher hatte jeder Screen seine eigene Zeilenanatomie.
