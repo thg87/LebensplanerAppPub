@@ -293,11 +293,17 @@
  * bleibt zurückhaltend (Größe wie die übrigen Abschnittstitel, z. B. .rezept-detail__abschnitt h2):
  * Er ordnet die Kacheln ein, ohne mit der <h1> der Begrüßung zu konkurrieren.
  */
-.lp-modulabschnitt {
+ * US-246: Der Einstellungen-Abschnitt der Mehr-Seite (.lp-appabschnitt) teilt sich diese
+ * beiden Regeln — gleicher Rhythmus, gleiche Titelgröße. Zwei zeichengleiche Blöcke wären
+ * zwei Pflegestellen, die beim nächsten Rhythmus-Wechsel auseinanderliefen.
+ */
+.lp-modulabschnitt,
+.lp-appabschnitt {
     margin-top: var(--lp-abstand-gross);
 }
 
-.lp-modulabschnitt__titel {
+.lp-modulabschnitt__titel,
+.lp-appabschnitt__titel {
     font-size: 1.05rem;
     margin: 0 0 var(--lp-abstand-klein);
 }
@@ -363,4 +369,26 @@
 .lp-modulkachel__kennzahl {
     color: var(--lp-text-leise);
     font-size: 0.85rem;
+}
+
+/*
+ * US-246 (ADR 0030, Festlegung 3): der Einstellungen-Eintrag auf der Mehr-Seite. Er steht
+ * dort ZUSÄTZLICH zum Avatar-Einstieg auf `/` — und sichtbar abgesetzt von der Modulliste,
+ * denn Einstellungen ist kein Modul. Die Absetzung ist die Trennlinie plus der eigene
+ * Abschnittstitel; die Zeile selbst erbt die ruhige Optik der Aktionsliste (.lp-aktion,
+ * grundlage.css, US-60) statt der Kachel-Optik darüber. Nur Tokens, keine neuen Farbwerte
+ * (ADR 0014).
+ *
+ * Abstand und Titelgröße teilt sich der Abschnitt mit .lp-modulabschnitt (siehe oben) — hier
+ * steht nur, was ihn davon UNTERSCHEIDET: die Trennlinie, die die Absetzung trägt.
+ */
+.lp-appabschnitt {
+    padding-top: var(--lp-abstand);
+    border-top: 1px solid var(--lp-trennlinie);
+}
+
+/* .lp-aktion ist für Knöpfe gebaut (US-60); als Link erbt die Zeile sonst die
+   Standard-Unterstreichung des Browsers. */
+.lp-appabschnitt__eintrag {
+    text-decoration: none;
 }
