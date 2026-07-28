@@ -1979,9 +1979,9 @@ a {
     color: var(--lp-akzent);
 }
 
-/* US-78: Die primäre(n) Detail-Aktion(en) — heute „Zum Wochenplan", später zusätzlich
-   „Einkaufsliste erstellen" (US-84). Knöpfe stehen nebeneinander und brechen auf
-   schmalen Geräten um. */
+/* US-78: Die primäre(n) Detail-Aktion(en) — „Zum Wochenplan" und die leise Zweitaktion
+   „Zutaten für dieses Rezept" (US-84; bis US-225 „Einkaufsliste erstellen"). Knöpfe stehen
+   nebeneinander und brechen auf schmalen Geräten um. */
 .rezept-detail__aktionen {
     display: flex;
     flex-wrap: wrap;
@@ -2528,6 +2528,31 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/*
+ * US-225: Die Absprung-Zeile der scoped Zutaten-Ansicht (/einkaufsliste) direkt unter dem
+ * Seitenkopf — sie sagt, dass diese Ansicht ein Auszug ist, und führt zur gemeinsamen
+ * Einkaufsliste (/einkauf). Bewusst eine leise Textzeile statt eines Knopfs: Der Absprung
+ * ist ein Hinweis, keine Primäraktion des Screens; er darf das Abhaken nicht überstrahlen.
+ * Keine neuen Farbwerte (ADR 0014) — leiser Text plus die vorhandene Akzent-Linkfarbe.
+ */
+.einkauf-absprung {
+    margin: calc(-1 * var(--lp-abstand-klein)) 0 var(--lp-abstand);
+    color: var(--lp-text-leise);
+    font-size: 0.9rem;
+}
+
+/* Der Link trägt das volle Tippziel (--lp-tippziel, „kein Richtwert zum Unterschreiten"): Diesen
+   Screen hält man beim Kochen und im Laden in der Hand, mit einer Hand und in Bewegung. Ein
+   Textlink in Fließtexthöhe wäre hier zu klein. Der obere Rand nimmt zurück, was die Mindesthöhe
+   an Luft über der Textzeile hinzufügt, damit die Zeile optisch nicht auseinanderfällt. */
+.einkauf-absprung__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--lp-tippziel);
+    margin-top: -8px;
+    font-weight: 600;
 }
 
 /*
