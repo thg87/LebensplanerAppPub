@@ -288,6 +288,21 @@
 }
 
 /*
+ * US-215: Die Kachelreihe ist ein benannter Abschnitt („Module") — sie ist der vollständige
+ * Einstieg in alle Module, nicht nur eine Anhäufung von Links unter der Begrüßung. Der Titel
+ * bleibt zurückhaltend (Größe wie die übrigen Abschnittstitel, z. B. .rezept-detail__abschnitt h2):
+ * Er ordnet die Kacheln ein, ohne mit der <h1> der Begrüßung zu konkurrieren.
+ */
+.lp-modulabschnitt {
+    margin-top: var(--lp-abstand-gross);
+}
+
+.lp-modulabschnitt__titel {
+    font-size: 1.05rem;
+    margin: 0 0 var(--lp-abstand-klein);
+}
+
+/*
  * Modul-Kacheln der Startseite (US-123, ADR 0020): je Modul ein Einstieg mit kompakter
  * Kennzahl (Score-Ring). Der Ring selbst ist ein Core-Baustein (lp-score-ring--klein,
  * grundlage.css) — hier steht nur das Kachel-Layout drumherum. Trägt bis ~320 px, weil
