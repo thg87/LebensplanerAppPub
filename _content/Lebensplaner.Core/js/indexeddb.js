@@ -97,7 +97,10 @@ function anwenden(db, transaktion, aktion, fertig) {
             break;
 
         case 'feldVorgabeSetzen':
-            vorgabeSetzen(transaktion.objectStore(aktion.store), aktion, fertig);
+            // Die TRANSAKTION wird durchgereicht, nicht der Store: `vorgabeSetzen` muss
+            // abbrechen können (siehe dort). Vorher bekam es nur den Store — und konnte
+            // es deshalb nicht.
+            vorgabeSetzen(transaktion, aktion, fertig);
             break;
 
         case 'kennungsformVereinheitlichen':
@@ -109,8 +112,13 @@ function anwenden(db, transaktion, aktion, fertig) {
     }
 }
 
-function vorgabeSetzen(store, aktion, fertig) {
-    const anfrage = store.openCursor();
+// Schreibt in jedem Datensatz eines Stores ein fehlendes Feld mit seiner Vorgabe
+// nach (Migrationen 2/4/6/13/14/15/19/20/24). Nimmt die TRANSAKTION, nicht den
+// Store — genau wie `kennungsformVereinheitlichen` darunter, und aus demselben
+// Grund: Ohne sie kann diese Funktion nicht abbrechen. Sie holt sich den Store
+// deshalb selbst.
+function vorgabeSetzen(transaktion, aktion, fertig) {
+    const anfrage = transaktion.objectStore(aktion.store).openCursor();
 
     anfrage.onsuccess = (e) => {
         const cursor = e.target.result;
@@ -119,15 +127,33 @@ function vorgabeSetzen(store, aktion, fertig) {
             return;
         }
 
-        // Nur dort setzen, wo das Feld fehlt — ein bestehender Wert des Nutzers
-        // wird nie überschrieben.
-        if (cursor.value[aktion.feld] === undefined) {
-            // Erst weiterlaufen, wenn das Update durch ist: Sonst stünde der
-            // nächste Snapshot wieder vor derselben Wettlaufsituation.
-            cursor.update({ ...cursor.value, [aktion.feld]: aktion.wert }).onsuccess =
-                () => cursor.continue();
-        } else {
-            cursor.continue();
+        // Unverzichtbar, und bis US-252 fehlte es hier: cursor.value (die
+        // Deserialisierung des gespeicherten Werts) und cursor.update() werfen
+        // SYNCHRON — update() etwa mit DataError, wenn der zusammengebaute Datensatz
+        // nicht klonbar ist oder den Schlüsselpfad verliert. Ohne dieses abort()
+        // liefe die versionchange-Transaktion trotz der Exception weiter und
+        // committete, was schon in ihr steht: einen Teil der Datensätze mit dem
+        // neuen Feld, den Rest ohne — auf einem Gerät ohne Backup (ADR 0003), und
+        // mit erhöhter Datenbankversion, sodass die Migration nie wieder läuft.
+        // Genau dieser Fehler saß in diesem Projekt schon zweimal (siehe
+        // `kennungsformVereinheitlichen` und `ersetzenAlles`); CLAUDE.md formuliert
+        // die Regel für JEDE Schleife, die Anfragen in eine Transaktion stellt,
+        // ohne Ausnahme. Der Grund, warum der Wächter hier fehlte, war mechanisch:
+        // Die Funktion bekam nur den Store übergeben und KONNTE nicht abbrechen.
+        try {
+            // Nur dort setzen, wo das Feld fehlt — ein bestehender Wert des Nutzers
+            // wird nie überschrieben.
+            if (cursor.value[aktion.feld] === undefined) {
+                // Erst weiterlaufen, wenn das Update durch ist: Sonst stünde der
+                // nächste Snapshot wieder vor derselben Wettlaufsituation.
+                cursor.update({ ...cursor.value, [aktion.feld]: aktion.wert }).onsuccess =
+                    () => cursor.continue();
+            } else {
+                cursor.continue();
+            }
+        } catch (fehler) {
+            transaktion.abort();
+            throw fehler;
         }
     };
 }
