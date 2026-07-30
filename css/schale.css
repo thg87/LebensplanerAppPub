@@ -292,10 +292,16 @@
  * Einstieg in alle Module, nicht nur eine Anhäufung von Links unter der Begrüßung. Der Titel
  * bleibt zurückhaltend (Größe wie die übrigen Abschnittstitel, z. B. .rezept-detail__abschnitt h2):
  * Er ordnet die Kacheln ein, ohne mit der <h1> der Begrüßung zu konkurrieren.
- */
+ *
  * US-246: Der Einstellungen-Abschnitt der Mehr-Seite (.lp-appabschnitt) teilt sich diese
  * beiden Regeln — gleicher Rhythmus, gleiche Titelgröße. Zwei zeichengleiche Blöcke wären
  * zwei Pflegestellen, die beim nächsten Rhythmus-Wechsel auseinanderliefen.
+ *
+ * US-227: Diese Zeile war der Fund des Design-Sync-Abgleichs. US-246 hatte den Kommentar
+ * darüber mit `*/` geschlossen und hier ohne `/*` weitergeschrieben — CSS liest den Rest
+ * dann als Selektor-Anfang und verwirft die GANZE folgende Regel samt beider Klassen. Der
+ * Abschnittsabstand fehlte damit auf `/` und auf `/mehr` gleichzeitig, unbemerkt: Ein
+ * kaputter Kommentar bricht keinen Build und keinen Test — nur den Browser.
  */
 .lp-modulabschnitt,
 .lp-appabschnitt {
