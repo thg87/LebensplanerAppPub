@@ -2807,6 +2807,39 @@ a {
     font-size: 0.85rem;
 }
 
+/* US-237: Serie, Meilenstein und persönlicher Rekord einer Gewohnheit. Eine eigene, volle Zeile
+   INNERHALB der Abhak-Zeile (flex-basis: 100%) statt eines weiteren Geschwisters neben Name und
+   Stift: Als gewöhnliches Flex-Kind rutschte der Text auf schmalen Screens unvorhersehbar zwischen
+   Name und Aktion, und die Zeilengeometrie hinge an der Textlänge. So steht er bei JEDER Breite
+   unter der Bedienzeile — dieselbe Anatomie wie der Abzeichen-Streifen unter dem Serien-Titel der
+   Haushalt-Karte, nur eine Ebene tiefer. Gedämpft und klein wie .lp-abhakzeile__herkunft; sie
+   umbricht selbst, damit Serientext, Abzeichen und Rekord bis ~320 px ohne Überlauf tragen
+   (CLAUDE.md: kein Gedränge). Kein neuer Farbwert, kein neues Maß (ADR 0014). */
+.lp-abhakzeile__serie {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    color: var(--lp-text-leise);
+    font-size: 0.85rem;
+}
+
+/* Die Abzeichen-Pille aus US-150 steht hier IN einer Zeile statt unter einem Kartentitel — ihr
+   Abstand nach oben käme sonst als 6px-Versatz mitten in der Zeile an. Nur der Abstand wird
+   zurückgenommen, Aussehen und Semantik der Pille bleiben die gemeinsamen. */
+.lp-abhakzeile__serie .lp-abzeichen {
+    margin: 0;
+}
+
+/* Der persönliche Rekord „Beste Serie" (US-237, Muster US-151/.lp-serie__rekord): etwas kräftiger
+   als der gedämpfte Text daneben, damit die Zahl trotz Muted-Ton nicht untergeht. KEIN eigener
+   Abstand nach oben — anders als im Haushalt ist er hier ein Wort in einer Zeile und kein Absatz
+   unter einer Karte. */
+.lp-abhakzeile__rekord {
+    font-weight: 600;
+}
+
 /* Abgehakt/gepackt: Name und statische Menge durchgestrichen und gedämpft — dieselbe Optik auf
    allen abhakbaren Listen (US-187, AC/V7). Ein editierbares Mengenfeld (Packliste) wird nur
    gedämpft, nicht durchgestrichen (siehe .packliste-menge__feld) — ein Strich durch ein
