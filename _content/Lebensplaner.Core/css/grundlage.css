@@ -2984,6 +2984,51 @@ a {
     border-style: dashed;
 }
 
+/*
+ * US-241: der Archiv-Abschnitt auf dem Screen „Heute" — der eine sichtbare Weg zu den
+ * archivierten Gewohnheiten (AK5). Er steht UNTER der Abhak-Liste und muss sich von ihr
+ * absetzen, ohne wie ein zweiter Screen zu wirken: Abstand und eine leise Überschrift, kein
+ * eigener Rahmen (Tiefe durch Schichtung, nicht durch Rahmen — CLAUDE.md). Dieselbe
+ * Überschriften-Optik wie .einkauf-gruppe__titel; kein zweites Aussehen für dieselbe Sache.
+ */
+.lp-archiv {
+    margin-top: var(--lp-abstand-gross);
+}
+
+/* Die Überschrift-Optik steht bei `.einkauf-gruppe__titel` weiter unten — als SELEKTORLISTE und
+   nicht als Kopie: Sechs deklarationsgleiche Zeilen 60 Zeilen entfernt wären genau das zweite
+   Aussehen für dieselbe Sache, das der Kommentar oben ausschließt. */
+
+/* Die Zeile trägt Badge und Link nebeneinander (Muster .raum-zeile). Sie hat GENAU EIN
+   Tippziel — den Link; das Badge ist dekorativ (aria-hidden). */
+.lp-archivzeile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Der Link füllt die Zeile, damit das 44-px-Tippziel (CLAUDE.md) die ganze Breite hat und nicht
+   nur die Textbreite. min-width:0 lässt den Namen bei Bedarf abschneiden, statt die Zeile auf
+   320 px zu sprengen (derselbe Grund wie bei .raum-zeile .raum__name). */
+.lp-archivzeile__name {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: var(--lp-tippziel);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.lp-archivzeile__name strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /* Abgehakt/gepackt: Name und statische Menge durchgestrichen und gedämpft — dieselbe Optik auf
    allen abhakbaren Listen (US-187, AC/V7). Ein editierbares Mengenfeld (Packliste) wird nur
    gedämpft, nicht durchgestrichen (siehe .packliste-menge__feld) — ein Strich durch ein
@@ -3004,7 +3049,11 @@ a {
     margin-top: var(--lp-abstand);
 }
 
-.einkauf-gruppe__titel {
+/* US-241: `.lp-archiv__titel` steht in derselben Regel und nicht in einer eigenen — es ist
+   dieselbe Sache (eine leise Abschnitts-Überschrift), und zwei deklarationsgleiche Blöcke laufen
+   bei der ersten Änderung auseinander. */
+.einkauf-gruppe__titel,
+.lp-archiv__titel {
     margin: 0 0 var(--lp-abstand-klein);
     font-size: 0.85rem;
     font-weight: 600;
