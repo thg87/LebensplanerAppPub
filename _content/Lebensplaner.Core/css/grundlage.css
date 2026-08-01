@@ -3065,7 +3065,15 @@ a {
  * eigener Rahmen (Tiefe durch Schichtung, nicht durch Rahmen — CLAUDE.md). Dieselbe
  * Überschriften-Optik wie .einkauf-gruppe__titel; kein zweites Aussehen für dieselbe Sache.
  */
-.lp-archiv {
+/*
+ * US-250: derselbe Abschnitt-Baustein für die PAUSIERTEN Gewohnheiten, die über dem Archiv stehen.
+ * Als SELEKTORLISTE und nicht als Kopie — wörtlich das Muster, mit dem `.lp-archiv__titel` weiter
+ * unten an `.einkauf-gruppe__titel` hängt: gleiche Optik, zwei Abschnitte, EIN Regelsatz. Die
+ * beiden Namen bezeichnen deshalb keine zwei Aussehen, sondern zwei Stellen — und ein Test kann
+ * jede für sich greifen, ohne die andere mitzunehmen.
+ */
+.lp-archiv,
+.lp-pausenabschnitt {
     margin-top: var(--lp-abstand-gross);
 }
 
@@ -3075,7 +3083,8 @@ a {
 
 /* Die Zeile trägt Badge und Link nebeneinander (Muster .raum-zeile). Sie hat GENAU EIN
    Tippziel — den Link; das Badge ist dekorativ (aria-hidden). */
-.lp-archivzeile {
+.lp-archivzeile,
+.lp-pausenzeile {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -3084,7 +3093,8 @@ a {
 /* Der Link füllt die Zeile, damit das 44-px-Tippziel (CLAUDE.md) die ganze Breite hat und nicht
    nur die Textbreite. min-width:0 lässt den Namen bei Bedarf abschneiden, statt die Zeile auf
    320 px zu sprengen (derselbe Grund wie bei .raum-zeile .raum__name). */
-.lp-archivzeile__name {
+.lp-archivzeile__name,
+.lp-pausenzeile__name {
     flex: 1 1 auto;
     min-width: 0;
     min-height: var(--lp-tippziel);
@@ -3097,7 +3107,8 @@ a {
     text-decoration: none;
 }
 
-.lp-archivzeile__name strong {
+.lp-archivzeile__name strong,
+.lp-pausenzeile__name strong {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -3127,7 +3138,8 @@ a {
    dieselbe Sache (eine leise Abschnitts-Überschrift), und zwei deklarationsgleiche Blöcke laufen
    bei der ersten Änderung auseinander. */
 .einkauf-gruppe__titel,
-.lp-archiv__titel {
+.lp-archiv__titel,
+.lp-pausenabschnitt__titel {
     margin: 0 0 var(--lp-abstand-klein);
     font-size: 0.85rem;
     font-weight: 600;
