@@ -20,22 +20,77 @@
 // Wie indexeddb.js, datei.js, installation.js und aktualisierung.js erreicht
 // diese Datei kein Unit-Test. Geprüft wird von Hand im Browser (Schwellen,
 // Zurückfedern, Scroll-Zusammenspiel) und am Ende auf dem iPhone (F-16, US-26).
+//
+// US-244 hat einen ZWEITEN Aufrufer gebracht (die Abhak-Zeile der Routinen) und
+// dafür GENAU EINE Zustandsmaschine gelassen: `starten` unten. Verschieden sind
+// nur zwei Dinge — die STUFEN (wie weit wofür) und WOHIN gemeldet wird. Beides
+// steht als Parameter, alles andere (Richtungssperre, Randausschluss, Maus-
+// Ausschluss, Zurückfedern, Aufräumen) teilen sich beide Aufrufer. Eine zweite
+// Datei mit einer zweiten Kopie dieser Logik wäre die Sorte Verdopplung, die
+// beim ersten Nachbessern auseinanderläuft — und geprüft werden kann sie nur im
+// Browser, also fiele das niemandem auf.
 
 const SCHWELLE_MORGEN = 72;
 const SCHWELLE_ERLEDIGT = 144;
 const SPERRE_RICHTUNG = 10;
 const RAND_AUSSCHLUSS = 24;
 
+// Die zweistufige Dashboard-Karte (US-25): weit = erledigt, halb weit = morgen.
+// Absteigend sortiert — `starten` nimmt die erste Stufe, die der Versatz erreicht.
+const STUFEN_KARTE = [
+    { ab: SCHWELLE_ERLEDIGT, aktion: 'erledigt' },
+    { ab: SCHWELLE_MORGEN, aktion: 'morgen' },
+];
+
+// Die einstufige Abhak-Zeile (US-244): NUR erledigt, und zwar bei DERSELBEN
+// Weite wie auf der Karte. Das ist die Zusage aus dem Akzeptanzkriterium — eine
+// Geste, nicht zwei: gleiche Richtung, gleiche Strecke, gleiche Wirkung. Unter
+// SCHWELLE_MORGEN bis SCHWELLE_ERLEDIGT passiert hier bewusst NICHTS; dass das
+// kein Defekt ist, sieht man daran, dass auch nichts aufleuchtet (dieselbe
+// Regel wie auf der Karte: sichtbar wird eine Stufe erst, wenn sie greift).
+const STUFEN_ZEILE = [
+    { ab: SCHWELLE_ERLEDIGT, aktion: 'erledigt' },
+];
+
 const gemerkteListener = new WeakMap();
 
+/**
+ * Die zweistufige Dashboard-Karte (US-25/US-36): meldet `Ausgeloest(aktion)` an
+ * die Komponente, die genau EINE Karte vertritt.
+ */
 export function aktivieren(karte, dotNetRef) {
+    starten(karte, STUFEN_KARTE, aktion => dotNetRef.invokeMethodAsync('Ausgeloest', aktion));
+}
+
+/**
+ * Die einstufige Abhak-Zeile (US-244): meldet `Ausgeloest(aktion, kennung)`.
+ *
+ * Die KENNUNG ist der Unterschied zur Karte und kein Beiwerk: Dort vertritt der
+ * .NET-Verweis genau eine Karte, hier vertritt EIN Verweis (der Screen) ALLE
+ * Zeilen. Ohne sie käme am Screen zwar „erledigt" an, aber nicht, WELCHE Zeile
+ * gewischt wurde — und er hakte die erstbeste ab. Sie wird beim Aktivieren
+ * festgelegt und ist damit an dasselbe Element gebunden wie die Listener.
+ */
+export function aktivierenNurErledigt(zeile, dotNetRef, kennung) {
+    starten(zeile, STUFEN_ZEILE, aktion => dotNetRef.invokeMethodAsync('Ausgeloest', aktion, kennung));
+}
+
+function starten(karte, stufen, melden) {
     const zustand = { phase: 'ruhe', startX: 0, startY: 0, pointerId: null, versatz: 0 };
+
+    // Aus 'erledigt' wird 'wisch--erledigt': Der Klassenname folgt der Aktion,
+    // damit „welche Stufe greift" und „was sieht man" nicht zwei Listen sind.
+    const klassen = stufen.map(stufe => `wisch--${stufe.aktion}`);
+
+    // Welche Stufe bei diesem Versatz greift — oder `undefined`. Die Stufen sind
+    // absteigend geordnet, also gewinnt die weiteste erreichte.
+    const stufeFuer = betrag => stufen.find(stufe => betrag >= stufe.ab);
 
     const zuruecksetzen = () => {
         zustand.phase = 'ruhe';
         zustand.pointerId = null;
         zustand.versatz = 0;
-        karte.classList.remove('wisch--zieht', 'wisch--morgen', 'wisch--erledigt');
+        karte.classList.remove('wisch--zieht', ...klassen);
         karte.style.removeProperty('--wisch-versatz');
     };
 
@@ -97,9 +152,8 @@ export function aktivieren(karte, dotNetRef) {
         zustand.versatz = Math.min(0, dx); // nur nach links, nie darüber hinaus nach rechts
         karte.style.setProperty('--wisch-versatz', `${zustand.versatz}px`);
 
-        const betrag = Math.abs(zustand.versatz);
-        karte.classList.toggle('wisch--morgen', betrag >= SCHWELLE_MORGEN && betrag < SCHWELLE_ERLEDIGT);
-        karte.classList.toggle('wisch--erledigt', betrag >= SCHWELLE_ERLEDIGT);
+        const erreicht = stufeFuer(Math.abs(zustand.versatz));
+        stufen.forEach((stufe, i) => karte.classList.toggle(klassen[i], stufe === erreicht));
     };
 
     const aufPointerEnde = (ev) => {
@@ -123,10 +177,10 @@ export function aktivieren(karte, dotNetRef) {
             return;
         }
 
-        if (betrag >= SCHWELLE_ERLEDIGT) {
-            dotNetRef.invokeMethodAsync('Ausgeloest', 'erledigt');
-        } else if (betrag >= SCHWELLE_MORGEN) {
-            dotNetRef.invokeMethodAsync('Ausgeloest', 'morgen');
+        const erreicht = stufeFuer(betrag);
+
+        if (erreicht) {
+            melden(erreicht.aktion);
         }
         // Unter der ersten Schwelle: nichts. Die Karte ist schon zurückgefedert.
     };

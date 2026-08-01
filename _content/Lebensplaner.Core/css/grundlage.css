@@ -2913,6 +2913,84 @@ a {
     font-weight: 600;
 }
 
+/* US-244: die Wischgeste an der Abhak-Zeile — nach links wischen hakt ab.
+   OPT-IN über einen Modifier und NICHT an `.lp-abhakzeile` selbst: Der Baustein
+   gehört auch EinkaufSeite, EinkaufslisteSeite und ReisePacklisteSeite, und dort
+   hängt an einer Wischgeste keine Wirkung. Dieselbe Abwägung wie bei
+   `.lp-abhakzeile__fortschritt` (US-251) und `.lp-schnellfilter__chip--kurz`
+   (US-242): Die Regel kommt dorthin, wo sie gebraucht wird, nicht in die Basis.
+
+   DIE ZEILE SELBST GLEITET, nicht ein Vordergrund darin — und das ist der eine
+   Unterschied zur Karte aus US-25, der hier gesagt gehört. Dort ist der äußere
+   `<li>` nur Bühne, `.wisch__vordergrund` gleitet darüber und gibt einen
+   beschrifteten Hintergrund („Erledigt") frei. Diese Zeile ist selbst der
+   Flex-Container, dessen Kinder — Häkchen, Badge, Name, Stift und die beiden
+   Unterzeilen mit `flex-basis: 100%` — DIREKTE Kinder sein müssen; ein
+   Vordergrund-Wrapper dazwischen legte die Flex-Ebene eine Stufe tiefer und
+   machte die auf 320 px gemessene Zeilengeometrie (US-233/237/251/253)
+   hinfällig. Also gleitet die Zeile, und was passieren wird, sagt ihre EIGENE
+   Fläche.
+
+   GENAUER GESAGT: Unmöglich ist ein beschrifteter Hintergrund damit NICHT, und
+   diese Einschränkung gehört dazu (Befund aus dem Review). Ausgeschlossen ist
+   nur ein weiteres FLEX-KIND. Ein `::after` mit `position: absolute` wäre kein
+   Flex-Item und ließe die Geometrie unberührt — der `transform` unten macht die
+   Zeile ohnehin zum Bezugsrahmen dafür. Es ist also eine Entscheidung für die
+   knappere Form und nicht der einzige Weg: Auf diesem Screen hat die Geste GENAU
+   EINE Wirkung, der Erfolgston sagt sie eindeutig, und ein Wort, das unter der
+   Zeile hervorwandert, wäre auf 320 px neben Häkchen, Badge, Name und Stift mehr
+   Gedränge als Auskunft (CLAUDE.md: wenige Elemente pro Screen). Die Karte im
+   Haushalt braucht es, weil sie ZWEI Wirkungen unterscheiden muss.
+
+   KEINE GEOMETRIE-ÄNDERUNG, und das ist der Punkt: `transform` wirkt erst beim
+   Malen, `background` und `border-color` fassen keine Box an. Die Zeile bleibt
+   bei jeder Breite so hoch und so breit wie ohne diese Regeln. Was der
+   `transform` sehr wohl ändert: Die Zeile wird zum Bezugsrahmen für absolut
+   positionierte Nachfahren — genau das, was `.lp-anim-wirt` der Animationsschicht
+   ohnehin für die Dauer der Rückmeldung gibt. Sie bleibt damit auf der Zeile
+   liegen, nicht auf einem äußeren Element.
+
+   `touch-action: pan-y` überlässt senkrechtes Scrollen dem Browser; waagerecht
+   übernimmt gesten.js — wörtlich wie bei `.wisch`. Ohne diese Zeile ruckelte das
+   Scrollen der Liste, sobald ein Finger auf einer Zeile aufsetzt.
+
+   OFFENER BEFUND, ungemessen und deshalb nicht geändert: `pan-y` nimmt neben dem
+   waagerechten Wischen AUCH Pinch- und Doppeltipp-Zoom. Auf der Haushalt-Karte
+   betrifft das ein paar Kacheln; hier tragen es ALLE Zeilen, also praktisch die
+   ganze Inhaltsfläche — wer vergrößern will, findet kaum eine Fläche, auf der die
+   Pinch-Geste anfängt. Die engere Fassung wäre `pan-y pinch-zoom`. Sie steht hier
+   NICHT, weil niemand gemessen hat, ob iOS Safari damit die Wischgeste noch
+   sauber durchlässt — und eine ungemessene Änderung an der Geste wäre genau die
+   Sorte Blindflug, die dieses Modul sonst vermeidet. Wer es misst, ändert es
+   hier und prüft dann BEIDES: Zoom und Wisch, auf dem Gerät. */
+.lp-abhakzeile--wischbar {
+    touch-action: pan-y;
+    transform: translateX(var(--wisch-versatz, 0px));
+}
+
+/* Zurückfedern nur, wenn gerade nicht gezogen wird — während der Geste bestimmt
+   der Finger die Position, keine Transition soll hinterherhinken (wie .wisch). */
+.lp-abhakzeile--wischbar:not(.wisch--zieht) {
+    transition: transform 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lp-abhakzeile--wischbar:not(.wisch--zieht) {
+        transition: none;
+    }
+}
+
+/* Ab der Schwelle: Loslassen hakt ab. Erst HIER wird etwas sichtbar — dieselbe
+   Regel wie bei `.wisch__hintergrund` („sonst wäre Ziehen Glücksspiel"): Wer
+   nicht weit genug gezogen hat, sieht nichts und es passiert auch nichts.
+   Erfolgston aus dem Bestand, per color-mix zu einer leisen Fläche gemischt —
+   kein neuer Farbwert (ADR 0014). Die Randfarbe trägt die Aussage mit, damit sie
+   nicht allein an der Fläche hängt (Muster .lp-erfolg: nie nur eine Farbe). */
+.lp-abhakzeile--wischbar.wisch--erledigt {
+    background: color-mix(in oklch, var(--lp-erfolg-text) 22%, transparent);
+    border-color: color-mix(in oklch, var(--lp-erfolg-text) 60%, var(--lp-trennlinie));
+}
+
 /*
  * US-238: die Detailansicht einer Gewohnheit — Kennzahlkarte (Serie/Quote) und Tagesgitter.
  * Kein neuer Farbwert und kein neues Maß (ADR 0014): Akzent, Fehlerton, Trennlinie, Fläche,
