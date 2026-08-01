@@ -699,6 +699,37 @@ a {
     font-weight: 600;
 }
 
+/* US-242: Dieselbe Chipreihe auch INNERHALB eines Formularfeldes (Rhythmus- und
+   Wochentagswahl im Gewohnheiten-Dialog). Dort trägt bereits .lp-feld den Abstand
+   nach unten — der eigene der Reihe stünde zusätzlich darin und risse ein Loch
+   zwischen die Felder. Nur der Abstand fällt weg; Umbruch, Lücke und Chip-Optik
+   (min-height 44px, aria-pressed) bleiben unverändert die von .lp-schnellfilter,
+   damit es nicht zwei Chipreihen mit einem Aussehen gibt. */
+.lp-feld > .lp-schnellfilter {
+    margin-bottom: 0;
+}
+
+/* US-242: Ein Chip mit SEHR KURZER Beschriftung — die Wochentagskürzel „Mo" … „So".
+   Der Basis-Chip hält nur die HÖHE bei 44px; seine Breite ist rein textgetrieben
+   (padding: 0 0.9rem um 0.9rem Text). Das trägt, solange die Beschriftung ein Wort
+   ist — bei zwei Buchstaben nicht mehr: Im Browser auf 320px gemessen fielen „Di"
+   (43,7px) und „Fr" (42,2px) UNTER das Tippziel, und im gedrückten Zustand
+   (font-weight 600) blieben sie darunter. Das ist die Hälfte des Tippziels, die
+   min-height allein nicht abdeckt.
+
+   ALS EIGENE KLASSE UND NICHT AM BASIS-CHIP: Eine Mindestbreite dort machte die
+   echten Schnellfilter (US-128 Tags, US-139 Favoriten) mit — deren Beschriftungen
+   sind lang genug, und sie würde fremdes Aussehen ändern, ohne dort ein Problem zu
+   lösen. Der Umbruch bleibt davon unberührt: 7 × 44 + 6 × 8 = 356px gegen 288px
+   Inhaltsbreite des Sheets, die Reihe bricht weiter auf 5 + 2.
+
+   justify-content, weil der Basis-Chip nur align-items setzt: Ohne das säße „Di" in
+   einer 44px breiten Fläche linksbündig und die Reihe wirkte unruhig. */
+.lp-schnellfilter__chip--kurz {
+    min-width: var(--lp-tippziel);
+    justify-content: center;
+}
+
 /* US-129: Die Sammel-Aktion über der gefilterten Liste. Steht abgesetzt zwischen
    Filterleiste und Liste; auf Handybreite trägt der Knopf die volle Zeilenbreite. */
 .lp-sammelaktion {
