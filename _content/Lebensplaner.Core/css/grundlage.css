@@ -2840,6 +2840,150 @@ a {
     font-weight: 600;
 }
 
+/*
+ * US-238: die Detailansicht einer Gewohnheit — Kennzahlkarte (Serie/Quote) und Tagesgitter.
+ * Kein neuer Farbwert und kein neues Maß (ADR 0014): Akzent, Fehlerton, Trennlinie, Fläche,
+ * Abstände und Radien sind Bestand; die Zustandsfarben entstehen per color-mix daraus, genau
+ * wie beim Raum-Badge aus US-51.
+ */
+/* Die Kennzahlkarte selbst trägt nur den Abstand zwischen den Karten — Fläche, Rand und Radius
+   kommen von `.lp-karte`. Sie hat trotzdem eine eigene Regel: Eine Klasse im Markup, zu der es
+   KEINEN Selektor gibt, ist eine Behauptung, die niemand einlöst (im Browser gegen die geladenen
+   Stylesheets nachgesehen — es gab sie zuerst wirklich nicht). */
+.lp-kennzahlkarte {
+    margin-bottom: var(--lp-abstand);
+}
+
+.lp-kennzahlkarte__titel {
+    margin: 0 0 var(--lp-abstand-klein);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--lp-text-leise);
+}
+
+.lp-kennzahlkarte__wert {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.lp-kennzahlkarte__rekord,
+.lp-kennzahlkarte__fortschritt {
+    margin: var(--lp-abstand-klein) 0 0;
+    font-weight: 600;
+}
+
+/* AK6 wörtlich: die Quote steht NEBEN dem Gitter. Ein umbrechender Flex statt zweier Karten —
+   auf dem Handy stehen beide Spalten untereinander, ab ~2 × 260 px nebeneinander. `min-width: 0`
+   lässt die Spalte schrumpfen, statt die Karte auf schmalen Screens zu sprengen. */
+.lp-verlauf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--lp-abstand-gross);
+}
+
+.lp-verlauf__spalte {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+/* Das Tagesgitter (AK1): ein Punktraster, keine Kurve. Die Felder haben eine FESTE Größe und
+   brechen um — nicht schrumpfen (AK8): 30 × (22 + 6) px passen auf ~320 px in drei Reihen und
+   bleiben dabei erkennbar; ein `flex: 1` ließe sie auf Handybreite zu Strichen zusammenlaufen. */
+.lp-tagesgitter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--lp-abstand-klein);
+}
+
+/* Ein Block ohne eigene Periodengrenze verschwindet aus dem Layout: Bei einer täglichen
+   Gewohnheit fallen Periode und Tag zusammen (AK3), und dreißig Rähmchen um je ein Feld wären
+   Gedränge ohne Aussage. `display: contents` lässt die Felder direkt im Raster oben fließen. */
+.lp-tagesgitter__block {
+    display: contents;
+}
+
+/* Erst eine Periode über mehr als einen Tag bekommt einen sichtbaren Rahmen (AK2) — sie ist die
+   Einheit, die bewertet wird. Sichtbar wird das mit US-251; gebaut und getestet ist es hier. */
+.lp-tagesgitter__block--periode {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px;
+    border: 1px solid var(--lp-trennlinie);
+    /* 8px wie am `.lp-raum-badge--klein` — bewusst KEIN vierter Radius-Rohwert neben
+       --lp-radius (14) und --lp-radius-gross (20); der fiele beim Design-Sync (US-245) als
+       Abweichung auf, ohne etwas zu bedeuten. */
+    border-radius: 8px;
+}
+
+.lp-tagesgitter__block--erfuellt {
+    border-color: color-mix(in oklch, var(--lp-akzent) 45%, var(--lp-trennlinie));
+}
+
+.lp-tagesgitter__block--verfehlt {
+    border-color: color-mix(in oklch, var(--lp-fehler-rand) 45%, var(--lp-trennlinie));
+}
+
+/* „läuft noch" und „pausiert" bleiben bewusst ungefärbt: Die laufende Periode ist nie ein
+   Fehlschlag (D-17a), und eine pausierte zählt weder so noch so (D-7b). Beide Klassen stehen
+   trotzdem im Markup — sie sind der Haken, an dem US-250/US-251 eine eigene Optik aufhängen
+   können, ohne das Markup zu ändern. */
+
+.lp-tagesgitter__tag {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--lp-flaeche);
+    border: 1px solid var(--lp-trennlinie);
+}
+
+/* Das „ja" des Gitters. */
+.lp-tagesgitter__tag--erledigt {
+    background: color-mix(in oklch, var(--lp-akzent) 55%, transparent);
+    border-color: var(--lp-akzent);
+}
+
+/* Das „nein" — und NUR abgeschlossene, verfehlte Perioden kommen hierher (D-17a). Leere Tage in
+   einer erfüllten Periode sind neutral, nicht rot (AK2).
+
+   DIE DIAGONALE IST NICHT ZIERDE, SONDERN DER ZWEITE UNTERSCHEIDUNGSWEG — und sie steht hier,
+   weil die Farbe allein nachweislich nicht trägt. Gemessen (Canvas → sRGB → relative Luminanz):
+   verfehlt gegen neutral **1,82 : 1**, erledigt gegen verfehlt 2,45 : 1, erledigt gegen neutral
+   4,45 : 1. Ausgerechnet das schlechteste Paar ist die KERNAUSSAGE von AK2 („leere Tage in einer
+   erfüllten Periode sind neutral, NICHT rot") — wer Rot und Grau nicht sicher trennt, sah den
+   Unterschied nicht, für den die Regel gebaut ist. `nichterfasst` trug schon ein eigenes Merkmal
+   (gestrichelt, ohne Fläche), diese drei nicht.
+
+   Der Strich läuft von unten links nach oben rechts und ist ~3px breit; er benutzt den
+   vorhandenen --lp-fehler-text und damit KEINEN neuen Farbwert (ADR 0014). */
+.lp-tagesgitter__tag--verfehlt {
+    background-color: color-mix(in oklch, var(--lp-fehler-rand) 40%, transparent);
+    background-image: linear-gradient(
+        45deg,
+        transparent calc(50% - 1.5px),
+        var(--lp-fehler-text) calc(50% - 1.5px),
+        var(--lp-fehler-text) calc(50% + 1.5px),
+        transparent calc(50% + 1.5px));
+    border-color: color-mix(in oklch, var(--lp-fehler-rand) 60%, var(--lp-trennlinie));
+}
+
+.lp-tagesgitter__tag--neutral {
+    background: var(--lp-flaeche);
+}
+
+/* Der dritte Zustand neben ja und nein: vor `AngelegtAm` (oder kein geplanter Wochentag) — hier
+   wurde nichts erwartet und nichts versäumt. Gestrichelt und ohne Fläche, damit es sich auch ohne
+   Farbwahrnehmung von einem leeren Tag unterscheidet. */
+.lp-tagesgitter__tag--nichterfasst {
+    background: transparent;
+    border-style: dashed;
+}
+
 /* Abgehakt/gepackt: Name und statische Menge durchgestrichen und gedämpft — dieselbe Optik auf
    allen abhakbaren Listen (US-187, AC/V7). Ein editierbares Mengenfeld (Packliste) wird nur
    gedämpft, nicht durchgestrichen (siehe .packliste-menge__feld) — ein Strich durch ein
