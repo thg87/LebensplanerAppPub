@@ -2832,10 +2832,52 @@ a {
     cursor: pointer;
 }
 
-.lp-abhakzeile__herkunft {
-    flex: none;
+/* Die leise Kleinschrift der Zeile — zwei Angaben, EIN Aussehen: die Herkunft rechts in der
+   Bedienzeile (Einkauf/Essen: „aus Rezept …") und der Periodenfortschritt (Gewohnheiten, US-251).
+   Zusammen deklariert, damit „dieselbe leise Optik" eine Quelle hat und nicht driftet — dasselbe
+   Vorgehen wie bei `.lp-feld input, .rezept-zutat__menge, …`. Verschieden ist allein der FLUSS,
+   und der steht darunter je einzeln. */
+.lp-abhakzeile__herkunft,
+.lp-abhakzeile__fortschritt {
     color: var(--lp-text-leise);
     font-size: 0.85rem;
+}
+
+/* Die Herkunft bleibt starr in der Bedienzeile: Sie ist kurz, und der Name daneben darf
+   schrumpfen. */
+.lp-abhakzeile__herkunft {
+    flex: none;
+}
+
+/* US-251: Der Periodenfortschritt („2 von 3 diese Woche"). DIESELBE OPTIK wie die Herkunft und
+   ausdrücklich EINE EIGENE KLASSE — im Browser gemessen, nicht vermutet:
+
+   Bis US-251 stand der Fortschritt an `.lp-abhakzeile__herkunft` und erschien nie (v1 kannte nur
+   „täglich", Ziel 1). Sobald er wirklich rendert, ist er mit `flex: none` STARR und der Name das
+   einzige schrumpffähige Kind — auf 320 px fiel `.lp-abhakzeile__name` damit auf 17 px, brach
+   buchstabenweise um (Label 107 px hoch) und die Zeile wuchs von 134 px auf 176 px. Selbst ein
+   kurzer Name („Großeinkauf") bekam nur 51 px. Die Rangfolge war umgekehrt: die NEBENangabe starr,
+   die HAUPTangabe kollabiert.
+
+   `flex: 0 1 100%` gibt ihm stattdessen eine EIGENE ZEILE unter der Bedienzeile — wörtlich die
+   Anatomie von `.lp-abhakzeile__serie` (US-237), die aus genau diesem Grund entstanden ist („als
+   gewöhnliches Flex-Kind rutschte der Text unvorhersehbar zwischen Name und Aktion, und die
+   Zeilengeometrie hinge an der Textlänge"). Der Name behält damit die volle Breite der ersten
+   Zeile.
+
+   WARUM NICHT AN DER BASISKLASSE: `.lp-abhakzeile__herkunft` gehört auch EinkaufSeite und
+   EinkaufslisteSeite; dort ist `flex: none` richtig, und eine Änderung hätte fremdes Layout
+   umgestellt, ohne dort ein Problem zu lösen — dieselbe Abwägung wie bei
+   `.lp-schnellfilter__chip--kurz` (US-242). Die Optik steht deshalb oben im gemeinsamen Selektor,
+   der Fluss hier getrennt.
+
+   Gemessen nach der Korrektur (320 px): Name 150 px (langer Fall) bzw. 184 px (kurzer) statt 17
+   bzw. 51; Zeile 157 px (Extremfall) und 109 px (kurzer Name). Auf 1280 px nimmt sich der
+   Fortschritt EBENFALLS eine eigene Zeile (655 px) — Zeilen dort 115 px bzw. 109 px statt 92 px.
+   Das ist so gewollt: Eine breitenabhängige Umschaltung ließe die VORLESE-Reihenfolge mit der
+   Fensterbreite wandern, und die Serienzeile darunter verhält sich seit US-237 genauso. */
+.lp-abhakzeile__fortschritt {
+    flex: 0 1 100%;
 }
 
 /* US-237: Serie, Meilenstein und persönlicher Rekord einer Gewohnheit. Eine eigene, volle Zeile
@@ -2938,7 +2980,8 @@ a {
 }
 
 /* Erst eine Periode über mehr als einen Tag bekommt einen sichtbaren Rahmen (AK2) — sie ist die
-   Einheit, die bewertet wird. Sichtbar wird das mit US-251; gebaut und getestet ist es hier. */
+   Einheit, die bewertet wird. Gebaut und getestet mit US-238, SICHTBAR seit US-251: Vorher konnte
+   die Bedienoberfläche keine Gewohnheit mit einer Periode über einen Tag anlegen. */
 .lp-tagesgitter__block--periode {
     display: flex;
     flex-wrap: wrap;
