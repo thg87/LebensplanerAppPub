@@ -3028,14 +3028,33 @@ a {
 
 /* AK6 wörtlich: die Quote steht NEBEN dem Gitter. Ein umbrechender Flex statt zweier Karten —
    auf dem Handy stehen beide Spalten untereinander, ab ~2 × 260 px nebeneinander. `min-width: 0`
-   lässt die Spalte schrumpfen, statt die Karte auf schmalen Screens zu sprengen. */
-.lp-verlauf {
+   lässt die Spalte schrumpfen, statt die Karte auf schmalen Screens zu sprengen.
+
+   SIE HIESS BIS US-245 `.lp-verlauf`, UND DAS WAR EIN LAYOUT-UNFALL IN EINEM FREMDEN MODUL — beim
+   Design-Sync gefunden, hier behoben. Denselben Namen trägt seit US-164/167 die Verlaufskarte der
+   HAUSHALT-Übersicht (`HaushaltUebersichtSeite.razor`: `lp-karte lp-verlauf`), dort aber als
+   selektorloser Haken für ihre `__`-Kinder — es gab schlicht keine `.lp-verlauf`-Regel. US-238 hat
+   den freien Namen belegt und damit jene Karte mit umgestellt. Am Markup nachgezählt (Zeilen aus
+   `HaushaltUebersichtSeite.razor`): DREI direkte Kinder im Datenzweig — `.lp-verlauf__kopf` (:164),
+   `.lp-verlauf__diagramm` (:189) und der Trendabsatz `<p class="lp-leer">` (:224, im selben
+   `@if (GenugDaten)`-Block) — und ZWEI im Leerzustand (`__kopf` plus der Absatz aus dem
+   `else`-Zweig, :236). KEINES davon setzt `flex-basis` oder `width`: `__kopf` ist selbst ein `flex`
+   mit `space-between`, `__diagramm` ein `grid`. Als Flex-Items eines umbrechenden Containers rücken
+   sie deshalb NEBENEINANDER, sobald sie zusammen hineinpassen, und `gap: var(--lp-abstand-gross)`
+   tritt zusätzlich zum `margin: 10px 0` des Diagramms. Kein Build bricht, kein Test wird rot;
+   sichtbar ist es nur im Browser.
+
+   Der eigene Name statt eines `--`-Modifiers an `.lp-verlauf`: Ein Modifier ließe den geteilten
+   Basisnamen im Markup beider Module stehen und die nächste Regel an `.lp-verlauf` fiele erneut in
+   dieselbe Falle. Die Schreibweise folgt `.lp-kennzahlkarte` im selben Screen, nicht
+   `.lp-score-karte`. */
+.lp-verlaufkarte {
     display: flex;
     flex-wrap: wrap;
     gap: var(--lp-abstand-gross);
 }
 
-.lp-verlauf__spalte {
+.lp-verlaufkarte__spalte {
     flex: 1 1 260px;
     min-width: 0;
 }
