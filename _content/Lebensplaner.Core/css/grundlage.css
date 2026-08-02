@@ -3005,14 +3005,11 @@ a {
     margin-bottom: var(--lp-abstand);
 }
 
-.lp-kennzahlkarte__titel {
-    margin: 0 0 var(--lp-abstand-klein);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--lp-text-leise);
-}
+/* Die Optik von `.lp-kennzahlkarte__titel` steht weiter unten in der gemeinsamen
+   Abschnitts-Überschrift bei `.einkauf-gruppe__titel` (US-258) — als SELEKTORLISTE und nicht als
+   Kopie: Es ist dieselbe leise Überschrift wie über Archiv, Pause, Einkaufsgruppe und
+   Schnellwahl, und sie hier ein zweites Mal zu schreiben hieße, sie beim nächsten Farbwechsel an
+   zwei Stellen zu ändern. */
 
 .lp-kennzahlkarte__wert {
     margin: 0;
@@ -3231,12 +3228,30 @@ a {
     margin-top: var(--lp-abstand);
 }
 
-/* US-241: `.lp-archiv__titel` steht in derselben Regel und nicht in einer eigenen — es ist
-   dieselbe Sache (eine leise Abschnitts-Überschrift), und zwei deklarationsgleiche Blöcke laufen
-   bei der ersten Änderung auseinander. */
+/* DIE leise Abschnitts-Überschrift — EIN Regelsatz für alle fünf Stellen, die sie tragen.
+ *
+ * US-241 hat `.lp-archiv__titel` hier angehängt statt zu kopieren, mit der Begründung: „es ist
+ * dieselbe Sache, und zwei deklarationsgleiche Blöcke laufen bei der ersten Änderung
+ * auseinander." US-250 hat `.lp-pausenabschnitt__titel` genauso behandelt. US-258 löst ein, was
+ * daneben trotzdem entstanden war: `.einkauf-schnellwahl__titel` (US-213) und
+ * `.lp-kennzahlkarte__titel` (US-238) trugen dieselben SECHS Deklarationen mit denselben Werten
+ * ein zweites und drittes Mal — die letzte nur in anderer Reihenfolge (`letter-spacing` vor
+ * `text-transform`, was nichts ändert: die beiden Eigenschaften greifen unabhängig voneinander).
+ * Zeichen für Zeichen nachgemessen, bevor sie zusammengelegt wurden.
+ *
+ * SELEKTORLISTE und kein eigener Baustein `.lp-abschnitt__titel`: Ein neuer Name hieße Markup in
+ * drei Modulen umstellen (F-12). Preis, ehrlich benannt: Der Block heißt nach keinem seiner fünf
+ * Nutzer. Wer ihn tauft, ändert das Markup mit — er kopiert die Regel nicht zurück.
+ *
+ * Alle Werte sind Bestand (`--lp-text-leise`, `--lp-abstand-klein`) — kein neuer Farbwert,
+ * ADR 0014. Die Stellen liegen in DREI Modulen (Einkauf, Essen, Gewohnheiten); alle fünf Klassen
+ * sitzen dort allein auf ihrem `<h2>`, deshalb hängt an der Position dieses Blocks in der Datei
+ * nichts — es gibt keine zweite Regel, die um dieselben Eigenschaften konkurriert. */
 .einkauf-gruppe__titel,
+.einkauf-schnellwahl__titel,
 .lp-archiv__titel,
-.lp-pausenabschnitt__titel {
+.lp-pausenabschnitt__titel,
+.lp-kennzahlkarte__titel {
     margin: 0 0 var(--lp-abstand-klein);
     font-size: 0.85rem;
     font-weight: 600;
@@ -3310,14 +3325,9 @@ a {
     margin-bottom: var(--lp-abstand);
 }
 
-.einkauf-schnellwahl__titel {
-    margin: 0 0 var(--lp-abstand-klein);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--lp-text-leise);
-}
+/* Die Optik von `.einkauf-schnellwahl__titel` steht weiter oben in der gemeinsamen
+   Abschnitts-Überschrift bei `.einkauf-gruppe__titel` (US-258) — dieselbe leise Überschrift,
+   derselbe Regelsatz. */
 
 /* Umbrechende Reihe von Chips (Muster .lp-schnellfilter / .tag-chips). */
 .einkauf-schnellwahl__chips {
