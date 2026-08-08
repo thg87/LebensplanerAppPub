@@ -847,6 +847,55 @@ a {
     border-inline-start: 3px solid var(--lp-fehler-text);
 }
 
+/*
+ * US-266: Die Kopfzeile einer Aufgaben-KARTE — Textblock links, Score-Ring rechts.
+ * Die Aktionszeile bleibt ihr Geschwister und damit über die volle Breite, sie rutscht
+ * NICHT in die Textspalte: Sonst schrumpften die drei Knöpfe um Ringbreite und wären auf
+ * 320 px nicht mehr fingerbreit.
+ *
+ * Bewusst OHNE `.wisch` im Selektor. Dieselbe Anatomie tragen zwei Karten: die wischbare
+ * der Raum-Detailseite und die NICHT wischbare „Demnächst"-Karte auf /haushalt (US-269).
+ * An `.wisch` gehängt bräuchte die zweite eine wortgleiche Kopie — eine Regel für eine
+ * Anatomie, nicht eine je Karte.
+ *
+ * Und bewusst nicht `.aufgabe__zeile` umgedeutet: Die ist die umbrechende Meta-Zeile mit
+ * 0.9rem Schrift (Fälligkeit, Raum, Tags) und steckt hier INNERHALB des Textblocks; das
+ * Dashboard biegt sie ohnehin schon per Inline-Style zurecht. Sie ein drittes Mal zu
+ * belegen wäre schlechter als eine ehrliche eigene Klasse.
+ *
+ * Der Ring braucht hier keine eigene Regel: `.lp-score-ring` bringt `flex: none` selbst
+ * mit, behält also seine Größe, während der Textblock den Rest nimmt.
+ */
+.aufgabe__kopf {
+    display: flex;
+    /* Am Titel ausgerichtet, nicht mittig: Die Karte ist mehrzeilig, ein mittig
+       schwebender Ring wirkte gelöst vom Titel, zu dem er gehört. Wie .aufgabe-zeile. */
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.aufgabe__kopftext {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    /* Titel, Fälligkeitszeile und Aufwand/Einfluss bekamen ihren Abstand bisher aus dem
+       `gap` von .wisch__vordergrund — sie waren dessen unmittelbare Kinder. Seit sie in
+       diesem Block stehen, muss er ihn selbst stellen, sonst kleben sie aufeinander.
+       Derselbe Wert, damit sich optisch nichts ändert. */
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-abstand-klein);
+
+    /* Wie bei .aufgabe-zeile .aufgabe__name (US-265, Review-Befund): `min-width: 0`
+       erlaubt dem Textblock zu schrumpfen, verschafft aber einem Titel aus EINEM langen
+       Wort („Waschmaschinenflusensiebreinigen") keine Umbruchstelle — die Glyphen liefen
+       unter dem Ring durch. Der Fall besteht auf dieser Karte schon vor dem Ring (der
+       Titel ist ein Flex-Element in einer Spalte), der Ring nimmt ihm nur weitere ~38 px.
+       `anywhere` und nicht `break-word`: Nur `anywhere` senkt auch die min-content-Breite,
+       mit der die Flexbox rechnet. Umbrechen statt kürzen — die Karte ist nie einzeilig. */
+    overflow-wrap: anywhere;
+}
+
 .aufgabe__zeile {
     display: flex;
     flex-wrap: wrap;
