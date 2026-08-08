@@ -1120,6 +1120,27 @@ a {
     flex: 1 1 auto;
     width: auto;
     min-width: 0;
+
+    /* US-265: Ein Titel aus EINEM langen Wort („Waschmaschinenflusensiebreinigen")
+       bricht ohne diese Regel nirgends um — er läuft waagerecht unter Ring und
+       •••-Knopf durch. `min-width: 0` allein genügt dafür nicht: Es erlaubt dem
+       Flex-Element zu schrumpfen, ändert aber nichts daran, dass der Text keine
+       Umbruchstelle hat. Auf 320 px bleiben dem Textblock ~162 px, seit dem Ring
+       38 px weniger als vorher — der Fall ist damit nicht mehr theoretisch.
+
+       `anywhere` und nicht `break-word`: Nur `anywhere` senkt auch die
+       min-content-Breite, die der Flexbox-Algorithmus für dieses Element rechnet.
+       Mit `break-word` bliebe das längste Wort weiterhin die Mindestbreite und
+       drückte den •••-Knopf aus der Zeile.
+
+       Und bewusst NICHT die Ellipsis-Lösung der Räume-Zeile
+       (.raum-zeile .raum__name strong, overflow/text-overflow/nowrap): Dort ist die
+       Zeile einzeilig, hier ist sie es nie — ein abgeschnittener Aufgabentitel wäre
+       ein Rückschritt gegenüber heute. Umbrechen statt kürzen.
+
+       Auf .aufgabe-zeile eingegrenzt: Andere Konsumenten von .aufgabe__name haben
+       weder Ring noch feste Spalte rechts und stehen nicht unter diesem Druck. */
+    overflow-wrap: anywhere;
 }
 
 /* Wie .raum-menue-knopf (US-60): der einzige Aktions-Einstieg der Zeile trägt die
@@ -1632,6 +1653,29 @@ a {
 
 .lp-score-ring--klein .lp-score-ring__mitte .lp-score__wert {
     font-size: 0.68rem;
+}
+
+/* US-265 (D-3): Noch eine Stufe kleiner — ein Ring pro Aufgabe in der Aufgabenliste.
+   Wie --klein ohne eigenes Leuchten (eine lange Liste glühender Ringe wäre Lärm) und
+   wie --klein nur Größe, keine Kopie der Basisregel: conic-gradient, --score-pct und
+   die Stufenfarben kommen unverändert von .lp-score-ring.
+
+   Die Mitte ist bewusst NICHT proportional mitskaliert: Die sichtbare Ringstärke ist
+   die halbe Differenz von Außenkreis und Mitte (84/64 → 10px, 40/31 → 4,5px). Naiv
+   skaliert (28/22) blieben 3px — auf einem Handy am Rand der Erkennbarkeit. 28/20
+   hält ~4px wie --klein.
+
+   Keine font-size-Regel: Die Mitte bleibt hier im Markup leer (D-3, keine Zahl bei
+   28px — bei 0.68rem ist die Schrift schon in --klein am unteren Rand). */
+.lp-score-ring--winzig {
+    width: 28px;
+    height: 28px;
+    box-shadow: none;
+}
+
+.lp-score-ring--winzig .lp-score-ring__mitte {
+    width: 20px;
+    height: 20px;
 }
 
 /* Quadratischer Icon-Knopf: die "+"-Aktionen (Räume, Raum-Detail) und der
